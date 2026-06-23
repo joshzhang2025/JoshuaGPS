@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apollo USA — Premium Promotional Products & In-House Decoration</title>
+  <meta name="description" content="Apollo USA is a B2B wholesale supplier of premium promotional apparel and products with full in-house decoration services: embroidery, DTF/heat transfer, patches, screen print, sublimation, and laser etching. ASI Top 40 · PPAI Top 100 · SAGE Rated A." />
+  <meta name="keywords" content="Apollo USA, promotional products, wholesale apparel, B2B distributor, embroidery, DTF, heat transfer, screen print" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── DESIGN TOKENS ─────────────────────────────── */
+    :root {
+      --navy:         #0B1F3A;
+      --navy-mid:     #162d52;
+      --navy-light:   #1e3d6e;
+      --accent:       #C8922A;
+      --accent-dark:  #a87420;
+      --accent-light: #f6ecd9;
+      --white:        #ffffff;
+      --bg:           #F4F6FA;
+      --panel:        #ffffff;
+      --text:         #1a2535;
+      --muted:        #5a6a7e;
+      --line:         #dde3ee;
+      --radius-sm:    6px;
+      --radius:       12px;
+      --radius-lg:    20px;
+      --shadow-sm:    0 2px 8px rgba(11,31,58,.07);
+      --shadow:       0 8px 28px rgba(11,31,58,.12);
+      --shadow-lg:    0 20px 56px rgba(11,31,58,.16);
+    }
+
+    /* ── RESET ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; }
+
+    /* ── LAYOUT ────────────────────────────────────── */
+    .wrap      { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+    .wrap-sm   { max-width: 840px;  margin: 0 auto; padding: 0 28px; }
+    .section   { padding: 80px 0; }
+    .section-alt { background: var(--white); }
+
+    /* ── BUTTONS ───────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 14px; letter-spacing: .01em;
+      border: 2px solid transparent; transition: all .2s ease; cursor: pointer;
+    }
+    .btn-primary  { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .btn-primary:hover  { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-outline  { background: transparent; color: var(--accent); border-color: var(--accent); }
+    .btn-outline:hover  { background: var(--accent); color: var(--white); }
+    .btn-ghost    { background: rgba(255,255,255,.13); color: var(--white); border-color: rgba(255,255,255,.38); backdrop-filter: blur(6px); }
+    .btn-ghost:hover    { background: rgba(255,255,255,.24); }
+    .btn-navy     { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .btn-navy:hover     { background: var(--navy-light); border-color: var(--navy-light); }
+
+    /* ── SECTION HEADERS ───────────────────────────── */
+    .sh { text-align: center; margin-bottom: 52px; }
+    .sh-eye {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .sh-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(26px, 3.2vw, 40px);
+      font-weight: 700; color: var(--navy);
+      line-height: 1.18; margin-bottom: 14px;
+    }
+    .sh-desc { font-size: 16px; color: var(--muted); max-width: 500px; margin: 0 auto; }
+
+    /* ── HEADER ────────────────────────────────────── */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--navy);
+    }
+    .header-top {
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 7px 0;
+    }
+    .header-top-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-creds {
+      font-size: 11.5px; color: rgba(255,255,255,.48); letter-spacing: .03em;
+    }
+    /* ── HEADER TOP SOCIAL ──────────────────────────── */
+    .header-top-social { display: flex; gap: 10px; align-items: center; }
+
+    /* ── UTILITY ICONS ─────────────────────────────── */
+    .header-utils { display: flex; align-items: center; gap: 2px; }
+    .util-btn {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 4px 9px; border-radius: 4px; background: none;
+      color: rgba(255,255,255,.58); font-size: 9.5px; font-weight: 500;
+      letter-spacing: .02em; transition: color .15s, background .15s; line-height: 1;
+    }
+    .util-btn:hover { color: #fff; background: rgba(255,255,255,.09); }
+    .util-btn svg { display: block; }
+    .util-count {
+      position: absolute; top: 1px; right: 5px;
+      background: var(--accent); color: #fff;
+      font-size: 8.5px; font-weight: 700; line-height: 1;
+      min-width: 14px; height: 14px; border-radius: 7px; padding: 0 3px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .util-sep { width: 1px; height: 26px; background: rgba(255,255,255,.12); margin: 0 6px; }
+    .util-login {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 13px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.24);
+      color: rgba(255,255,255,.78); font-size: 12px; font-weight: 500;
+      background: none; transition: all .15s;
+    }
+    .util-login:hover { background: rgba(255,255,255,.09); color: #fff; border-color: rgba(255,255,255,.44); }
+    .header-top-social a {
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.5); transition: color .18s;
+    }
+    .header-top-social a:hover { color: rgba(255,255,255,.9); }
+    .header-top-social svg { display: block; }
+
+    .header-main { padding: 14px 0; }
+    .header-main-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 28px;
+      position: relative;
+    }
+    .logo img { height: 46px; width: auto; filter: brightness(0) invert(1); }
+    .main-nav { display: flex; align-items: center; gap: 2px; }
+    .main-nav > a, .nav-drop-wrap > a {
+      padding: 8px 14px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 500;
+      color: rgba(255,255,255,.74); transition: all .18s;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .main-nav > a:hover, .nav-drop-wrap:hover > a { color: #fff; background: rgba(255,255,255,.08); }
+
+    /* ── MEGA DROPDOWN ────────────────────────────── */
+    .nav-drop-wrap { position: static; display: flex; }
+    .nav-drop-wrap > a::after {
+      content: ''; display: inline-block;
+      border-left: 4px solid transparent; border-right: 4px solid transparent;
+      border-top: 4px solid rgba(255,255,255,.45);
+      margin-top: 2px; transition: transform .18s;
+    }
+    .nav-drop-wrap:hover > a::after { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 24px 64px rgba(11,31,58,.18);
+      padding: 22px 22px 18px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+      z-index: 500;
+    }
+    .nav-dropdown::before {
+      content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px;
+    }
+    .nav-drop-wrap:hover .nav-dropdown {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .drop-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+    }
+    .drop-grid { display: grid; gap: 8px; }
+    .drop-grid-6 { grid-template-columns: repeat(6, 1fr); min-width: 1140px; }
+    .drop-grid-3 { grid-template-columns: repeat(3, 1fr); min-width: 540px; }
+    .drop-item {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      padding: 10px 8px; border-radius: 9px; cursor: pointer;
+      transition: background .14s; text-decoration: none; color: var(--text);
+    }
+    .drop-item:hover { background: var(--bg); }
+    .drop-item img { width: 100%; height: 80px; object-fit: contain; border-radius: 7px; background: #f4f6fa; padding: 6px; }
+    .drop-grid-6 .drop-item img { height: 100px; object-fit: contain; background: none; padding: 0; }
+    .drop-item-name { font-size: 11.5px; font-weight: 500; text-align: center; line-height: 1.3; }
+
+    /* ── HERO ──────────────────────────────────────── */
+    .hero {
+      position: relative; height: 60vh; min-height: 380px; max-height: 640px; overflow: hidden;
+    }
+    .hero-slides {
+      position: absolute; inset: 0;
+      display: flex;
+      transition: transform 0.75s cubic-bezier(0.45, 0, 0.15, 1);
+      will-change: transform;
+    }
+    .hero-slide {
+      flex: 0 0 100%;
+      background-size: cover; background-position: center top;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(110deg,
+        rgba(11,31,58,.82) 0%,
+        rgba(11,31,58,.48) 52%,
+        rgba(11,31,58,.18) 100%
+      );
+    }
+    .hero-body {
+      position: relative; z-index: 2; height: 100%;
+      display: flex; align-items: center;
+    }
+    .hero-text { max-width: 500px; }
+    .hero-eye {
+      display: inline-block; background: var(--accent);
+      color: var(--white); font-size: 10px; font-weight: 700;
+      letter-spacing: .11em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px; margin-bottom: 12px;
+    }
+    .hero-h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(26px, 3.6vw, 46px);
+      font-weight: 700; color: var(--white);
+      line-height: 1.12; margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-size: 15px; color: rgba(255,255,255,.8);
+      max-width: 400px; margin-bottom: 24px; line-height: 1.6;
+    }
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .hero-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+      width: 50px; height: 50px;
+      background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.24);
+      border-radius: 50%; color: #fff; font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s; backdrop-filter: blur(6px);
+    }
+    .hero-arrow:hover { background: rgba(255,255,255,.26); }
+    .hero-arrow.prev { left: 22px; }
+    .hero-arrow.next { right: 22px; }
+    .hero-dots {
+      position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+      z-index: 3; display: flex; gap: 8px; align-items: center;
+    }
+    .hero-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.32); transition: all .22s;
+    }
+    .hero-dot.active { width: 22px; border-radius: 4px; background: var(--accent); }
+
+    /* ── INTRO BAND ────────────────────────────────── */
+    .intro-band {
+      background: var(--navy); color: var(--white);
+      padding: 36px 0;
+    }
+    .intro-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 32px; flex-wrap: wrap;
+    }
+    .intro-text { flex: 1; min-width: 260px; }
+    .intro-eye {
+      display: inline-block; background: var(--accent);
+      color: var(--white); font-size: 10px; font-weight: 700;
+      letter-spacing: .11em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .intro-h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 2.8vw, 36px);
+      font-weight: 700; line-height: 1.18; margin: 0 0 8px;
+    }
+    .intro-sub {
+      font-size: 14px; color: rgba(255,255,255,.72);
+      max-width: 520px; line-height: 1.65; margin: 0;
+    }
+    .intro-btns {
+      display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0;
+    }
+
+    /* ── TRUST BAR ─────────────────────────────────── */
+    .trust-bar { background: var(--navy-mid); padding: 26px 0; }
+    .trust-inner {
+      display: flex; align-items: center; justify-content: center;
+      gap: 44px; flex-wrap: wrap;
+    }
+    .trust-item { display: flex; align-items: center; gap: 13px; }
+    .trust-item img {
+      height: 38px; width: auto; object-fit: contain;
+      background: rgba(255,255,255,.92); border-radius: 5px; padding: 4px 8px;
+    }
+    .trust-item-body strong { display: block; font-size: 13px; font-weight: 700; color: #fff; }
+    .trust-item-body span  { font-size: 11px; color: rgba(255,255,255,.45); }
+    .trust-sep { width: 1px; height: 38px; background: rgba(255,255,255,.1); }
+    .trust-social { display: flex; gap: 8px; align-items: center; }
+    .trust-soc-ico {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.18);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.72); transition: background .18s, color .18s;
+    }
+    .trust-soc-ico:hover { background: rgba(255,255,255,.24); color: #fff; }
+
+    /* ── STATS ─────────────────────────────────────── */
+    .stats-band { background: var(--accent); }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      divide: 1px solid rgba(0,0,0,.08);
+    }
+    .stats-grid > * + * { border-left: 1px solid rgba(0,0,0,.1); }
+    .stat-cell { padding: 44px 24px; text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px; font-weight: 700;
+      color: var(--white); line-height: 1; margin-bottom: 6px;
+    }
+    .stat-lbl {
+      font-size: 12px; font-weight: 600;
+      color: rgba(255,255,255,.72);
+      text-transform: uppercase; letter-spacing: .07em;
+    }
+
+    /* ── CATEGORIES ────────────────────────────────── */
+    .cat-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    }
+    .cat-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .cat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .cat-img { aspect-ratio: 1; overflow: hidden; background: #f0f2f6; }
+    .cat-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .cat-card:hover .cat-img img { transform: scale(1.06); }
+    .cat-body { padding: 16px 18px 18px; }
+    .cat-name {
+      font-size: 15px; font-weight: 600; color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .cat-link {
+      font-size: 12.5px; font-weight: 600; color: var(--accent);
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .cat-link::after { content: '→'; }
+
+    /* ── DECORATION METHODS ────────────────────────── */
+    .deco-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+    }
+    .deco-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .deco-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .deco-img { height: 190px; overflow: hidden; background: #f0f2f6; }
+    .deco-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .deco-card:hover .deco-img img { transform: scale(1.05); }
+    .deco-body { padding: 22px; }
+    .deco-name {
+      font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px;
+    }
+    .deco-desc { font-size: 14px; color: var(--muted); line-height: 1.58; }
+
+    /* ── FEATURED PRODUCTS ─────────────────────────── */
+    .feat-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    }
+    .feat-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      transition: transform .22s ease, box-shadow .22s ease;
+    }
+    .feat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .feat-img { aspect-ratio: 3/2; overflow: hidden; background: #f0f2f6; }
+    .feat-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s ease;
+    }
+    .feat-card:hover .feat-img img { transform: scale(1.05); }
+    .feat-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      background: var(--accent-light); color: var(--accent);
+      padding: 3px 8px; border-radius: 4px; margin: 16px 16px 0;
+    }
+    .feat-body { padding: 10px 16px 18px; }
+    .feat-name { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .feat-sku  { font-size: 12px; color: var(--muted); }
+
+    /* ── VALUE BAND ────────────────────────────────── */
+    .value-band { background: var(--navy); padding: 88px 0; }
+    .value-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+    }
+    .value-eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .value-h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 44px); font-weight: 700;
+      color: var(--white); line-height: 1.15; margin-bottom: 18px;
+    }
+    .value-desc {
+      font-size: 16px; color: rgba(255,255,255,.68);
+      line-height: 1.72; margin-bottom: 36px;
+    }
+    .pillars { display: flex; flex-direction: column; gap: 20px; }
+    .pillar { display: flex; gap: 16px; align-items: flex-start; }
+    .pillar-ico {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(200,146,42,.16); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+    }
+    .pillar-body strong {
+      display: block; font-size: 14px; font-weight: 600;
+      color: #fff; margin-bottom: 4px;
+    }
+    .pillar-body p { font-size: 13px; color: rgba(255,255,255,.5); }
+
+    /* ── CTA BAND ──────────────────────────────────── */
+    .cta-band {
+      background: var(--accent-light);
+      border-top: 3px solid var(--accent);
+      padding: 56px 0;
+    }
+    .cta-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 28px; flex-wrap: wrap;
+    }
+    .cta-h {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; color: var(--navy); margin-bottom: 6px;
+    }
+    .cta-sub { font-size: 15px; color: var(--muted); }
+
+    /* ── FOOTER ────────────────────────────────────── */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,.55);
+      padding: 64px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 260px repeat(3, 1fr);
+      gap: 52px; margin-bottom: 56px;
+    }
+    .footer-logo { height: 40px; width: auto; filter: brightness(0) invert(1); margin-bottom: 14px; }
+    .footer-tagline {
+      font-size: 13px; color: rgba(255,255,255,.4);
+      line-height: 1.65; margin-bottom: 22px;
+    }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,.08); color: rgba(255,255,255,.65);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .18s;
+    }
+    .footer-social a:hover { background: rgba(255,255,255,.18); color: #fff; }
+    .footer-social a svg { width: 15px; height: 15px; display: block; }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: rgba(255,255,255,.9); margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: 14px; color: rgba(255,255,255,.46); transition: color .18s; }
+    .footer-col ul a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.09);
+      padding-top: 24px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 14px; flex-wrap: wrap;
+    }
+    .footer-badges { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .footer-badges img { height: 30px; width: auto; object-fit: contain; background: rgba(255,255,255,.9); border-radius: 4px; padding: 3px 7px; }
+    .footer-copy { font-size: 12.5px; color: rgba(255,255,255,.3); }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .cat-grid   { grid-template-columns: repeat(3, 1fr); }
+      .feat-grid  { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid > * + * { border-left: none; }
+      .stats-grid > *:nth-child(odd) { border-right: 1px solid rgba(0,0,0,.1); }
+    }
+    @media (max-width: 768px) {
+      .header-top  { display: none; }
+      .main-nav    { display: none; }
+      .hero        { height: 72vh; min-height: 460px; }
+      .hero-arrow  { display: none; }
+      .section     { padding: 56px 0; }
+      .cat-grid    { grid-template-columns: repeat(2, 1fr); gap: 13px; }
+      .deco-grid   { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .feat-grid   { grid-template-columns: repeat(2, 1fr); gap: 13px; }
+      .value-inner { grid-template-columns: 1fr; gap: 36px; }
+      .cta-inner   { flex-direction: column; align-items: flex-start; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .trust-inner { gap: 22px; }
+      .trust-sep   { display: none; }
+    }
+    @media (max-width: 480px) {
+      .wrap        { padding: 0 16px; }
+      .section     { padding: 44px 0; }
+      .cat-grid    { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .deco-grid   { grid-template-columns: 1fr; }
+      .feat-grid   { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .stats-grid  { grid-template-columns: 1fr 1fr; }
+      .hero-h1     { font-size: 32px; }
+      .hero-btns   { flex-direction: column; }
+      .value-band  { padding: 56px 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide, .cat-card, .deco-card, .feat-card { transition: none; }
+      .hero-slide { transition: opacity .01s; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="wrap header-top-inner">
+      <a href="tel:8009822146" style="font-size:12px;font-weight:600;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:6px;letter-spacing:.01em;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.32a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.95-1.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        800-982-2146
+      </a>
+      <div class="header-top-social">
+        <a href="#" aria-label="Facebook">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" aria-label="X">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+      <div class="header-utils">
+
+        <button class="util-btn" aria-label="Compare (0)">
+          <span class="util-count">0</span>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+            <rect x="1" y="5.5" width="11.5" height="11.5" rx="1.8"/>
+            <rect x="6.5" y="1" width="11.5" height="11.5" rx="1.8"/>
+          </svg>
+          Compare
+        </button>
+
+        <button class="util-btn" aria-label="Wishlist (0)">
+          <span class="util-count">0</span>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.5 16S2 10.8 2 6.4A4.2 4.2 0 0 1 9.5 4a4.2 4.2 0 0 1 7.5 2.4C17 10.8 9.5 16 9.5 16z"/>
+          </svg>
+          Wishlist
+        </button>
+
+        <button class="util-btn" aria-label="Presentations (0)">
+          <span class="util-count">0</span>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6.5" y="3.5" width="10" height="13" rx="1.8"/>
+            <rect x="2.5" y="1.5" width="10" height="13" rx="1.8" fill="#0B1F3A"/>
+            <rect x="2.5" y="1.5" width="10" height="13" rx="1.8"/>
+            <circle cx="7.5" cy="9.5" r="3"/>
+            <line x1="7.5" y1="9.5" x2="7.5" y2="6.5"/>
+            <line x1="7.5" y1="9.5" x2="10" y2="11.1"/>
+          </svg>
+          Presentations
+        </button>
+
+        <div class="util-sep"></div>
+
+        <button class="util-login" aria-label="Log In">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="6.5" cy="4.5" r="2.2"/>
+            <path d="M1.5 12c0-2.8 2.2-4.5 5-4.5s5 1.7 5 4.5"/>
+          </svg>
+          Log In
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="wrap header-main-inner">
+      <a href="#" class="logo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Apollo-USA-Logo.png" alt="Apollo USA">
+      </a>
+      <nav class="main-nav" aria-label="Main">
+
+        <!-- Products mega-menu -->
+        <div class="nav-drop-wrap">
+          <a href="#">Products</a>
+          <div class="nav-dropdown">
+            <div class="drop-eyebrow">Shop by Category</div>
+            <div class="drop-grid drop-grid-6">
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Caps.png" alt=""><span class="drop-item-name">Caps &amp; Hats</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Bags.png" alt=""><span class="drop-item-name">Bags</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Blankets.png" alt=""><span class="drop-item-name">Blankets</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Beanies.png" alt=""><span class="drop-item-name">Beanies</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Towels.png" alt=""><span class="drop-item-name">Towels</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Robes.png" alt=""><span class="drop-item-name">Robes</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Gift-Sets.png" alt=""><span class="drop-item-name">Gift Sets</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Pillows.png" alt=""><span class="drop-item-name">Pillows</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Scarves.png" alt=""><span class="drop-item-name">Scarves</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Gloves.png" alt=""><span class="drop-item-name">Gloves</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Aprons.png" alt=""><span class="drop-item-name">Aprons</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Headbands-Wristbands.png" alt=""><span class="drop-item-name">Headbands &amp; Wristbands</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Baby-Items.png" alt=""><span class="drop-item-name">Baby Items</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Neoprene-Sleeves.png" alt=""><span class="drop-item-name">Neoprene Sleeves</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decoration Services mega-menu -->
+        <div class="nav-drop-wrap">
+          <a href="apollo_decorations.html">Decoration Services</a>
+          <div class="nav-dropdown">
+            <div class="drop-eyebrow">In-House Decoration Methods</div>
+            <div class="drop-grid drop-grid-3">
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/embroidery-new.png" alt=""><span class="drop-item-name">Embroidery</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/heat-transfer.png" alt=""><span class="drop-item-name">DTF / Heat Transfer</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/paches.png" alt=""><span class="drop-item-name">Patches</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/screenprint.png" alt=""><span class="drop-item-name">Screen Print</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/sublimation-new.png" alt=""><span class="drop-item-name">Sublimation</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/laser.png" alt=""><span class="drop-item-name">Laser Etching</span></a>
+            </div>
+          </div>
+        </div>
+
+        <a href="#">Special Deals</a>
+        <a href="#">Resources</a>
+        <a href="#">About Us</a>
+        <a href="#">Customer Care</a>
+      </nav>
+      <a href="#" class="btn btn-primary">Request Catalog</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide" style="background-image:url('apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/KING_CAPS-BANNER_for-category_updated_3238bf6d-ddcb-4f65-aadb-3eee730fb9_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_524011-min_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_411514.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/2026-catalog-banner_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_411215.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/SLIDE3.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/SLIDE4.jpg')"></div>
+  </div>
+  <button class="hero-arrow prev" id="heroPrev" aria-label="Previous">&#8592;</button>
+  <button class="hero-arrow next" id="heroNext" aria-label="Next">&#8594;</button>
+  <div class="hero-dots" id="heroDots"></div>
+</section>
+
+<!-- ═══ INTRO BAND ══════════════════════════════════════ -->
+<div class="intro-band">
+  <div class="wrap intro-inner">
+    <div class="intro-text">
+      <span class="intro-eye">B2B Wholesale Supplier</span>
+      <h1 class="intro-h1">Premium Promotional Products,<br>Decorated In-House</h1>
+      <p class="intro-sub">Wholesale apparel and branded merchandise for distributors — with embroidery, DTF, screen print, and five more decoration methods all under one roof.</p>
+    </div>
+    <div class="intro-btns">
+      <a href="#" class="btn btn-primary">Browse Products</a>
+      <a href="#" class="btn btn-ghost">View 2026 Catalog</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TRUST BAR ══════════════════════════════════════ -->
+<div class="trust-bar">
+  <div class="wrap trust-inner">
+
+    <div class="trust-item">
+      <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/ASIstarsupplier.webp" alt="ASI">
+      <div class="trust-item-body"><strong>ASI Top 40</strong><span>Supplier</span></div>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/PPAI.png" alt="PPAI">
+      <div class="trust-item-body"><strong>PPAI Top 100</strong><span>Supplier</span></div>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/SAGEsupplier.png" alt="SAGE">
+      <div class="trust-item-body"><strong>SAGE Rated A</strong><span>Certified Supplier</span></div>
+    </div>
+    <div class="trust-sep"></div>
+    <div class="trust-item">
+      <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/PROsupplier.png" alt="PRO">
+      <div class="trust-item-body"><strong>PRO Supplier</strong><span>Verified Status</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STATS ══════════════════════════════════════════ -->
+<div class="stats-band">
+  <div class="stats-grid">
+    <div class="stat-cell"><div class="stat-num">25+</div><div class="stat-lbl">Years in Business</div></div>
+    <div class="stat-cell"><div class="stat-num">50+</div><div class="stat-lbl">Product Categories</div></div>
+    <div class="stat-cell"><div class="stat-num">6</div><div class="stat-lbl">In-House Decoration Methods</div></div>
+    <div class="stat-cell"><div class="stat-num">500K+</div><div class="stat-lbl">Units Decorated Per Year</div></div>
+  </div>
+</div>
+
+<!-- ═══ CATEGORIES ══════════════════════════════════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-eye">Product Catalog</span>
+      <h2 class="sh-title">Shop by Category</h2>
+      <p class="sh-desc">Premium wholesale promotional products across every major category, ready for in-house decoration.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Caps.png" alt="Caps & Hats"></div><div class="cat-body"><div class="cat-name">Caps &amp; Hats</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Bags.png" alt="Bags"></div><div class="cat-body"><div class="cat-name">Bags</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Blankets.png" alt="Blankets"></div><div class="cat-body"><div class="cat-name">Blankets</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Beanies.png" alt="Beanies"></div><div class="cat-body"><div class="cat-name">Beanies</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Towels.png" alt="Towels"></div><div class="cat-body"><div class="cat-name">Towels</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Robes.png" alt="Robes"></div><div class="cat-body"><div class="cat-name">Robes</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Gift-Sets.png" alt="Gift Sets"></div><div class="cat-body"><div class="cat-name">Gift Sets</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Pillows.png" alt="Pillows"></div><div class="cat-body"><div class="cat-name">Pillows</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Scarves.png" alt="Scarves"></div><div class="cat-body"><div class="cat-name">Scarves</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Gloves.png" alt="Gloves"></div><div class="cat-body"><div class="cat-name">Gloves</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Aprons.png" alt="Aprons"></div><div class="cat-body"><div class="cat-name">Aprons</div><span class="cat-link">View all</span></div></div>
+      <div class="cat-card"><div class="cat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Headbands-Wristbands.png" alt="Headbands & Wristbands"></div><div class="cat-body"><div class="cat-name">Headbands &amp; Wristbands</div><span class="cat-link">View all</span></div></div>
+    </div>
+    <div style="text-align:center; margin-top:44px;">
+      <a href="#" class="btn btn-outline">View All Product Categories</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DECORATION METHODS ═════════════════════════════ -->
+<section class="section section-alt">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-eye">In-House Services</span>
+      <h2 class="sh-title">Six Decoration Methods, One Supplier</h2>
+      <p class="sh-desc">Every decoration method handled in-house — no outsourcing, no delays, consistent quality across every order.</p>
+    </div>
+    <div class="deco-grid">
+      <div class="deco-card">
+        <div class="deco-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/embroidery-new.png" alt="Embroidery"></div>
+        <div class="deco-body"><div class="deco-name">Embroidery</div><p class="deco-desc">Classic, durable thread-based decoration for headwear, apparel, and accessories. Ideal for structured logos and detailed artwork.</p></div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/heat-transfer.png" alt="DTF / Heat Transfer"></div>
+        <div class="deco-body"><div class="deco-name">DTF / Heat Transfer</div><p class="deco-desc">Full-color, photographic-quality prints on virtually any fabric. No minimums on most items; perfect for vibrant, edge-to-edge designs.</p></div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/paches.png" alt="Patches"></div>
+        <div class="deco-body"><div class="deco-name">Patches</div><p class="deco-desc">Woven, embroidered, or PVC patches that can be sewn or iron-on applied. A premium, collectible decoration format.</p></div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/screenprint.png" alt="Screen Print"></div>
+        <div class="deco-body"><div class="deco-name">Screen Print</div><p class="deco-desc">High-volume, cost-effective spot-color printing on textiles. Best for bold graphics and large runs with consistent color reproduction.</p></div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/sublimation-new.png" alt="Sublimation"></div>
+        <div class="deco-body"><div class="deco-name">Sublimation</div><p class="deco-desc">Dye-sublimation for all-over prints on polyester and hard goods. Produces vibrant, permanent color with no hand-feel on the fabric.</p></div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/laser.png" alt="Laser Etching"></div>
+        <div class="deco-body"><div class="deco-name">Laser Etching</div><p class="deco-desc">Precision laser engraving on leather, wood, metal, and fabric. A premium, tactile decoration method suited for executive gifts and specialty items.</p></div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:44px;">
+      <a href="apollo_decorations.html" class="btn btn-navy">Learn About All Decoration Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURED PRODUCTS ══════════════════════════════ -->
+<section class="section">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-eye">New Arrivals</span>
+      <h2 class="sh-title">Featured This Season</h2>
+      <p class="sh-desc">Selected items from the 2026 catalog — premium quality, available for decoration and wholesale ordering.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/Chenil-01-Luxury-Chenille-Throw-Blanket_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_453430-new_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_432515.jpg" alt="Luxury Chenille Throw Blanket"></div>
+        <span class="feat-badge">New</span>
+        <div class="feat-body"><div class="feat-name">Luxury Chenille Throw Blanket</div><div class="feat-sku">CHENIL-01</div></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/TSET-6000-TRAVEL-SET_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_111251-new_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_233554.jpg" alt="Travel Set"></div>
+        <span class="feat-badge">New</span>
+        <div class="feat-body"><div class="feat-name">Travel Set</div><div class="feat-sku">TSET-6000</div></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/UV-9800-microfiber-sun-hat_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_232535-new_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_233554.jpg" alt="Microfiber Sun Hat"></div>
+        <span class="feat-badge">Popular</span>
+        <div class="feat-body"><div class="feat-name">Microfiber Sun Hat</div><div class="feat-sku">UV-9800</div></div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-img"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/SlideShows/Large/9200R-TYE-DYE-BUCKET-HAT_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_421045-new_3238bf6d-ddcb-4f65-aadb-3eee730fb9c8_450151.jpg" alt="Tie-Dye Bucket Hat"></div>
+        <span class="feat-badge">Trending</span>
+        <div class="feat-body"><div class="feat-name">Tie-Dye Bucket Hat</div><div class="feat-sku">9200R</div></div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:44px;">
+      <a href="#" class="btn btn-outline">View All New Arrivals</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUE BAND ══════════════════════════════════════ -->
+<div class="value-band">
+  <div class="wrap value-inner">
+    <div>
+      <span class="value-eyebrow">Why Apollo USA</span>
+      <h2 class="value-h2">Your Decoration Partner From Product to Finished Good</h2>
+      <p class="value-desc">Apollo USA is built for promotional distributors who need a reliable single-source supplier. We carry the product, run the decoration, and ship the finished good — so your team can focus on selling, not coordinating vendors.</p>
+      <a href="#" class="btn btn-primary">Learn More About Apollo</a>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-ico">🏭</div>
+        <div class="pillar-body">
+          <strong>Full In-House Decoration</strong>
+          <p>Embroidery, DTF, patches, screen print, sublimation, and laser — all on-site, no outsourcing.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-ico">📦</div>
+        <div class="pillar-body">
+          <strong>Single-Source Simplicity</strong>
+          <p>One supplier, one PO, one shipment. Product + decoration coordinated in one place.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-ico">🏅</div>
+        <div class="pillar-body">
+          <strong>Industry-Recognized Quality</strong>
+          <p>ASI Top 40 · PPAI Top 100 · SAGE Rated A. Trusted by distributors across the country.</p>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-ico">🤝</div>
+        <div class="pillar-body">
+          <strong>Distributor-First Pricing</strong>
+          <p>Volume pricing, flexible minimums, and a dedicated account team for your distributor business.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CTA BAND ════════════════════════════════════════ -->
+<div class="cta-band">
+  <div class="wrap cta-inner">
+    <div>
+      <h3 class="cta-h">Ready to Place an Order?</h3>
+      <p class="cta-sub">Contact your account representative or request the 2026 catalog to get started.</p>
+      <a href="tel:8009822146" style="display:inline-flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:var(--navy);margin-top:10px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.32a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.95-1.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        800-982-2146
+      </a>
+    </div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="#" class="btn btn-primary">Request a Quote</a>
+      <a href="#" class="btn btn-outline">Contact Us</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Apollo-USA-Logo.png" alt="Apollo USA">
+        <p class="footer-tagline">Premium promotional products and full in-house decoration services for wholesale distributors. ASI · PPAI · SAGE certified supplier.</p>
+        <a href="tel:8009822146" style="display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);margin-bottom:18px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.32a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.95-1.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          800-982-2146
+        </a>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" aria-label="X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Caps &amp; Hats</a></li>
+          <li><a href="#">Blankets</a></li>
+          <li><a href="#">Bags</a></li>
+          <li><a href="#">Towels &amp; Robes</a></li>
+          <li><a href="#">Gift Sets</a></li>
+          <li><a href="#">View All Categories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Decoration Services</h4>
+        <ul>
+          <li><a href="#">Embroidery</a></li>
+          <li><a href="#">DTF / Heat Transfer</a></li>
+          <li><a href="#">Screen Print</a></li>
+          <li><a href="#">Sublimation</a></li>
+          <li><a href="#">Patches</a></li>
+          <li><a href="#">Laser Etching</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Testimonials</a></li>
+          <li><a href="#">Trade Shows</a></li>
+          <li><a href="#">Sales Flyers</a></li>
+          <li><a href="#">Employment</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-badges">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/ASIstarsupplier.webp" alt="ASI Top 40">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/PPAI.png" alt="PPAI Top 100">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/SAGEsupplier.png" alt="SAGE Rated A">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/PROsupplier.png" alt="PRO Supplier">
+      </div>
+      <p class="footer-copy">&copy; 2026 Apollo USA. All rights reserved. B2B wholesale only.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── LINK / FORM INTERCEPTOR ─────────────────────── */
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (a) {
+      var href = a.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('#')) {
+        e.preventDefault(); e.stopPropagation();
+      }
+    }
+  }, true);
+  document.addEventListener('submit', function(e) { e.preventDefault(); }, true);
+
+  /* ── HERO CAROUSEL (slide transition) ───────────── */
+  (function() {
+    var track  = document.getElementById('heroSlides');
+    var dotsEl = document.getElementById('heroDots');
+    var total  = document.querySelectorAll('.hero-slide').length;
+    var cur    = 0, timer;
+
+    for (var i = 0; i < total; i++) {
+      (function(idx) {
+        var d = document.createElement('div');
+        d.className = 'hero-dot' + (idx === 0 ? ' active' : '');
+        d.addEventListener('click', function() { go(idx); });
+        dotsEl.appendChild(d);
+      })(i);
+    }
+
+    function go(n) {
+      dotsEl.children[cur].classList.remove('active');
+      cur = (n + total) % total;
+      track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+      dotsEl.children[cur].classList.add('active');
+      reset();
+    }
+
+    function reset() {
+      clearInterval(timer);
+      timer = setInterval(function() { go(cur + 1); }, 5000);
+    }
+
+    document.getElementById('heroPrev').addEventListener('click', function() { go(cur - 1); });
+    document.getElementById('heroNext').addEventListener('click', function() { go(cur + 1); });
+    reset();
+  })();
+</script>
+
+<script src="chat-widget.js"></script>
+</body>
+</html>

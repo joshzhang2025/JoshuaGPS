@@ -1,0 +1,25 @@
+[
+  {
+    "projectName": "Joshua Dynamic GPS Site",
+    "sourceMaterial": "Joshua Month 1 GPS v4 markdown",
+    "status": "MVP",
+    "en": {
+      "problem": "Joshua needs one daily operating dashboard for tasks, weekly plan, logs and portfolio review.",
+      "input": "GPS markdown and reference static MVP site.",
+      "aiProcess": "Structure the GPS into dashboard, Today, weekly plan, priorities, schedule, logs and portfolio.",
+      "siteProcess": "Build a static bilingual page with navigation, cards, mobile layout and read-aloud.",
+      "output": "Joshua GPS Site MVP",
+      "learned": "A structured GPS document can become a daily bilingual site.",
+      "nextImprovement": "Move more daily updates into JSON files and add screenshot links."
+    },
+    "zh": {
+      "problem": "Joshua 需要一个每日操作台，用于任务、周计划、日志和作品集复盘。",
+      "input": "GPS Markdown 和参考静态 MVP 网站。",
+      "aiProcess": "把 GPS 结构化为 Dashboard、Today、周计划、优先级、日程、日志和 Portfolio。",
+      "siteProcess": "制作带导航、卡片、手机端布局和朗读功能的静态双语页面。",
+      "output": "Joshua GPS Site MVP",
+      "learned": "结构化 GPS 文档可以变成每日使用的双语网站。",
+      "nextImprovement": "把更多每日更新拆进 JSON 文件，并增加截图链接。"
+    }
+  }
+]

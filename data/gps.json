@@ -1,0 +1,309 @@
+{
+      "nav": [
+        { "id": "dashboard", "icon": "01", "zh": "首页看板", "en": "Dashboard" },
+        { "id": "today", "icon": "02", "zh": "今日任务", "en": "Today" },
+        { "id": "weekly", "icon": "03", "zh": "周计划", "en": "Weekly Plan" },
+        { "id": "priority", "icon": "04", "zh": "P0/P1/P2 优先级", "en": "Priorities" },
+        { "id": "schedule", "icon": "05", "zh": "月度按天计划", "en": "Monthly Schedule" },
+        { "id": "logs", "icon": "06", "zh": "Daily Log 模板", "en": "Daily Log" },
+        { "id": "projects", "icon": "07", "zh": "Project Note 模板", "en": "Project Note" },
+        { "id": "portfolio", "icon": "08", "zh": "Portfolio / 最终展示", "en": "Portfolio / Final View" },
+        { "id": "testPage", "icon": "09", "zh": "项目记录（测试）", "en": "Project Note (Test)" },
+        { "id": "word", "icon": "10", "zh": "会议总结", "en": "Word Conversion" },
+        { "id": "markdown", "icon": "11", "zh": "Markdown 转换", "en": "Markdown" },
+        { "id": "excel", "icon": "12", "zh": "表格转网页", "en": "Excel Viewer" },
+        { "id": "xmind", "icon": "13", "zh": "思维导图", "en": "Mind Map" },
+        { "id": "apollo", "icon": "🏪", "group": "Apollo", "zh": "Apollo 网站", "en": "Current Apollo Site" },
+        { "id": "apollo-redesign", "icon": "✦", "group": "Apollo", "zh": "Apollo 重设计", "en": "Apollo Redesign" },
+        { "id": "tmx", "icon": "📋", "group": "TMX", "zh": "TMX 方法论", "en": "TMX Methodology" }
+      ],
+      "ui": {
+        "en": {
+          "brandTitle": "Joshua GPS",
+          "brandSubtitle": "Dynamic Bilingual Site MVP",
+          "pageTitle": "Joshua GPS Site",
+          "pageSubtitle": "Daily plan, bilingual review, read-aloud and progress tracking.",
+          "switchLang": "中文",
+          "read": "Read current page",
+          "stop": "Stop"
+        },
+        "zh": {
+          "brandTitle": "Joshua GPS",
+          "brandSubtitle": "动态双语 Site MVP",
+          "pageTitle": "Joshua GPS Site",
+          "pageSubtitle": "每日计划、双语复盘、朗读与进度追踪。",
+          "switchLang": "English",
+          "read": "朗读当前页面",
+          "stop": "停止朗读"
+        }
+      },
+      "hero": {
+        "en": {
+          "title": "Joshua Month 1 GPS: Site is the main line, Apollo is the application, GPS is the operating entrance.",
+          "desc": "This static MVP turns the Month 1 GPS document into a bilingual dashboard for daily tasks, weekly plans, priorities, logs, project notes and final portfolio review."
+        },
+        "zh": {
+          "title": "Joshua 第一个月 GPS：Site 是主线，Apollo 是应用，GPS 是管理入口。",
+          "desc": "这个静态 MVP 把第一个月 GPS 文档变成双语操作台，用于每日任务、周计划、优先级、日志、项目笔记和最终作品集复盘。"
+        }
+      },
+      "monthGoal": {
+        "en": "Use the AIX-prepared dynamic bilingual GPS Site first, understand how AI turns plans, documents, tables and project materials into websites, then build 3-5 small Site demos and a final Internship Portfolio Site.",
+        "zh": "先使用 AIX 预先搭建好的动态双语 GPS Site，理解 AI 如何把计划、文档、表格和项目材料转成网页，再完成 3-5 个 Site 小案例和最终 Internship Portfolio Site。"
+      },
+      "current": {
+        "week": "Pre-arrival / Week 1",
+        "day": "Day 1 ready",
+        "p0": "Dynamic bilingual GPS Site + basic Site capability",
+        "p1": "Apollo use cases as Site examples",
+        "p2": "Agent / data / automation for Month 2"
+      },
+      "dashboardCards": [
+        { "number": "4", "enLabel": "Weeks in Month 1", "zhLabel": "第一个月 4 周计划" },
+        { "number": "24", "enLabel": "Daily task cards", "zhLabel": "24 张每日任务卡" },
+        { "number": "5+", "enLabel": "Site demos to build", "zhLabel": "至少 5 个 Site Demo" },
+        { "number": "1", "enLabel": "Final portfolio site", "zhLabel": "最终作品集 Site" }
+      ],
+      "today": {
+        "day": "Day 1",
+        "status": "Ready",
+        "en": {
+          "focus": "Open and use the Joshua GPS Site, then understand how it supports daily internship work.",
+          "tasks": [
+            "Open Joshua GPS Site on desktop.",
+            "Open Joshua GPS Site on mobile.",
+            "Test Chinese / English switching.",
+            "Test read-aloud for the Today page.",
+            "Review Week 1 goal and Day 1 deliverables.",
+            "Write the first Daily Log with AIX support."
+          ],
+          "deliverables": [
+            "Day 1 Daily Log",
+            "Mobile screenshot",
+            "First feedback about the GPS Site",
+            "Language / read-aloud issue list if any"
+          ],
+          "resources": [
+            "Joshua Month 1 GPS v4 markdown",
+            "Joshua GPS Site MVP",
+            "Daily Log template",
+            "Project Note template"
+          ],
+          "check": [
+            "Can I immediately tell what I need to do today?",
+            "Can I switch language and still understand the page?",
+            "Can I use this page on my phone?",
+            "Can I explain what a GPS Site is in simple English?"
+          ]
+        },
+        "zh": {
+          "focus": "打开并使用 Joshua GPS Site，理解它如何支持每日实习任务。",
+          "tasks": [
+            "在电脑端打开 Joshua GPS Site。",
+            "在手机端打开 Joshua GPS Site。",
+            "测试中英文切换。",
+            "测试 Today 页面朗读。",
+            "查看第 1 周目标和 Day 1 产出物。",
+            "在 AIX 支持下填写第一份 Daily Log。"
+          ],
+          "deliverables": [
+            "Day 1 Daily Log",
+            "手机端截图",
+            "对 GPS Site 的第一反馈",
+            "如有问题，记录语言 / 朗读问题清单"
+          ],
+          "resources": [
+            "Joshua 第一个月 GPS v4 Markdown",
+            "Joshua GPS Site MVP",
+            "Daily Log 模板",
+            "Project Note 模板"
+          ],
+          "check": [
+            "我能不能马上知道今天要做什么？",
+            "切换语言后，我是否仍然能看懂页面？",
+            "我能不能在手机上使用这个页面？",
+            "我能不能用简单英文解释什么是 GPS Site？"
+          ]
+        }
+      },
+      "weeks": [
+        {
+          "week": "Week 1",
+          "enTitle": "Understand GPS Site and build the first simple Site",
+          "zhTitle": "认识 GPS Site，并完成第一个 Site 小成果",
+          "enGoal": "Joshua sees the full GPS Site, knows what to do each day, and understands that documents can become webpages.",
+          "zhGoal": "Joshua 看到完整 GPS Site，知道每天做什么，并理解文档可以变成网页。",
+          "enTasks": ["Use GPS Site", "Compare GPS document with site", "Build first document-to-site demo", "Test PC/mobile", "Add bilingual/read-aloud", "Give 3-minute English review"],
+          "zhTasks": ["使用 GPS Site", "对比 GPS 文档和网页", "完成第一个文档转 Site Demo", "测试 PC/手机端", "加入双语/朗读", "做 3 分钟英文复盘"],
+          "enOutputs": ["Joshua GPS Site usage record", "Site Structure Note", "First Simple Site Demo", "Week 1 English Summary"],
+          "zhOutputs": ["Joshua GPS Site 使用记录", "Site Structure Note", "First Simple Site Demo", "Week 1 English Summary"]
+        },
+        {
+          "week": "Week 2",
+          "enTitle": "Convert multiple file types into Sites",
+          "zhTitle": "多文件类型转 Site",
+          "enGoal": "Joshua learns that Site is not only for GPS; it can organize different content types.",
+          "zhGoal": "Joshua 知道 Site 不只可以做 GPS，也可以处理不同类型资料。",
+          "enTasks": ["Word-to-Site", "Markdown-to-Site", "Table-to-Site", "TMM/Xmind-to-Site", "Project Note-to-Site", "Toolkit review"],
+          "zhTasks": ["Word 转 Site", "Markdown 转 Site", "表格转 Site", "TMM/Xmind 转 Site", "Project Note 转 Site", "Toolkit 复盘"],
+          "enOutputs": ["Word-to-Site Demo", "Table-to-Site Demo", "TMM-to-Site Demo", "Project-to-Site Demo", "Document-to-Site Toolkit v1"],
+          "zhOutputs": ["Word-to-Site Demo", "Table-to-Site Demo", "TMM-to-Site Demo", "Project-to-Site Demo", "Document-to-Site Toolkit v1"]
+        },
+        {
+          "week": "Week 3",
+          "enTitle": "Apply Site capability to Apollo",
+          "zhTitle": "Apollo 应用转 Site",
+          "enGoal": "Use Apollo scenarios to show that Site skills can support real business communication.",
+          "zhGoal": "把 Site 能力应用到 Apollo 场景，让 Joshua 看到它对真实业务有用。",
+          "enTasks": ["Apollo website AI analysis", "Analysis-to-Site", "Image / Mockup comparison", "Vector / Catalog workflow", "Apollo AI application overview", "Apollo demo review"],
+          "zhTasks": ["Apollo 网站 AI 分析", "分析结果转 Site", "图片 / Mockup 对比", "矢量图 / Catalog 流程", "Apollo AI 应用总览", "Apollo 展示复盘"],
+          "enOutputs": ["Apollo Website Analysis Site", "Apollo Image Optimization Site", "Apollo AI Application Site", "Apollo English Explanation"],
+          "zhOutputs": ["Apollo Website Analysis Site", "Apollo Image Optimization Site", "Apollo AI Application Site", "Apollo English Explanation"]
+        },
+        {
+          "week": "Week 4",
+          "enTitle": "Dynamic update workflow and Portfolio Site",
+          "zhTitle": "动态更新机制 + Portfolio Site",
+          "enGoal": "Integrate the first three weeks into Joshua's final portfolio and a daily update workflow.",
+          "zhGoal": "把前三周成果整合成 Joshua 的最终展示站，并形成每日更新机制。",
+          "enTasks": ["Design update workflow", "Daily Log module", "Project Note module", "Portfolio integration", "Final English script", "Month 1 final demo"],
+          "zhTasks": ["设计更新流程", "Daily Log 模块", "Project Note 模块", "Portfolio 整合", "最终英文讲稿", "第一个月最终展示"],
+          "enOutputs": ["Joshua Internship Portfolio Site", "Dynamic Update Workflow", "Final Presentation", "Paul / Dora View Version"],
+          "zhOutputs": ["Joshua Internship Portfolio Site", "Dynamic Update Workflow", "Final Presentation", "Paul / Dora View Version"]
+        }
+      ],
+      "priorities": [
+        {
+          "level": "P0",
+          "color": "red",
+          "enTitle": "Must complete: Dynamic bilingual GPS Site + Site basics",
+          "zhTitle": "必须完成：动态双语 GPS Site + Site 基础能力",
+          "enTasks": [
+            "AIX prepares the GPS Site before Joshua arrives.",
+            "Joshua uses the GPS Site every day.",
+            "The site supports bilingual view, PC/mobile view, daily tasks, Daily Log, Project Note and read-aloud.",
+            "Joshua learns how GPS, documents and project materials become webpages.",
+            "Every day leaves one visible result."
+          ],
+          "zhTasks": [
+            "AIX 在 Joshua 到岗前先完成 GPS Site。",
+            "Joshua 每天使用 GPS Site。",
+            "Site 支持双语、PC/手机端、每日任务、Daily Log、Project Note 和朗读。",
+            "Joshua 学习 GPS、文档和项目材料如何变成网页。",
+            "每天留下一个可见成果。"
+          ],
+          "enOutputs": ["Joshua Dynamic GPS Site", "Daily Task Card", "Daily Log", "Project Note", "First Site demos"],
+          "zhOutputs": ["Joshua Dynamic GPS Site", "Daily Task Card", "Daily Log", "Project Note", "第一批 Site Demo"]
+        },
+        {
+          "level": "P1",
+          "color": "yellow",
+          "enTitle": "Should complete: Apollo application as Site cases",
+          "zhTitle": "应该完成：Apollo 应用作为 Site 案例",
+          "enTasks": [
+            "Apollo website analysis",
+            "Image / Mockup / vector before-after display",
+            "Apollo AI application overview",
+            "English explanation for Apollo / Dora"
+          ],
+          "zhTasks": [
+            "Apollo 网站分析",
+            "图片 / Mockup / 矢量图前后对比展示",
+            "Apollo AI 应用总览",
+            "面向 Apollo / Dora 的英文说明"
+          ],
+          "enOutputs": ["Apollo Website Analysis Site", "Image Optimization Site", "Apollo AI Application Site"],
+          "zhOutputs": ["Apollo Website Analysis Site", "Image Optimization Site", "Apollo AI Application Site"]
+        },
+        {
+          "level": "P2",
+          "color": "purple",
+          "enTitle": "Optional extension: Agent, data and automation",
+          "zhTitle": "可选延展：复杂 Agent / 数据 / 自动化",
+          "enTasks": [
+            "Agent platform research",
+            "Apollo marketing automation",
+            "Competitor data analysis",
+            "Customer information completion",
+            "US-side AI tool research"
+          ],
+          "zhTasks": [
+            "Agent 平台研究",
+            "Apollo 营销自动化",
+            "竞争对手数据分析",
+            "客户信息补全",
+            "美国侧 AI 工具研究"
+          ],
+          "enOutputs": ["Month 2 recommendation", "Optional research notes"],
+          "zhOutputs": ["Month 2 Recommendation", "可选研究笔记"]
+        }
+      ],
+      "schedule": [
+        ["Day 1", "Week 1", "Use Joshua GPS Site", "Open site, test bilingual switch, mobile view and read-aloud", "Day 1 Daily Log; mobile screenshot; first feedback", "Ready"],
+        ["Day 2", "Week 1", "GPS to Site explanation", "Compare original GPS document with web version; map AI vs IT work", "GPS to Site workflow note; Site Structure Note", "Planned"],
+        ["Day 3", "Week 1", "First document-to-site demo", "Convert a short document or project note into a simple page", "First Document-to-Site Demo; screenshot", "Planned"],
+        ["Day 4", "Week 1", "PC + mobile adaptation", "Compare desktop and mobile; adjust cards, headings and buttons", "PC screenshot; mobile screenshot; Responsive Design Note", "Planned"],
+        ["Day 5", "Week 1", "Bilingual + read-aloud", "Add Chinese/English content and test English read-aloud", "Bilingual Site Demo v1; Read-aloud Test Note", "Planned"],
+        ["Day 6", "Week 1", "Week 1 review", "Show daily records and first demo; give a 3-minute English explanation", "Week 1 English Summary; Demo Script", "Planned"],
+        ["Day 7", "Week 2", "Word / meeting note to Site", "Extract structure and English summary from a Word or meeting note", "Word-to-Site Demo; Meeting Summary Page", "Planned"],
+        ["Day 8", "Week 2", "Markdown / plain text to Site", "Practice headings, cards, key points and conclusions", "Markdown-to-Site Demo; Page Structure Note", "Planned"],
+        ["Day 9", "Week 2", "Table / matrix to Site", "Turn a small table into a readable webpage table or cards", "Table-to-Site Demo; Matrix Display Page", "Planned"],
+        ["Day 10", "Week 2", "TMM / Xmind to Site", "Turn hierarchy into navigation, cards or grouped sections", "TMM-to-Site Demo; Mindmap-to-Web Note", "Planned"],
+        ["Day 11", "Week 2", "Project note to Site", "Use Project Note fields to build a project display page", "Project-to-Site Demo; Project Note Page", "Planned"],
+        ["Day 12", "Week 2", "Toolkit review", "Summarize GPS, Word, Markdown, Table, TMM and Project Note methods", "Document-to-Site Toolkit v1; Week 2 Summary", "Planned"],
+        ["Day 13", "Week 3", "Apollo website AI analysis", "Analyze Apollo and 1-2 competitor sites", "Apollo Website Analysis Table; Comparison Notes", "Planned"],
+        ["Day 14", "Week 3", "Apollo analysis to Site", "Build SEO, Layout, Content, Visual and CTA recommendation page", "Apollo Website Analysis Site v1", "Planned"],
+        ["Day 15", "Week 3", "Image / Mockup comparison Site", "Display before/after image cases and explain AI optimization", "Image Before/After Page; Mockup Case Page", "Planned"],
+        ["Day 16", "Week 3", "Vector / Catalog workflow Site", "Create workflow page for vector or catalog application", "Vector / Catalog Workflow Site", "Planned"],
+        ["Day 17", "Week 3", "Apollo AI application overview", "Integrate website, image, catalog, competitor and marketing use cases", "Apollo AI Application Site v1", "Planned"],
+        ["Day 18", "Week 3", "Apollo demo review", "Joshua explains how AI and Site can help Apollo", "Week 3 English Summary; Apollo Demo Script", "Planned"],
+        ["Day 19", "Week 4", "Dynamic update workflow", "Design Daily Notes to AI Summary to English to Site Update to Archive", "Dynamic GPS Update Workflow; Daily Update Prompt v1", "Planned"],
+        ["Day 20", "Week 4", "Daily Log module", "Use previous logs to test auto summary and GPS Site update", "Daily Log Module v1; Auto Summary Example", "Planned"],
+        ["Day 21", "Week 4", "Project Note module", "Organize 2-3 project cases into a consistent gallery format", "Project Note Module v1; Project Gallery Page", "Planned"],
+        ["Day 22", "Week 4", "Portfolio Site integration", "Integrate About, GPS, learning, site projects, Apollo cases, logs and next step", "Joshua Internship Portfolio Site v1", "Planned"],
+        ["Day 23", "Week 4", "Final English script", "Prepare and rehearse final English presentation", "Final English Presentation Script; Demo Flow", "Planned"],
+        ["Day 24", "Week 4", "Month 1 final demo", "Present GPS Site, demos, Apollo Site, Portfolio Site and Month 2 recommendation", "Month 1 Final Demo; Paul / Dora View; Month 2 Recommendation", "Planned"]
+      ],
+      "logTemplate": [
+        "Date:",
+        "Day:",
+        "Today's Focus:",
+        "What I learned:",
+        "What I built:",
+        "What AI helped with:",
+        "What I found difficult:",
+        "Questions:",
+        "Tomorrow's next step:"
+      ],
+      "projectTemplate": [
+        "Project Name:",
+        "Source Material:",
+        "Problem:",
+        "Input:",
+        "AI Process:",
+        "IT / Site Process:",
+        "Output:",
+        "PC Version:",
+        "Mobile Version:",
+        "What I learned:",
+        "Next Improvement:"
+      ],
+      "portfolio": {
+        "en": {
+          "learned": ["AI-assisted project learning", "Document-to-Site method", "Bilingual expression and English summaries", "Responsive Site thinking", "How AI and IT divide work"],
+          "built": ["Joshua Dynamic GPS Site", "Document-to-Site Toolkit v1", "5+ Site demos", "Apollo AI Application Site v1", "Joshua Internship Portfolio Site", "Final English Presentation"],
+          "projects": ["GPS-to-Site", "Word-to-Site", "Table-to-Site", "TMM / Xmind-to-Site", "Project Note-to-Site", "Apollo-to-Site"],
+          "progress": ["Daily GPS Site use", "Daily Log", "Weekly English Summary", "Screenshots / links for each demo"],
+          "reflection": "Joshua should be able to explain what he learned, what he built, how AI helped, and how he can continue using this method after returning.",
+          "next": "Month 2 can move toward Apollo, Agent, Research or more complex data projects based on Joshua's interest and capability."
+        },
+        "zh": {
+          "learned": ["AI 辅助项目学习方式", "Document-to-Site 方法", "双语表达和英文总结", "响应式 Site 产品思维", "AI 与 IT 的分工"],
+          "built": ["Joshua Dynamic GPS Site", "Document-to-Site Toolkit v1", "5 个以上 Site Demo", "Apollo AI Application Site v1", "Joshua Internship Portfolio Site", "Final English Presentation"],
+          "projects": ["GPS-to-Site", "Word-to-Site", "Table-to-Site", "TMM / Xmind-to-Site", "Project Note-to-Site", "Apollo-to-Site"],
+          "progress": ["每日使用 GPS Site", "Daily Log", "每周英文总结", "每个 Demo 的截图 / 链接"],
+          "reflection": "Joshua 应该能够说明自己学到了什么、做出了什么、AI 如何帮助，以及回美国后如何继续使用这套方法。",
+          "next": "第二个月可根据 Joshua 兴趣和能力进入 Apollo、Agent、Research 或更复杂数据项目。"
+        }
+      }
+    }

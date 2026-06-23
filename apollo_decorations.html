@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apollo USA — Decoration Services</title>
+  <meta name="description" content="Apollo USA offers complete in-house decoration services: embroidery, DTF/heat transfer, patches, screen print, sublimation, and laser etching." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:         #0B1F3A;
+      --navy-mid:     #162d52;
+      --navy-light:   #1e3d6e;
+      --accent:       #C8922A;
+      --accent-dark:  #a87420;
+      --accent-light: #f6ecd9;
+      --white:        #ffffff;
+      --bg:           #F4F6FA;
+      --panel:        #ffffff;
+      --text:         #1a2535;
+      --muted:        #5a6a7e;
+      --line:         #dde3ee;
+      --radius-sm:    6px;
+      --radius:       12px;
+      --radius-lg:    20px;
+      --shadow-sm:    0 2px 8px rgba(11,31,58,.07);
+      --shadow:       0 8px 28px rgba(11,31,58,.12);
+      --shadow-lg:    0 20px 56px rgba(11,31,58,.16);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 26px; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 14px; letter-spacing: .01em;
+      border: 2px solid transparent; transition: all .2s ease; cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+    .btn-outline { background: transparent; color: var(--accent); border-color: var(--accent); }
+    .btn-outline:hover { background: var(--accent); color: var(--white); }
+    .btn-ghost { background: rgba(255,255,255,.13); color: var(--white); border-color: rgba(255,255,255,.38); backdrop-filter: blur(6px); }
+    .btn-ghost:hover { background: rgba(255,255,255,.24); }
+    .btn-navy { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .btn-navy:hover { background: var(--navy-light); border-color: var(--navy-light); }
+
+    /* ── HEADER ── */
+    .site-header { position: sticky; top: 0; z-index: 100; background: var(--navy); }
+    .header-top { border-bottom: 1px solid rgba(255,255,255,.07); padding: 7px 0; }
+    .header-top-inner { display: flex; align-items: center; justify-content: space-between; }
+    .header-top-social { display: flex; gap: 10px; align-items: center; }
+    .header-top-social a { display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.5); transition: color .18s; }
+    .header-top-social a:hover { color: rgba(255,255,255,.9); }
+    .header-top-social svg { display: block; }
+    .header-utils { display: flex; align-items: center; gap: 2px; }
+    .util-btn {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 4px 9px; border-radius: 4px; background: none;
+      color: rgba(255,255,255,.58); font-size: 9.5px; font-weight: 500;
+      letter-spacing: .02em; transition: color .15s, background .15s; line-height: 1;
+    }
+    .util-btn:hover { color: #fff; background: rgba(255,255,255,.09); }
+    .util-btn svg { display: block; }
+    .util-count {
+      position: absolute; top: 1px; right: 5px;
+      background: var(--accent); color: #fff;
+      font-size: 8.5px; font-weight: 700; line-height: 1;
+      min-width: 14px; height: 14px; border-radius: 7px; padding: 0 3px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .util-sep { width: 1px; height: 26px; background: rgba(255,255,255,.12); margin: 0 6px; }
+    .util-login {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 13px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.24);
+      color: rgba(255,255,255,.78); font-size: 12px; font-weight: 500;
+      background: none; transition: all .15s; cursor: pointer;
+    }
+    .util-login:hover { background: rgba(255,255,255,.09); color: #fff; border-color: rgba(255,255,255,.44); }
+
+    .header-main { padding: 14px 0; }
+    .header-main-inner { display: flex; align-items: center; justify-content: space-between; gap: 28px; position: relative; }
+    .logo img { height: 46px; width: auto; filter: brightness(0) invert(1); }
+    .main-nav { display: flex; align-items: center; gap: 2px; }
+    .main-nav > a, .nav-drop-wrap > a {
+      padding: 8px 14px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 500;
+      color: rgba(255,255,255,.74); transition: all .18s;
+      display: flex; align-items: center; gap: 5px;
+    }
+    .main-nav > a:hover, .nav-drop-wrap:hover > a { color: #fff; background: rgba(255,255,255,.08); }
+    .main-nav > a.current { color: var(--accent); }
+
+    /* ── MEGA DROPDOWN ── */
+    .nav-drop-wrap { position: static; display: flex; }
+    .nav-drop-wrap > a::after {
+      content: ''; display: inline-block;
+      border-left: 4px solid transparent; border-right: 4px solid transparent;
+      border-top: 4px solid rgba(255,255,255,.45);
+      margin-top: 2px; transition: transform .18s;
+    }
+    .nav-drop-wrap > a.current::after { border-top-color: rgba(200,146,42,.7); }
+    .nav-drop-wrap:hover > a::after { transform: rotate(180deg); }
+    .nav-dropdown {
+      position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      background: #fff; border-radius: 14px;
+      box-shadow: 0 24px 64px rgba(11,31,58,.18);
+      padding: 22px 22px 18px;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s;
+      z-index: 500;
+    }
+    .nav-dropdown::before { content: ''; position: absolute; top: -10px; left: 0; right: 0; height: 10px; }
+    .nav-drop-wrap:hover .nav-dropdown {
+      opacity: 1; visibility: visible; pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .drop-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .drop-grid { display: grid; gap: 8px; }
+    .drop-grid-6 { grid-template-columns: repeat(6, 1fr); min-width: 1140px; }
+    .drop-grid-3 { grid-template-columns: repeat(3, 1fr); min-width: 540px; }
+    .drop-item {
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      padding: 10px 8px; border-radius: 9px; cursor: pointer;
+      transition: background .14s; text-decoration: none; color: var(--text);
+    }
+    .drop-item:hover { background: var(--bg); }
+    .drop-item img { width: 100%; height: 80px; object-fit: contain; border-radius: 7px; background: #f4f6fa; padding: 6px; }
+    .drop-grid-6 .drop-item img { height: 100px; object-fit: contain; background: none; padding: 0; }
+    .drop-item-name { font-size: 11.5px; font-weight: 500; text-align: center; line-height: 1.3; }
+
+    /* ── HERO ── */
+    .page-hero { line-height: 0; }
+    .page-hero img { width: 100%; display: block; }
+
+    /* ── DECORATION SECTIONS ── */
+    .deco-method { padding: 52px 0; }
+    .deco-method:nth-child(odd)  { background: var(--white); }
+    .deco-method:nth-child(even) { background: var(--bg); }
+
+    .deco-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 56px; align-items: center;
+    }
+    .deco-split.flip { direction: rtl; }
+    .deco-split.flip > * { direction: ltr; }
+
+    .deco-photo {
+      border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: var(--shadow); aspect-ratio: 3/2; background: #e8ecf4;
+    }
+    .deco-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .deco-tag {
+      display: block; font-size: 11px; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    }
+    .deco-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 2.4vw, 32px); font-weight: 700; color: var(--navy);
+      line-height: 1.14; margin-bottom: 14px;
+    }
+    .deco-desc {
+      font-size: 14.5px; color: var(--muted); line-height: 1.7; margin-bottom: 22px;
+    }
+
+    /* ── PARTNERS ── */
+    .partners-section { background: var(--navy); padding: 72px 0; }
+    .sh-center { text-align: center; margin-bottom: 44px; }
+    .sh-eye-gold {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .sh-title-white {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.8vw, 34px); font-weight: 700; color: var(--white);
+      line-height: 1.18; margin-bottom: 10px;
+    }
+    .sh-desc-muted { font-size: 14px; color: rgba(255,255,255,.48); max-width: 500px; margin: 0 auto; }
+    .partners-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .partner-card {
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-lg); padding: 28px 22px; text-align: center;
+      transition: background .2s;
+    }
+    .partner-card:hover { background: rgba(255,255,255,.1); }
+    .partner-badge {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; background: var(--accent); color: var(--white);
+      padding: 3px 9px; border-radius: 4px; margin-bottom: 14px;
+    }
+    .partner-name { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 10px; line-height: 1.2; }
+    .partner-desc { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 18px; }
+    .partner-perk {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 100px;
+      background: rgba(200,146,42,.15); font-size: 12px; font-weight: 600; color: var(--accent);
+    }
+
+    /* ── PROGRAMS ── */
+    .programs-band {
+      background: var(--bg); padding: 40px 0; text-align: center;
+      border-top: 1px solid var(--line);
+    }
+    .programs-band p { font-size: 13.5px; color: var(--muted); margin-bottom: 16px; }
+    .programs-tags { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .prog-tag {
+      padding: 6px 15px; border-radius: 100px; border: 1.5px solid var(--line);
+      font-size: 12.5px; font-weight: 600; color: var(--navy); background: var(--white);
+    }
+
+    /* ── CTA ── */
+    .cta-band {
+      background: var(--accent-light); border-top: 3px solid var(--accent);
+      padding: 60px 0; text-align: center;
+    }
+    .cta-h {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 2.8vw, 34px); color: var(--navy); margin-bottom: 10px;
+    }
+    .cta-sub { font-size: 15px; color: var(--muted); margin-bottom: 28px; }
+    .cta-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); color: rgba(255,255,255,.55); padding: 56px 0 28px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 260px 1fr 220px;
+      gap: 52px; margin-bottom: 48px;
+    }
+    .footer-logo { height: 40px; width: auto; filter: brightness(0) invert(1); margin-bottom: 14px; }
+    .footer-tagline { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.65; margin-bottom: 22px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(255,255,255,.08); color: rgba(255,255,255,.65);
+      display: flex; align-items: center; justify-content: center; transition: background .18s;
+    }
+    .footer-social a:hover { background: rgba(255,255,255,.18); color: #fff; }
+    .footer-social a svg { width: 15px; height: 15px; display: block; }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+      color: rgba(255,255,255,.9); margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: 14px; color: rgba(255,255,255,.46); transition: color .18s; }
+    .footer-col ul a:hover { color: #fff; }
+    .footer-col ul li { font-size: 13px; color: rgba(255,255,255,.38); line-height: 1.5; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.09); padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+    }
+    .footer-badges { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .footer-badges img { height: 30px; width: auto; object-fit: contain; background: rgba(255,255,255,.9); border-radius: 4px; padding: 3px 7px; }
+    .footer-copy { font-size: 12.5px; color: rgba(255,255,255,.3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 900px) {
+      .deco-split { grid-template-columns: 1fr; gap: 28px; }
+      .deco-split.flip { direction: ltr; }
+      .partners-grid { grid-template-columns: 1fr; gap: 14px; }
+    }
+    @media (max-width: 768px) {
+      .page-hero { padding: 48px 0 40px; }
+      .deco-method { padding: 40px 0; }
+      .main-nav { display: none; }
+      .header-top { display: none; }
+    }
+    @media (max-width: 480px) {
+      .wrap { padding: 0 16px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="wrap header-top-inner">
+      <div class="header-top-social">
+        <a href="#" aria-label="Facebook">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" aria-label="X">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+      </div>
+      <div class="header-utils">
+
+        <button class="util-btn" aria-label="Compare (0)">
+          <span class="util-count">0</span>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+            <rect x="1" y="5.5" width="11.5" height="11.5" rx="1.8"/>
+            <rect x="6.5" y="1" width="11.5" height="11.5" rx="1.8"/>
+          </svg>
+          Compare
+        </button>
+
+        <button class="util-btn" aria-label="Wishlist (0)">
+          <span class="util-count">0</span>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.5 16S2 10.8 2 6.4A4.2 4.2 0 0 1 9.5 4a4.2 4.2 0 0 1 7.5 2.4C17 10.8 9.5 16 9.5 16z"/>
+          </svg>
+          Wishlist
+        </button>
+
+        <button class="util-btn" aria-label="Presentations (0)">
+          <span class="util-count">0</span>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6.5" y="3.5" width="10" height="13" rx="1.8"/>
+            <rect x="2.5" y="1.5" width="10" height="13" rx="1.8" fill="#0B1F3A"/>
+            <rect x="2.5" y="1.5" width="10" height="13" rx="1.8"/>
+            <circle cx="7.5" cy="9.5" r="3"/>
+            <line x1="7.5" y1="9.5" x2="7.5" y2="6.5"/>
+            <line x1="7.5" y1="9.5" x2="10" y2="11.1"/>
+          </svg>
+          Presentations
+        </button>
+
+        <div class="util-sep"></div>
+
+        <button class="util-login" aria-label="Log In">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="6.5" cy="4.5" r="2.2"/>
+            <path d="M1.5 12c0-2.8 2.2-4.5 5-4.5s5 1.7 5 4.5"/>
+          </svg>
+          Log In
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <div class="header-main">
+    <div class="wrap header-main-inner">
+      <a href="apollo_redesign.html" class="logo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Apollo-USA-Logo.png" alt="Apollo USA">
+      </a>
+      <nav class="main-nav" aria-label="Main">
+
+        <!-- Products mega-menu -->
+        <div class="nav-drop-wrap">
+          <a href="apollo_redesign.html">Products</a>
+          <div class="nav-dropdown">
+            <div class="drop-eyebrow">Shop by Category</div>
+            <div class="drop-grid drop-grid-6">
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Caps.png" alt=""><span class="drop-item-name">Caps &amp; Hats</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Bags.png" alt=""><span class="drop-item-name">Bags</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Blankets.png" alt=""><span class="drop-item-name">Blankets</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Beanies.png" alt=""><span class="drop-item-name">Beanies</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Towels.png" alt=""><span class="drop-item-name">Towels</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Robes.png" alt=""><span class="drop-item-name">Robes</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Gift-Sets.png" alt=""><span class="drop-item-name">Gift Sets</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Pillows.png" alt=""><span class="drop-item-name">Pillows</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Scarves.png" alt=""><span class="drop-item-name">Scarves</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Gloves.png" alt=""><span class="drop-item-name">Gloves</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Aprons.png" alt=""><span class="drop-item-name">Aprons</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Headbands-Wristbands.png" alt=""><span class="drop-item-name">Headbands &amp; Wristbands</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Baby-Items.png" alt=""><span class="drop-item-name">Baby Items</span></a>
+              <a href="#" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/Collections/Default/Neoprene-Sleeves.png" alt=""><span class="drop-item-name">Neoprene Sleeves</span></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decoration Services mega-menu -->
+        <div class="nav-drop-wrap">
+          <a href="apollo_decorations.html" class="current">Decoration Services</a>
+          <div class="nav-dropdown">
+            <div class="drop-eyebrow">In-House Decoration Methods</div>
+            <div class="drop-grid drop-grid-3">
+              <a href="#embroidery" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/embroidery-new.png" alt=""><span class="drop-item-name">Embroidery</span></a>
+              <a href="#dtf" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/heat-transfer.png" alt=""><span class="drop-item-name">DTF / Heat Transfer</span></a>
+              <a href="#patches" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/paches.png" alt=""><span class="drop-item-name">Patches</span></a>
+              <a href="#screenprint" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/screenprint.png" alt=""><span class="drop-item-name">Screen Print</span></a>
+              <a href="#sublimation" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/sublimation-new.png" alt=""><span class="drop-item-name">Sublimation</span></a>
+              <a href="#laser" class="drop-item"><img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/laser.png" alt=""><span class="drop-item-name">Laser Etching</span></a>
+            </div>
+          </div>
+        </div>
+
+        <a href="#">Special Deals</a>
+        <a href="#">Resources</a>
+        <a href="#">About Us</a>
+        <a href="#">Customer Care</a>
+      </nav>
+      <a href="#contact" class="btn btn-primary">Request Catalog</a>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ══════════════════════════════════════════ -->
+<section class="page-hero">
+  <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Deco_Banner.png" alt="Apollo USA Decoration Services">
+</section>
+
+<!-- ═══ DECORATION METHODS ══════════════════════════════ -->
+
+<!-- Embroidery -->
+<section class="deco-method" id="embroidery">
+  <div class="wrap">
+    <div class="deco-split">
+      <div class="deco-photo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/EMB_image.png" alt="Embroidery machine in operation">
+      </div>
+      <div>
+        <span class="deco-tag">In-House Service &middot; Method 01</span>
+        <h2 class="deco-name">Embroidery</h2>
+        <p class="deco-desc">High-density decorative stitching on fabric that evolved from handwork to today's high-speed, computerized multi-head machines. With state of the art embroidery equipment, thread and digitizing software, embroidery artwork can be applied on a wide range of products.</p>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DTF / Heat Transfer -->
+<section class="deco-method" id="dtf">
+  <div class="wrap">
+    <div class="deco-split flip">
+      <div class="deco-photo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/HT_image.png" alt="DTF heat transfer press">
+      </div>
+      <div>
+        <span class="deco-tag">In-House Service &middot; Method 02</span>
+        <h2 class="deco-name">DTF / Heat Transfer</h2>
+        <p class="deco-desc">Heat Transfer is an innovative way of branding a wide range of products with crisp, vibrant, full-color graphics. This state-of-the-art technology provides the ability to print and apply detailed logos and graphics while being cost-effective.</p>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Patches -->
+<section class="deco-method" id="patches">
+  <div class="wrap">
+    <div class="deco-split">
+      <div class="deco-photo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Patches_image.png" alt="Assorted custom patches">
+      </div>
+      <div>
+        <span class="deco-tag">In-House Service &middot; Method 03</span>
+        <h2 class="deco-name">Patches</h2>
+        <p class="deco-desc">Patch twill, woven, and leather etched patches are used to create a premium luxurious look to your logo. Great application for bags, premium blankets, or a wide range of products you are looking to elevate.</p>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen Print -->
+<section class="deco-method" id="screenprint">
+  <div class="wrap">
+    <div class="deco-split flip">
+      <div class="deco-photo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Screen-Print.webp" alt="Screen printing process">
+      </div>
+      <div>
+        <span class="deco-tag">In-House Service &middot; Method 04</span>
+        <h2 class="deco-name">Screen Print</h2>
+        <p class="deco-desc">A printing technique that uses a woven mesh to support an ink-blocking stencil. Nylon inks are used for fabrics with a high nylon content or stretch factor. Plastisol inks are used on all cotton-rich products. Ideal for various fabrics and large-format applications at a low cost.</p>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sublimation -->
+<section class="deco-method" id="sublimation">
+  <div class="wrap">
+    <div class="deco-split">
+      <div class="deco-photo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Sublimation.webp" alt="Sublimation printing setup">
+      </div>
+      <div>
+        <span class="deco-tag">In-House Service &middot; Method 05</span>
+        <h2 class="deco-name">Sublimation</h2>
+        <p class="deco-desc">Sublimation permanently adds a design to a sublimation blank — shirts, ornaments, tumblers, and more — creating an amazing variety of custom products. Produces vibrant, permanent color with no hand-feel on the fabric.</p>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Laser Etching -->
+<section class="deco-method" id="laser">
+  <div class="wrap">
+    <div class="deco-split flip">
+      <div class="deco-photo">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Laser-Etching.webp" alt="Laser etching machine and samples">
+      </div>
+      <div>
+        <span class="deco-tag">In-House Service &middot; Method 06</span>
+        <h2 class="deco-name">Laser Etching</h2>
+        <p class="deco-desc">Laser etching creates marks on parts and products by melting their surface, producing raised marks in black, white, or gray. Highly versatile, it works with metals, leather, wood, and fabric — a premium tactile decoration method suited for executive gifts and specialty items.</p>
+        <a href="#contact" class="btn btn-primary">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PARTNER PROGRAMS ═════════════════════════════ -->
+<section class="partners-section">
+  <div class="wrap">
+    <div class="sh-center">
+      <div class="sh-eye-gold">Partner Programs</div>
+      <h2 class="sh-title-white">Certified by Industry Leaders</h2>
+      <p class="sh-desc-muted">Apollo USA is an authorized decorator partner for the industry's leading contract programs.</p>
+    </div>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <span class="partner-badge">Authorized Decorator</span>
+        <div class="partner-name">Sanmar PSST</div>
+        <p class="partner-desc">Pack Separately. Ship Together. Established 2009. Free freight on every order with no exclusions, 2% spoilage protection plan, no restock fees, and spec sampling to win new business.</p>
+        <span class="partner-perk">Free Freight &middot; No Restock Fees Ever</span>
+      </div>
+      <div class="partner-card">
+        <span class="partner-badge">Contract Decorator</span>
+        <div class="partner-name">S&amp;S Activewear</div>
+        <p class="partner-desc">S&amp;S Contract Decorator Network — Simple Solution Embellishment Partners. Free freight on all orders. Authorized decorator of exclusive brands including Adidas, Oakley, Russell Athletic, and more.</p>
+        <span class="partner-perk">Free Freight on All Orders</span>
+      </div>
+      <div class="partner-card">
+        <span class="partner-badge">New Partner</span>
+        <div class="partner-name">Storm Creek</div>
+        <p class="partner-desc">Storm Creek has teamed up with Apollo USA to meet decoration and PSST program needs. This eco-made apparel brand ships FREE to all Apollo locations across the country.</p>
+        <span class="partner-perk">Ships Free to All Locations</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROGRAMS BAND ════════════════════════════════ -->
+<div class="programs-band">
+  <div class="wrap">
+    <p>We are also proud to be part of the following programs:</p>
+    <div class="programs-tags">
+      <span class="prog-tag">Sanmar PSST</span>
+      <span class="prog-tag">Alphabroders Mpact</span>
+      <span class="prog-tag">S&amp;S Activewear Freight Advantage</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CTA ══════════════════════════════════════════ -->
+<section class="cta-band" id="contact">
+  <div class="wrap">
+    <h2 class="cta-h">Questions? Let's Talk.</h2>
+    <p class="cta-sub">Contact us for pricing, minimums, and decoration details for your next project.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn btn-primary">Request a Quote</a>
+      <a href="#" class="btn btn-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <img class="footer-logo" src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/Apollo-USA-Logo.png" alt="Apollo USA">
+        <p class="footer-tagline">Premium promotional products and full in-house decoration services for wholesale distributors. ASI &middot; PPAI &middot; SAGE certified supplier.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Decoration Services</h4>
+        <ul>
+          <li><a href="#embroidery">Embroidery</a></li>
+          <li><a href="#dtf">DTF / Heat Transfer</a></li>
+          <li><a href="#patches">Patches</a></li>
+          <li><a href="#screenprint">Screen Print</a></li>
+          <li><a href="#sublimation">Sublimation</a></li>
+          <li><a href="#laser">Laser Etching</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Locations</h4>
+        <ul>
+          <li>CA HQ — 1650 W. Artesia Blvd, Gardena CA 90248</li>
+          <li>TX — 2700 Story Rd W #180, Irving TX 75038</li>
+          <li>IL — 1401 Estes Ave, Elk Grove Village IL 60007</li>
+          <li>NJ — 7895 Airport Hwy, Pennsauken Twp NJ 08109</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-badges">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/ASIstarsupplier.webp" alt="ASI Top 40">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/PPAI.png" alt="PPAI Top 100">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/SAGEsupplier.png" alt="SAGE Rated A">
+        <img src="apollo_copy/A047264C-172B-47EA-BF5E-DA8739C2839B/StaticImages/PROsupplier.png" alt="PRO Supplier">
+      </div>
+      <p class="footer-copy">&copy; 2026 Apollo USA. All rights reserved. B2B wholesale only.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a');
+    if (a) {
+      var href = a.getAttribute('href');
+      if (href === '#') { e.preventDefault(); }
+    }
+  });
+</script>
+<script src="chat-widget.js"></script>
+</body>
+</html>

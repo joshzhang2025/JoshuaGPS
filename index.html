@@ -1,0 +1,489 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#102954">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Joshua GPS">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <title>Joshua Dynamic Bilingual GPS Site MVP</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Offline overlay (shown when the connection drops while the app is open) -->
+  <div id="offline-overlay" aria-hidden="true">
+    <div id="offline-box">
+      <div id="offline-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 1l22 22" />
+          <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55" />
+          <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39" />
+          <path d="M10.71 5.05A16 16 0 0 1 22.58 9" />
+          <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88" />
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+          <line x1="12" y1="20" x2="12.01" y2="20" />
+        </svg>
+      </div>
+      <h1>Connection lost</h1>
+      <p>You're offline. Some content may be unavailable until the connection is restored.</p>
+      <button id="offline-retry" type="button">Try again</button>
+    </div>
+  </div>
+
+  <!-- Login overlay -->
+  <div id="login-overlay">
+    <div id="login-box">
+      <div id="login-brand-mark">GPS</div>
+      <h1 id="login-title">Joshua GPS</h1>
+      <p id="login-subtitle">Please sign in to continue</p>
+      <form id="login-form" autocomplete="off">
+        <div class="login-field">
+          <label for="login-username">Username</label>
+          <input id="login-username" type="text" placeholder="Enter username" />
+        </div>
+        <div class="login-field">
+          <label for="login-password">Password</label>
+          <input id="login-password" type="password" placeholder="Enter password" />
+        </div>
+        <div id="login-error">Incorrect username or password.</div>
+        <button id="login-btn" type="submit">Sign In</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="app">
+    <aside id="sidebar">
+      <button class="sidebar-close" id="sidebar-close" type="button">&#10005;</button>
+      <div class="brand">
+        <div class="brand-mark">GPS</div>
+        <div>
+          <h1 id="brand-title">Joshua GPS</h1>
+          <p id="brand-subtitle">Dynamic Bilingual Site MVP</p>
+        </div>
+      </div>
+      <div class="nav-scroll" id="nav"></div>
+    </aside>
+    <div id="sidebar-overlay"></div>
+
+    <main>
+      <div class="topbar">
+        <div class="topbar-left">
+          <button class="hamburger" id="sidebar-toggle" type="button">&#9776;</button>
+          <div>
+            <h2 id="page-title">Joshua GPS Site</h2>
+            <p id="page-subtitle">Daily plan, bilingual review, read-aloud and progress tracking.</p>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn" id="lang-toggle" type="button">中文</button>
+          <button class="btn primary" id="read-btn" type="button">Read current page</button>
+          <button class="btn" id="stop-btn" type="button">Stop</button>
+        </div>
+      </div>
+
+      <section id="dashboard" class="section active"></section>
+      <section id="today" class="section"></section>
+      <section id="weekly" class="section"></section>
+      <section id="priority" class="section"></section>
+      <section id="schedule" class="section"></section>
+      <section id="logs" class="section"></section>
+      <section id="projects" class="section"></section>
+      <section id="portfolio" class="section"></section>
+      <section id="testPage" class="section"></section>
+      <section id="word" class="section"></section>
+      <section id="markdown" class="section"></section>
+      <section id="excel" class="section"></section>
+      <section id="xmind" class="section"></section>
+      <section id="apollo" class="section apollo-section">
+        <iframe src="apollo_copy/index.html" title="Apollo Site" allowfullscreen></iframe>
+      </section>
+      <section id="apollo-redesign" class="section apollo-section">
+        <iframe src="apollo_redesign.html" title="Apollo Redesign" allowfullscreen></iframe>
+      </section>
+      <section id="tmx" class="section">
+        <div id="tmx-page">
+          <nav class="tmx-subnav" id="tmx-nav-list"></nav>
+          <div class="tmx-hero">
+            <h3 id="tmx-hero-title"></h3>
+            <p id="tmx-hero-subtitle"></p>
+            <div class="tmx-stat-row" id="tmx-stat-row"></div>
+          </div>
+          <div class="tmx-search-panel">
+            <div class="tmx-search-row">
+              <div class="tmx-search-box"><span>🔍</span><input id="tmx-search-input" type="text" /></div>
+              <button class="tmx-btn" id="tmx-btn-clear"></button>
+              <div class="tmx-search-meta" id="tmx-search-meta"></div>
+            </div>
+          </div>
+          <div id="tmx-content"></div>
+          <div class="tmx-empty-state" id="tmx-empty-state"></div>
+          <div class="tmx-footer-note" id="tmx-footer-note"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script>
+    (function () {
+      var overlay = document.getElementById('login-overlay');
+      var form = document.getElementById('login-form');
+      var errEl = document.getElementById('login-error');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var user = document.getElementById('login-username').value.trim();
+        var pass = document.getElementById('login-password').value;
+        if ((user === 'admin' && pass === 'bigblaze') || (user === '1' && pass === '1')) {
+          overlay.classList.add('login-fade-out');
+          setTimeout(function () { overlay.style.display = 'none'; }, 400);
+        } else {
+          errEl.style.display = 'block';
+          document.getElementById('login-password').value = '';
+        }
+      });
+    })();
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js');
+      });
+    }
+  </script>
+  <script>
+    // Connection-status overlay: surfaces a clear "offline" screen instead of
+    // letting failed fetches leave a blank/stale view.
+    (function () {
+      var overlay = document.getElementById('offline-overlay');
+      function setOnline() { overlay.classList.remove('show'); overlay.setAttribute('aria-hidden', 'true'); }
+      function setOffline() { overlay.classList.add('show'); overlay.setAttribute('aria-hidden', 'false'); }
+      window.addEventListener('online', setOnline);
+      window.addEventListener('offline', setOffline);
+      document.getElementById('offline-retry').addEventListener('click', function () {
+        if (navigator.onLine) { setOnline(); window.location.reload(); }
+      });
+      if (!navigator.onLine) setOffline();
+
+      // Expose for the native bridge below to reuse.
+      window.__gpsOffline = { show: setOffline, hide: setOnline };
+    })();
+  </script>
+  <script>
+    // Native Capacitor plugins. These only run inside the iOS/Android app;
+    // in a plain browser window.Capacitor is undefined and this is skipped.
+    (function () {
+      var Cap = window.Capacitor;
+      if (!Cap || typeof Cap.isNativePlatform !== 'function' || !Cap.isNativePlatform()) return;
+      var P = Cap.Plugins || {};
+      var off = window.__gpsOffline || { show: function () {}, hide: function () {} };
+
+      // Status bar: white text on the dark brand bar.
+      if (P.StatusBar) {
+        try { P.StatusBar.setStyle({ style: 'DARK' }); } catch (e) {}
+        try { P.StatusBar.setBackgroundColor({ color: '#102954' }); } catch (e) {} // Android only
+      }
+
+      // Hide the splash once the app shell is ready (config sets launchAutoHide:false).
+      function hideSplash() { if (P.SplashScreen) { try { P.SplashScreen.hide(); } catch (e) {} } }
+      window.addEventListener('load', function () { setTimeout(hideSplash, 150); });
+      setTimeout(hideSplash, 4000); // safety: never let the splash get stuck
+
+      // Native connectivity drives the offline overlay (more reliable than navigator.onLine).
+      if (P.Network) {
+        var apply = function (s) { (s && s.connected) ? off.hide() : off.show(); };
+        P.Network.getStatus().then(apply).catch(function () {});
+        P.Network.addListener('networkStatusChange', apply);
+
+        // Re-check the connection whenever the app returns from the background.
+        if (P.App) {
+          P.App.addListener('appStateChange', function (state) {
+            if (state.isActive) P.Network.getStatus().then(apply).catch(function () {});
+          });
+        }
+      }
+    })();
+  </script>
+  <script src="script.js"></script>
+  <script>
+(function(){
+const tmxUI={
+  zh:{
+    pageTitle:'TMX 核心工作方法论',
+    pageSub:'正式内部同步版，融合 TMX 方法模板与 2026-06-17 Joshua 方法说明会内容。',
+    heroTitle:'Integrated TMX Methodology View',
+    heroSub:'结构化呈现 TMX 核心方法、关键工具、四件套和 AIX 工作法，用于新同事培训、项目启动和公司内部同步。',
+    read:'朗读当前页',stop:'停止',clear:'清空搜索',
+    searchPlaceholder:'搜索 Code / 方法名 / 英文全称 / 关键词',
+    searchMeta:q=>q?`已筛选：${q}`:'支持全文搜索，输入 Code、方法名、英文全称或关键字。',
+    noResult:'未找到匹配结果，请尝试其他关键词。',
+    footer:'说明：本页融合《TMX_Work_Methodology_Template_AIX_New_Methods_EN.xmind》和《20260617_TMX_Joshua_原文.docx》的内容，用于公司内部同步与培训；页面已统一口径：TMX / UPX。',
+    stats:[{num:'6+',text:'主模块'},{num:'30+',text:'关键方法 / 工具'},{num:'2',text:'语言模式'},{num:'1',text:'搜索与朗读'}]
+  },
+  en:{
+    pageTitle:'TMX Core Work Methodology',
+    pageSub:'Formal internal sync version integrating the TMX methodology template and the 2026-06-17 Joshua method session.',
+    heroTitle:'Integrated TMX Methodology View',
+    heroSub:'A structured view of TMX core methods, key tools, the Four-piece Set, and AIX work methods for onboarding, project initiation, and internal synchronization.',
+    read:'Read current page',stop:'Stop',clear:'Clear search',
+    searchPlaceholder:'Search by code / method / full name / keyword',
+    searchMeta:q=>q?`Filtered by: ${q}`:'Full-text search is supported across codes, method names, full names, and keywords.',
+    noResult:'No matching result was found. Please try another keyword.',
+    footer:'Note: This page integrates content from "TMX_Work_Methodology_Template_AIX_New_Methods_EN.xmind" and "20260617_TMX_Joshua_原文.docx" for internal synchronization and training. Terminology has been unified as TMX / UPX.',
+    stats:[{num:'6+',text:'major modules'},{num:'30+',text:'key methods / tools'},{num:'2',text:'language modes'},{num:'1',text:'search & read-aloud'}]
+  }
+};
+
+const tmxData=[
+  {id:'overview',number:'01',navZh:'总览',navEn:'Overview',titleZh:'TMX 核心工作方法论',titleEn:'TMX Core Work Methodology',introZh:'公司内部同步正式版｜统一口径：TMX / UPX。',introEn:'Formal internal sync version | unified terminology: TMX / UPX.',
+   cards:[
+    {icon:'🧭',titleZh:'TMX 是什么',titleEn:'What TMX Is',textZh:'TMX 是公司过去几年持续提炼并在日常工作中反复验证的一套工作方法体系。它不是单个工具，而是覆盖学习、讨论、竞对分析、标准化、项目结构化、AI 工作法和 KPI 衡量的整体操作系统。',textEn:'TMX is a work methodology system refined and repeatedly validated in daily work over recent years. It is not a single tool, but an operating system covering learning, discussion, reverse competitor analysis, standardization, project structuring, AI work methods, and KPI measurement.'},
+    {icon:'📌',titleZh:'为什么重要',titleEn:'Why It Matters',textZh:'Joshua 在会议中明确指出，真正让公司近几年进步变快的，不只是项目本身，而是持续建立并使用方法。TMX 的价值在于：让知识可学习、让问题可讨论、让案例可借鉴、让项目可结构化、让结果可闭环、让团队可衡量。',textEn:'Joshua made it clear that what accelerated progress in recent years was not only the projects themselves, but the intentional building and use of methods. TMX makes knowledge learnable, problems discussable, cases borrowable, projects structurally manageable, results closable in loops, and teams measurable.'},
+    {icon:'🔁',titleZh:'统一口径',titleEn:'Unified Naming',textZh:'本页已统一命名：TMX / TMS 统一为 TMX；UPX / AUPX 统一为 UPX。页面同时提供双语切换、全文搜索和语音朗读。',textEn:'Naming is standardized on this page: TMX / TMS are unified as TMX; UPX / AUPX are unified as UPX. The page also provides bilingual switching, full-text search, and read-aloud support.'}
+   ],
+   flowTitleZh:'TMX 总体运行路径',flowTitleEn:'TMX Operating Route',
+   flow:[
+    {code:'UPX',zh:'学习外部知识并转化',en:'Learn external knowledge and convert it'},
+    {code:'BSD',zh:'围绕问题正式讨论',en:'Run formal problem-centered discussions'},
+    {code:'VBA',zh:'反向研究优秀竞对',en:'Reverse-analyze strong competitors'},
+    {code:'COX / OPI / MTA / MCC',zh:'统一概念、流程、培训与传播',en:'Standardize concepts, processes, training, and circulation'},
+    {code:'TMM / PEA / MTX / KMM',zh:'把项目结构化表达和跟进',en:'Structure, express, and follow up projects'},
+    {code:'AIX',zh:'用 AI 工作法推动闭环',en:'Use AI work methods to drive closed loops'},
+    {code:'KPI',zh:'用指标衡量结果与效率',en:'Measure outcomes and efficiency with metrics'}
+   ]
+  },
+  {id:'background',number:'02',navZh:'TMX 背景',navEn:'TMX Background',
+   sectionTitleZh:'TMX 背景与会议要点',sectionTitleEn:'TMX Background and Meeting Highlights',
+   sectionIntroZh:'这一部分用于说明 Joshua 分享里对 TMX 的核心判断，帮助团队理解为什么 TMX 不是"概念集合"，而是已经被用于实际业务和管理的工作系统。',
+   sectionIntroEn:'This section explains Joshua\'s core judgments about TMX and helps the team understand why TMX is not just a concept collection, but a work system already used in real business and management.',
+   cards:[
+    {icon:'📈',titleZh:'从经验走向方法',titleEn:'From Experience to Method',textZh:'Joshua 回顾了公司长期经营的经历，指出真正明显的跃迁来自近几年对"工作方法"的系统化建设：把学习、分析、讨论、表达、执行和衡量沉淀成可反复使用的方法。',textEn:'Joshua reviewed the company\'s long operating journey and noted that the visible leap came from recent systematic work on "methods": turning learning, analysis, discussion, expression, execution, and measurement into reusable methods.'},
+    {icon:'👥',titleZh:'先训练，再扩散',titleEn:'Train First, Then Spread',textZh:'TMX 的逻辑不是先找最完美的人，而是先找到正确的方法，再通过课程、训练、案例和传播机制，把能力从核心小组扩展到更大的团队。',textEn:'The logic of TMX is not to begin by finding the perfect person, but to begin by finding the right method and then spread capability from a core group to a wider team through courses, training, cases, and communication mechanisms.'},
+    {icon:'🧱',titleZh:'结构化是关键',titleEn:'Structure Is the Key',textZh:'信息如果只是散落在聊天、经验或临时讨论中，就很难积累。TMX 的价值之一，就是把内容组织进 COX、TMM、PEA、MTX、KMM、AIX 方法链和 KPI 之中，让项目和知识都能被看见、被复用、被衡量。',textEn:'If information remains scattered across chat, personal experience, or ad hoc discussion, it is difficult to accumulate. One value of TMX is that it organizes content into COX, TMM, PEA, MTX, KMM, the AIX method chain, and KPI so that projects and knowledge can be seen, reused, and measured.'}
+   ]
+  },
+  {id:'core',number:'03',navZh:'核心基础方法',navEn:'Core Methods',
+   sectionTitleZh:'三大基础核心方法',sectionTitleEn:'Three Foundational Core Methods',
+   sectionIntroZh:'Joshua 在会议中明确提到，UPX、BSD、VBA 是较早形成且对公司进步帮助最大的三类方法。它们分别解决：怎么学习、怎么讨论、怎么借鉴外部优秀做法。',
+   sectionIntroEn:'Joshua explicitly said that UPX, BSD, and VBA were among the earliest and most influential methods behind the company\'s progress. They answer how to learn, how to discuss, and how to learn from strong external practices.',
+   methods:[
+    {code:'UPX',tag:'Foundation',icon:'🎓',titleZh:'UPX 学习方法',titleEn:'UPX Learning Method',fullEn:'Related UPX Courses / UPX Method',defZh:'UPX 是公司系统发现、筛选、购买、学习并转化外部优质课程和知识内容的方法，重点不只是"看课程"，而是把知识真正用于业务。',defEn:'UPX is the company method for systematically discovering, screening, purchasing, learning from, and converting high-quality external courses and knowledge content. The point is not only to watch courses, but to use the knowledge in real business.',impZh:'Joshua 明确表示，TMX 早期进步的重要来源之一，就是持续学习 Amazon、广告、TikTok 和 AI 等内容，然后再组织内部应用和传播。',impEn:'Joshua made it clear that one important source of early TMX progress was continuous learning about Amazon, advertising, TikTok, AI, and more, followed by internal application and spread.',pointsZh:['通过关键词查找课程和材料，并识别优质学习资源。','重点识别优秀教练和高价值内容，而不是泛泛浏览。','将课程内容翻译、总结、交流并转化为内部可执行做法。','建立 UPX 列表和学习机制，让知识从个人学习变成团队能力。'],pointsEn:['Use keywords to search for courses and materials, and identify strong learning resources.','Focus on identifying strong coaches and high-value content rather than browsing randomly.','Translate, summarize, discuss, and convert course content into executable internal practices.','Build a UPX list and learning mechanism so that knowledge grows from individual learning into team capability.']},
+    {code:'BSD',tag:'Foundation',icon:'💬',titleZh:'BSD 头脑风暴法',titleEn:'BSD Brainstorming',fullEn:'BSD Concept and Importance',defZh:'BSD 是围绕单一问题、单一主题展开的正式讨论机制，通过提前准备材料、邀请最了解问题的人、聚焦讨论和形成思路，来提升问题解决效率。',defEn:'BSD is a formal discussion mechanism focused on one issue or one topic at a time. It improves problem solving by requiring preparation in advance, bringing in the people who understand the issue best, focusing the discussion, and forming clear approaches.',impZh:'Joshua 反复强调，很多大问题都起点于高质量讨论。BSD 的意义不是"多开会"，而是让会议准备充分、聚焦问题、不浪费时间。',impEn:'Joshua repeatedly emphasized that many major solutions start from high-quality discussion. BSD is not about having more meetings, but about meetings that are prepared, focused, and efficient.',pointsZh:['发现问题后，就应发起 BSD，而不是放任问题散落。','会议前应通过文档或录屏共享背景材料，确保参与者充分理解问题。','一般一场 BSD 只聚焦一个问题，通常 20–60 分钟。','可以结合 AI 生成讨论思路、问题清单和可能路径。'],pointsEn:['Once a problem is found, it should be brought into a BSD rather than left scattered.','Background knowledge should be shared in advance through documents or recordings.','A BSD should usually focus on one issue only and typically lasts 20–60 minutes.','AI can support the discussion with approaches, question lists, and possible paths.']},
+    {code:'VBA',tag:'Foundation',icon:'🔎',titleZh:'VBA 反向竞对分析法',titleEn:'VBA Reverse Competitor Analysis',fullEn:'VBA Concept / Reverse Competitor Analysis',defZh:'VBA 是通过分析优秀竞争对手的做法，反向学习其页面表达、关键词、视频、组织结构、岗位设置、投入策略和执行方式的方法。',defEn:'VBA is a method for learning in reverse by analyzing how strong competitors operate, including their page expression, keywords, videos, organization structure, roles, investment strategies, and execution approaches.',impZh:'Joshua 指出，任何业务都不是孤立的。公司可以通过看别人怎么做，快速找到更好的参考路径，从而减少试错成本。',impEn:'Joshua pointed out that no business exists in isolation. By seeing how others work, the company can quickly find stronger reference paths and reduce the cost of trial and error.',pointsZh:['可分析页面文案、关键词、主图、视频和营销表达等外部可见内容。','也可分析竞对公司结构、岗位设置、简历信息和策略痕迹。','基于项目理解，借助 AI 列出竞对名单及其主要做法。','VBA 的目标不是简单模仿，而是找到适合本项目的优秀参考。'],pointsEn:['Analyze externally visible content such as page wording, keywords, hero images, videos, and marketing expression.','Also analyze competitor company structure, role setup, resume information, and strategic traces.','Use AI to list competitors and their main practices based on the project context.','The goal is not simple imitation, but finding strong references that fit the current project.']}
+   ]
+  },
+  {id:'tools',number:'04',navZh:'方法与工具',navEn:'Methods & Tools',
+   sectionTitleZh:'Methods & Tools：标准化与支撑层',sectionTitleEn:'Methods & Tools: Standardization and Support Layer',
+   sectionIntroZh:'这一层方法用来统一概念、沉淀流程、组织培训并推动公司内传播，是 TMX 从"个人会做"走向"团队会做"的关键。',
+   sectionIntroEn:'This layer standardizes concepts, accumulates procedures, organizes training, and drives company-wide circulation. It is the key bridge that turns "one person can do it" into "the team can do it."',
+   methods:[
+    {code:'COX',tag:'Tool',icon:'🏷️',titleZh:'COX 代码与概念标准',titleEn:'COX Code and Concept Standard',fullEn:'Code of MX: Core Concepts, KPIs, and Codes',defZh:'COX 是公司内部的概念、KPI 和代码词典，用来为高频方法、术语和对象提供统一且可搜索的标准定义。',defEn:'COX is the internal dictionary of concepts, KPIs, and codes. It provides unified, searchable standard definitions for frequently used methods, terms, and objects.',impZh:'Joshua 专门强调，精确代码和精确定义能让不同团队、不同地点的人快速对齐，也让 AI 更容易准确理解内部表达。',impEn:'Joshua specifically emphasized that precise codes and definitions help people across teams and locations align quickly, and make it easier for AI to understand internal language accurately.',pointsZh:['维护公司级核心概念、KPI 和代码。','支持 Outlook / 微信 / 文档等场景的快速搜索和引用。','为项目建立相关 COX 条目，减少沟通歧义。','是 AI 友好的表达基础。'],pointsEn:['Maintain company-level core concepts, KPIs, and codes.','Support quick search and reference in Outlook, WeChat, documents, and other work scenarios.','Build project-related COX items to reduce ambiguity.','Provide an AI-friendly expression layer.']},
+    {code:'OPI',tag:'Tool',icon:'🗂️',titleZh:'OPI 操作流程索引',titleEn:'OPI Operation Procedure Index',fullEn:'Standard Operation Procedure (SOP) Index',defZh:'OPI 用于把工作步骤化、流程化，让执行者可以按明确步骤完成任务并减少遗漏。',defEn:'OPI turns work into clear procedures and indexed steps so executors can complete tasks in a structured way and reduce omissions.',impZh:'很多问题如果有明确步骤，就更容易复盘、复制和培训，因此 OPI 是方法落地的重要承接层。',impEn:'Once work has clear steps, it becomes easier to review, replicate, and train, which makes OPI an important execution layer.',pointsZh:['建立 SOP 索引，让关键流程可查可用。','在项目中检查"这项工作是否已经考虑 OPI"。','可通过 OPI PEA 继续进行跟进和实现。'],pointsEn:['Build an SOP index so key processes are searchable and reusable.','Check within each project whether OPI has already been considered.','Continue follow-up and implementation through OPI PEA.']},
+    {code:'MTA',tag:'Tool',icon:'📚',titleZh:'MTA 培训机制',titleEn:'MTA Training Mechanism',fullEn:'Project-linked Training and Knowledge Spread',defZh:'MTA 是围绕项目上线、能力补足和知识扩散而建立的培训机制，用来把方法和案例转化为面向不同对象的培训内容。',defEn:'MTA is a training mechanism built around project launch, capability building, and knowledge spread. It turns methods and cases into training content for different audiences.',impZh:'Joshua 强调，公司愿意持续投资员工教育，因此 MTA 是 TMX 的关键组成部分。',impEn:'Joshua stressed that the company continuously invests in employee education, which is why MTA is a key part of TMX.',pointsZh:['每个项目启动后，应思考对应的 MTA 是什么。','通过链接、要点和层级机制，沉淀培训内容。','特别适用于 AI 课程、方法培训和项目复盘培训。'],pointsEn:['After each project launches, define the corresponding MTA.','Accumulate training content through links, key points, and level-based mechanisms.','Especially useful for AI courses, method training, and project retrospectives.']},
+    {code:'MCC',tag:'Tool',icon:'📣',titleZh:'MCC 公司内传播机制',titleEn:'MCC Internal Communication and Circulation',fullEn:'Spread Methods and Knowledge Across the Company',defZh:'MCC 用于把项目、方法、案例和经验从局部小组传播到更大范围，让"知道的人"不断扩展。',defEn:'MCC spreads projects, methods, cases, and experience from a local group to a broader audience so that the circle of people who understand them keeps expanding.',impZh:'Joshua 明确说，很多事情不能只停留在一个房间里，而要让更多人知道、理解并会用。',impEn:'Joshua clearly said that many things cannot stay confined to one room. More people need to know, understand, and use them.',pointsZh:['当项目达到一定阶段后，应补充 MCC 链接或传播动作。','思考本项目哪些内容需要公司范围传播。','MCC 是把方法影响力扩散到组织层的关键手段。'],pointsEn:['Once a project reaches a certain stage, add MCC links or dissemination actions.','Think about which parts of the project should be spread company-wide.','MCC is a key mechanism for expanding method influence to the organization level.']},
+    {code:'3MM',tag:'Tool',icon:'⏱️',titleZh:'Three-minute Meeting 快速同步法',titleEn:'Three-minute Meeting',fullEn:'Short, High-frequency Alignment',defZh:'Three-minute Meeting 是一种极简、短频快的同步机制，用于在正式会议之间快速对齐最新状态、重点变化和下一步动作。',defEn:'The Three-minute Meeting is a lightweight, short, and high-frequency alignment mechanism used to quickly sync the latest status, important changes, and next actions between formal meetings.',impZh:'它让信息不必总等待大会议才更新，适合在节奏较快的项目中保持低成本沟通。',impEn:'It avoids waiting for large meetings before information is updated and is useful for maintaining low-cost communication in fast-moving projects.',pointsZh:['聚焦状态、变化和下一步，不展开大讨论。','适合正式会议之间的快速对齐。','与 BSD、MCC、TMM 等方法配合，可以提升整体节奏感。'],pointsEn:['Focus on status, changes, and next steps rather than deep discussion.','Best used for quick alignment between formal meetings.','When combined with BSD, MCC, and TMM, it strengthens execution rhythm.']},
+    {code:'VIM',tag:'Tool',icon:'🖼️',titleZh:'VIM 可视化信息管理',titleEn:'VIM Visual Information Management',fullEn:'Use Visual Expression to Improve Understanding',defZh:'VIM 强调通过可视化方式组织和表达信息，让复杂内容更容易被快速阅读、理解和复用。',defEn:'VIM emphasizes organizing and expressing information visually so that complex content becomes easier to read, understand, and reuse quickly.',impZh:'TMX 本身大量使用思维导图、矩阵、流程图和视觉化表达，VIM 是这种做法背后的通用原则。',impEn:'TMX itself uses mind maps, matrices, flowcharts, and visual expression extensively. VIM is the general principle behind that way of working.',pointsZh:['把复杂信息转成更易理解的视觉结构。','适用于汇报、培训、项目结构整理和方法同步。','与 DVA、TMM、MTX、KMM 等方法天然协同。'],pointsEn:['Turn complex information into easier-to-understand visual structures.','Useful for reporting, training, project structuring, and method synchronization.','Naturally works well with DVA, TMM, MTX, KMM, and related methods.']},
+    {code:'AI',tag:'Tool',icon:'🤖',titleZh:'AI 赋能工作法',titleEn:'AI-enabled Work',fullEn:'AI as an Everyday Productivity Layer',defZh:'AI 在 TMX 中不是单独模块，而是贯穿学习、讨论、分析、结构化表达、闭环管理和培训的增强层。',defEn:'Within TMX, AI is not an isolated module. It is an enhancement layer running through learning, discussion, analysis, structured expression, closed-loop management, and training.',impZh:'Joshua 在会议中多次提到，AI 让内容理解、结构转换和方法复用更快，因此应尽量嵌入到已有工作方法中。',impEn:'Joshua repeatedly noted that AI makes content understanding, structure conversion, and method reuse faster, so it should be embedded into existing work methods as much as possible.',pointsZh:['可辅助生成 BSD 讨论思路、VBA 竞对列表和 TMM 结构。','可在 TMM、PEA、MTX、KMM 之间帮助转换结构。','可用于培训内容、海报、一页纸和汇报草稿生成。'],pointsEn:['Use it to support BSD discussion approaches, VBA competitor lists, and TMM structures.','Use it to help convert between TMM, PEA, MTX, and KMM structures.','Use it to generate training content, posters, one-pagers, and reporting drafts.']}
+   ]
+  },
+  {id:'four',number:'05',navZh:'四件套',navEn:'Four-piece Set',
+   sectionTitleZh:'四件套：项目结构化表达与跟进',sectionTitleEn:'Four-piece Set: Project Structuring and Follow-up',
+   sectionIntroZh:'TMM、PEA、MTX、KMM 是 TMX 中非常关键的四种结构化表达和跟进方式，它们可以从不同角度承载同一个项目。',
+   sectionIntroEn:'TMM, PEA, MTX, and KMM are four very important TMX structures for expression and follow-up. They can all carry the same project from different angles.',
+   methods:[
+    {code:'TMM',tag:'Structure',icon:'🧠',titleZh:'TMM 思维导图主页',titleEn:'TMM Mind Map Home Page',fullEn:'Mind-map Structure for Project Understanding',defZh:'TMM 通过思维导图分层组织项目背景、5W2H、待办、交付物和 SOP，是理解和展开项目的主结构。',defEn:'TMM organizes project background, 5W2H, to-do items, deliverables, and SOPs in layered mind-map form. It is the main structure for understanding and expanding a project.',impZh:'Joshua 特别说明，TMM 不是 Word，也不是 Excel，而是层级化组织复杂信息的方式。',impEn:'Joshua specifically explained that TMM is neither Word nor Excel; it is a layered way to organize complex information.',pointsZh:['适合梳理项目主体结构和关键问题。','可以承接 To-do List、Concrete Deliverables、SOP 等内容。','是后续 PEA、MTX、KMM 等表达形式的重要输入源。'],pointsEn:['Useful for structuring the main body of a project and its key questions.','Can carry the to-do list, concrete deliverables, SOPs, and related content.','Acts as an important input source for later PEA, MTX, and KMM.']},
+    {code:'PEA',tag:'Structure',icon:'📋',titleZh:'PEA 跟进与落地',titleEn:'PEA Follow-up and Implementation',fullEn:'Execution Follow-up Database / Table Layer',defZh:'PEA 是把项目从结构理解转向任务跟进和执行落地的承接层，用于记录方案、计划、风险、任务拆解、实验、周报和复盘。',defEn:'PEA is the carrying layer that turns project understanding into execution follow-up and implementation. It records solutions, plans, risks, task breakdowns, experiments, weekly reporting, and retrospectives.',impZh:'它让项目不只停留在图上，而是进入表格化、数据库化、可追踪的执行状态。',impEn:'It ensures that a project does not stay only on a diagram, but enters a tabular, database-like, and trackable execution state.',pointsZh:['承接方案、计划、风险清单。','承接任务拆解、A/B/PoC、小实验、周报和复盘。','与 TMM 相互配合：TMM 偏结构理解，PEA 偏执行跟踪。'],pointsEn:['Carry solutions, plans, and risk lists.','Carry task breakdowns, A/B/PoC trials, small experiments, weekly reporting, and retrospectives.','Work together with TMM: TMM leans toward structure, while PEA leans toward execution tracking.']},
+    {code:'MTX',tag:'Structure',icon:'🔢',titleZh:'MTX 矩阵表达',titleEn:'MTX Matrix',fullEn:'Matrix Expression for Relationship Modeling',defZh:'MTX 通过矩阵结构表达对象、维度、关系和对比，适合把复杂问题转成更清晰的二维或多维模型。',defEn:'MTX uses matrix structures to express objects, dimensions, relationships, and comparisons. It is suitable for turning complex issues into clearer two-dimensional or multi-dimensional models.',impZh:'Joshua 直接指出，矩阵简单但非常有力，很多脑中难以整理的内容，一旦放入矩阵，就更容易建模和分析。',impEn:'Joshua directly pointed out that a matrix is simple but very powerful. Many things become easier to model and analyze once put into a matrix.',pointsZh:['适合做关系梳理、角色分工、项目维度对比和知识建模。','有利于把思考结构化并支持 AI 理解。','可以与 TMM 和 KMM 互相转换。'],pointsEn:['Useful for relationship mapping, role allocation, project dimension comparison, and knowledge modeling.','Helps structure thinking and supports AI understanding.','Interchangeable with TMM and KMM.']},
+    {code:'KMM',tag:'Structure',icon:'🪜',titleZh:'KMM 流程图表达',titleEn:'KMM Flowchart',fullEn:'Flow-based Process Expression',defZh:'KMM 用流程图表达工作路径、步骤顺序和分支逻辑，适合把"怎么做"明确画出来。',defEn:'KMM uses flowcharts to express work paths, step sequence, and branch logic. It is suitable for drawing out exactly how work should be done.',impZh:'对于需要流程清晰、上下游明确的工作，KMM 是非常直接且高效的表达形式。',impEn:'For work that requires clear flow and clear upstream-downstream connections, KMM is a very direct and efficient expression form.',pointsZh:['适合表达流程、节点、判断条件和分支。','便于培训、交接和 SOP 制作。','可与 TMM、PEA、MTX 共同承载同一项目。'],pointsEn:['Useful for expressing processes, nodes, decision points, and branches.','Convenient for training, handoff, and SOP creation.','Can carry the same project together with TMM, PEA, and MTX.']}
+   ]
+  },
+  {id:'aix',number:'06',navZh:'AIX 工作法',navEn:'AIX Work Methods',
+   sectionTitleZh:'AIX 工作法：AI 时代的闭环方法层',sectionTitleEn:'AIX Work Methods: The Closed-loop Method Layer for the AI Era',
+   sectionIntroZh:'AIX 工作法用于把 AI 深度嵌入到项目理解、问题重构、决策、推进、沉淀和复盘中。以下内容融合了 XMind 中补充的新方法和 Joshua 分享中对 TMX / AI 方法的整体理解。',
+   sectionIntroEn:'AIX work methods embed AI deeply into project understanding, issue reconstruction, decision-making, execution, accumulation, and review. The following content integrates the new methods added in the XMind file and Joshua\'s overall TMX / AI method understanding.',
+   methods:[
+    {code:'GPS',tag:'AIX',icon:'🛰️',titleZh:'GPS 目标计划导航法',titleEn:'GPS Goal Planning Navigation Method',fullEn:'Goal - Priority - Schedule',defZh:'GPS 是把目标拆成优先级、执行节奏和闭环复盘的方法，不是普通周计划，而是目标驱动的周会闭环。',defEn:'GPS turns goals into priorities, execution rhythm, and review loops. It is not a normal weekly plan, but a goal-driven weekly closed loop.',impZh:'GPS 解决"目标如何真正落到周、日动作"的问题，也是 TDA 决策进入执行后的主要承接方式。',impEn:'GPS solves the problem of how goals truly translate into weekly and daily actions, and it is also the main follow-up mechanism after a TDA decision enters execution.',pointsZh:['核心字段包括目标、P0/P1/P2、Owner、交付物、截止时间和验收标准。','强调先定目标，再排优先级，再拆到周和日。','适合项目推进、周会管理和阶段性目标跟踪。'],pointsEn:['Core fields include goals, P0/P1/P2, owner, deliverables, deadline, and acceptance criteria.','It emphasizes setting the goal first, then prioritizing, then breaking down into weekly and daily actions.','Useful for project execution, weekly management, and stage-goal tracking.']},
+    {code:'AIM',tag:'AIX',icon:'🎯',titleZh:'AIM 五象限闭环法',titleEn:'AIM Five-quadrant Closed-loop Method',fullEn:'D → B → A → C → E',defZh:'AIM 通过 D 问题/需求池、B 突击攻坚、A 成果案例、C 方法模板、E 能力沉淀五个象限，把一次性任务转化为可复用的成果与能力。',defEn:'AIM uses five quadrants—D problem / requirement pool, B taskforce breakthrough, A results / cases, C methods / templates, and E capability accumulation—to turn one-off tasks into reusable results and capabilities.',impZh:'AIM 的价值不是"做完一件事"，而是让事情继续沉淀、扩散和复用。',impEn:'The value of AIM is not simply finishing one task, but allowing the work to continue accumulating, spreading, and being reused.',pointsZh:['适用于 AI 应用、培训案例、项目成果榜和方法沉淀。','强调问题要进入池子、成果要形成案例、方法要形成模板、能力要继续积累。','有助于把零散事项串成真正的闭环。'],pointsEn:['Applicable to AI applications, training cases, project result boards, and method accumulation.','It emphasizes that problems enter a pool, results become cases, methods become templates, and capability continues to accumulate.','It helps turn scattered items into a real closed loop.']},
+    {code:'LCM',tag:'AIX',icon:'🧾',titleZh:'LCM 历史资料整合与上下文重构法',titleEn:'LCM Historical Material Integration and Context Reconstruction Method',fullEn:'Read History First; Do Not Start from Zero',defZh:'LCM 要求先收集历史 TMM、会议纪要、录屏转写、项目背景和已有模板，再让 AI 先理解，再按目标重构。',defEn:'LCM requires collecting historical TMMs, meeting notes, recording transcripts, project background, and existing templates first, letting AI understand them first, and only then reconstructing them toward the goal.',impZh:'LCM 解决"做事不要从零开始"的问题，是 AI 真正进入复杂项目理解的重要前提。',impEn:'LCM solves the problem of always starting from scratch and is a key precondition for AI to truly engage with complex project understanding.',pointsZh:['第一步是找资料，不是急着输出。','常用口径是"先通读理解，不漏细节，不做扩展"。','之后再按 GPS、AIM、TAP、培训材料、一页纸等结构重构。'],pointsEn:['The first step is to find the materials, not to rush to produce output.','A common prompt style is "first read and understand, with no missing details and no expansion."','After understanding, reconstruct into GPS, AIM, TAP, training materials, one-pagers, and similar forms.']},
+    {code:'AIX-CHAIN',tag:'AIX',icon:'🔗',titleZh:'AIX 主链路',titleEn:'Main AIX Method Chain',fullEn:'LCM → ELD → AIM / BIM → TDA → GPS',defZh:'AIX 主链路说明了 AI 方法的整体推进顺序：先读历史，再做重构，再形成闭环，再做阶段决策，最后拆到执行。',defEn:'The main AIX method chain explains the overall progression of AI methods: read history first, then reconstruct, then form the loop, then make a stage decision, and finally break down into execution.',impZh:'它有助于新同事理解各方法之间不是平行关系，而是有顺序、有承接的。',impEn:'It helps new colleagues understand that the methods are not just parallel concepts, but have sequence and handoff relationships.',pointsZh:['LCM：不从零开始。','ELD：从点到类做重构。','AIM / BIM：形成问题—成果—方法—能力的闭环。','TDA：在样板房/1.0/试点后做拍板。','GPS：把决策拆到月、周、日。'],pointsEn:['LCM: do not start from zero.','ELD: reconstruct from one point to a category.','AIM / BIM: form a loop from problems to results, methods, and capability.','TDA: make a decision after a sample room / 1.0 / pilot.','GPS: break the decision into monthly, weekly, and daily actions.']},
+    {code:'ELD',tag:'AIX',icon:'🧩',titleZh:'ELD 核心重构法',titleEn:'ELD Core Reconstruction Method',fullEn:'Reconstruct the Whole Category Clearly',defZh:'ELD 强调不要只修补单点问题，而要把问题扩展为一类问题并做结构化重构。',defEn:'ELD emphasizes not merely patching one isolated problem, but expanding it into a category of issues and reconstructing it structurally.',impZh:'它让团队从临时处理升级到结构化解决，是 AI 真正发挥作用的重要场景。',impEn:'It upgrades the team from temporary handling to structural problem solving and is an important scenario where AI can truly create value.',pointsZh:['从单点扩展到一类问题。','从人工经验升级为 AI 辅助重构。','输出不只是答案，还包括流程、模板、样板房、Skill 和培训材料。'],pointsEn:['Expand from one point into a category of issues.','Upgrade from manual experience to AI-assisted reconstruction.','Output not only answers, but also processes, templates, sample rooms, skills, and training materials.']},
+    {code:'TDA',tag:'AIX',icon:'⚖️',titleZh:'TDA 决策方法',titleEn:'TDA Decision Method',fullEn:'Test → Decision → Apply',defZh:'TDA 用于在样板房、1.0 或试点后做阶段性判断：是否继续推进、在什么条件下推进、还是暂缓。',defEn:'TDA is used to make stage decisions after a sample room, 1.0, or pilot: whether to continue, under what conditions to continue, or whether to hold.',impZh:'它解决"做完样板之后怎么办"的问题，避免项目长期停留在试点不拍板。',impEn:'It solves the question of what to do after a sample room is built and prevents projects from staying in pilot mode without a decision.',pointsZh:['T：提供样板房、数据、案例、问题和反馈。','D：做出 Go / Conditional Go / Hold / No-Go 判断。','A：把结果转成 GPS、TAP、Owner、交付物和验收标准。'],pointsEn:['T: provide sample rooms, data, cases, issues, and feedback.','D: make a Go / Conditional Go / Hold / No-Go judgment.','A: convert the result into GPS, TAP, owner, deliverables, and acceptance criteria.']},
+    {code:'BIM',tag:'AIX',icon:'🏢',titleZh:'BIM BU 管理闭环法',titleEn:'BIM BU Management Closed-loop Method',fullEn:'BU Management Version Referencing AIM',defZh:'BIM 参考 AIM 结构，但用于 BU 管理场景，重点不是写执行动作，而是看项目健康度、风险、资源、决策和下周调整。',defEn:'BIM references the AIM structure but is designed for BU management scenarios. Its focus is not on writing execution actions, but on project health, risks, resources, decisions, and next-week adjustments.',impZh:'BIM 让管理层的周总结和项目管理不再停留在"有没有做"，而是升级为"是否健康、是否可持续推进"。',impEn:'BIM upgrades management weekly summaries and project oversight from simply "was it done?" to "is it healthy, and can it continue sustainably?"',pointsZh:['适用于 BU 周总结、BU 管理会和跨项目管理。','用于管理判断而不是代替执行。','是 AIM 在管理层的应用延伸。'],pointsEn:['Useful for BU weekly summaries, BU management meetings, and cross-project management.','It supports management judgment rather than replacing execution.','It is an extension of AIM at the management level.']},
+    {code:'RAM',tag:'AIX',icon:'🎥',titleZh:'录屏沉淀法',titleEn:'Recording-based Accumulation Method',fullEn:'Record First, Then Reuse',defZh:'录屏沉淀法要求尽量记录会议、操作和系统流程，并在转写后输入到 LCM / TMM 中，让 AI 先理解历史，再形成训练与沉淀。',defEn:'The Recording-based Accumulation Method asks teams to record meetings, operations, and system processes whenever possible, then feed the transcripts into LCM / TMM so AI can understand the history first and help build training materials and accumulated knowledge.',impZh:'它是让隐性经验变成显性资产的重要方法。',impEn:'It is an important way to turn tacit experience into explicit assets.',pointsZh:['适合会议、系统操作、流程说明和培训演示。','录屏转写后可再用于 MKD、UPX、一页纸、案例和 Skill。','与 DAB、LCM、AIM 等方法天然协同。'],pointsEn:['Useful for meetings, system operations, process explanation, and training demos.','After transcription, recordings can be reused for MKD, UPX, one-pagers, cases, and skills.','Naturally works together with DAB, LCM, and AIM.']},
+    {code:'ACS',tag:'AIX',icon:'🪄',titleZh:'AI 应用案例分享法',titleEn:'AI Application Case Sharing Method',fullEn:'Make AI Cases Easy to Understand and Reuse',defZh:'该方法要求每个 AI 案例都要讲清：和谁有关、什么时候可用、应该怎么问、用完下一步做什么。',defEn:'This method requires every AI case to clearly explain who it is relevant to, when it can be used, how it should be asked, and what to do next after using it.',impZh:'它解决"AI 案例看起来很好，但别人不会用"的问题。',impEn:'It solves the problem of "the AI case looks good, but others do not know how to use it."',pointsZh:['适用于 A1 实际应用、A2 成果榜、C 方法和 E 能力沉淀。','重点是让业务同事快速理解场景、问法和下一步。','适合做海报、一页纸、培训和案例库。'],pointsEn:['Useful for A1 practical applications, A2 result boards, C methods, and E capability accumulation.','The focus is helping business colleagues quickly understand the scenario, prompting style, and next step.','Good for posters, one-pagers, training, and case libraries.']},
+    {code:'RQM',tag:'AIX',icon:'❓',titleZh:'正确问法方法',titleEn:'Method for Asking the Right Questions',fullEn:'Prompt with Scenario, Goal, and Boundaries',defZh:'正确问法要求提问时带上系统/页面/业务场景、具体事项、具体问题、期待解释的内容以及下一步目标。',defEn:'The Method for Asking the Right Questions requires users to provide the system / page / business scenario, the specific matter, the specific problem, what kind of explanation is needed, and the next-step goal.',impZh:'它直接影响 AI 输出质量，是新人使用 AI 的基础能力。',impEn:'It directly affects AI output quality and is a foundational capability for new colleagues using AI.',pointsZh:['问题中要带场景、材料、目标、边界和预期输出。','可采用标准模板句式。','AI 不是最终审批人，规则变更和业务判断仍需负责人确认。'],pointsEn:['Questions should include scenario, materials, goal, boundaries, and expected output.','A standard prompt sentence can be used as a template.','AI is not the final approver; rule changes and business judgments still require owner confirmation.']},
+    {code:'SKL',tag:'AIX',icon:'🛠️',titleZh:'Skill 化方法',titleEn:'Skillization Method',fullEn:'Turn Successful Work into Repeatable Process',defZh:'Skill 化方法要求把已经跑通、效果好的工作方式沉淀成可反复调用的流程、模板或 SOP。',defEn:'The Skillization Method asks teams to turn work methods that have already run successfully into repeatable processes, templates, or SOPs.',impZh:'它让"会做一次"变成"可以反复做、别人也能做"。',impEn:'It turns "we can do it once" into "we can do it repeatedly, and others can do it too."',pointsZh:['适用于会议纪要、GPS 拆解、TAP 卡片、周总结和海报输出。','先做样板，再沉淀为 Skill。','是规模化推广 AI 工作方式的关键一步。'],pointsEn:['Useful for meeting notes, GPS breakdowns, TAP cards, weekly summaries, and poster output.','Build the sample first, then solidify it into a skill.','It is a key step for scaling AI work methods.']},
+    {code:'DVA',tag:'AIX',icon:'📊',titleZh:'DVA AI 数据可视化表达法',titleEn:'DVA Data Visualization Using AI',fullEn:'Visual Chart Expression',defZh:'DVA 通过 AI 把信息整合为信息图、概念图、Dashboard 或一页纸，提升表达和理解效率。',defEn:'DVA uses AI to integrate information into infographics, concept maps, dashboards, or one-page reports to improve expression and understanding.',impZh:'它是把复杂信息快速转成管理层或团队可读结果的重要方法。',impEn:'It is an important method for quickly turning complex information into outputs that management or teams can read.',pointsZh:['DV1 信息图：适合讲故事、时间线和对比。','DV2 导图：适合关系和知识结构。','DV3 Dashboard：适合实时关键数据。','DV4 一页纸：适合"摘要 + 图表 + 结论"。'],pointsEn:['DV1 Infographic: suitable for storytelling, timelines, and comparisons.','DV2 Mind map: suitable for relationships and knowledge structure.','DV3 Dashboard: suitable for real-time key data.','DV4 One-page report: suitable for summary + charts + conclusions.']},
+    {code:'QCL',tag:'AIX',icon:'⚡',titleZh:'QCL 快速完整闭环法',titleEn:'QCL Quick Complete Loop',fullEn:'Complete a Small Clean Loop First',defZh:'QCL 主张先完整闭环一个小而清晰的事项，再考虑迭代和升级。',defEn:'QCL advocates closing a small and clean loop first, and only then considering iteration and upgrading.',impZh:'它帮助团队避免事项永远悬而不决，也帮助新人更快理解"闭环"的具体含义。',impEn:'It helps the team avoid leaving items hanging forever and helps new colleagues understand what a closed loop really means.',pointsZh:['先闭一个小环，再谈更大版本。','QC1 对应一天闭环原则。','适合高频小事项和试点型任务。'],pointsEn:['Close one small loop first, then talk about the larger version.','QC1 corresponds to the one-day closed-loop principle.','Useful for high-frequency small items and pilot-type tasks.']}
+   ]
+  },
+  {id:'kpi',number:'07',navZh:'KPI 标准',navEn:'KPI Standards',
+   sectionTitleZh:'KPI Measurement Standards：结果与效率的衡量层',sectionTitleEn:'KPI Measurement Standards: The Measurement Layer for Results and Efficiency',
+   sectionIntroZh:'Joshua 在会议最后强调，没有衡量，就很难真正知道一个项目、一个部门或一个人的进步、退步与效率。KPI 是 TMX 的最终衡量层。',
+   sectionIntroEn:'Joshua emphasized that without measurement, it is difficult to truly know the progress, decline, or efficiency of a project, a department, or an individual. KPI is the final measurement layer of TMX.',
+   methods:[
+    {code:'KPI',tag:'KPI',icon:'📐',titleZh:'KPI 衡量标准',titleEn:'KPI Measurement Standards',fullEn:'Core Metrics That Reflect Work Quality and Input-output Ratio',defZh:'KPI 用来衡量工作质量、投入产出比、进步或退步趋势，是对项目和团队进行有效管理的基础。',defEn:'KPI is used to measure work quality, input-output ratio, and the trend of progress or decline. It is the basis for effective management of projects and teams.',impZh:'Joshua 明确表示，如果没有 KPI，就无法真正比较好坏，也无法知道一个部门或个人到底做得怎样。',impEn:'Joshua clearly stated that without KPI, it is impossible to truly compare performance or know how well a department or an individual is really doing.',pointsZh:['KPI 应与项目起点和目标对应。','可用于衡量进度、结果、效率和质量。','适合部门管理、项目追踪和个人绩效观察。','AKM KPI 和 Report 是 KPI 层的配套输出。'],pointsEn:['KPI should correspond to the project\'s starting point and goals.','It can be used to measure progress, results, efficiency, and quality.','It is suitable for department management, project tracking, and individual performance observation.','AKM KPI and Report are supporting outputs under the KPI layer.']}
+   ]
+  },
+  {id:'final',number:'08',navZh:'最终视图',navEn:'Final View',
+   sectionTitleZh:'最终视图：如何把 TMX 用到项目里',sectionTitleEn:'Final View: How to Use TMX in a Real Project',
+   sectionIntroZh:'下面是一条便于新人理解和落地的 TMX 应用路径，可用于培训、项目启动和内部同步。',
+   sectionIntroEn:'Below is a practical TMX application path that is easy for new colleagues to understand and use. It can be used for training, project initiation, and internal synchronization.',
+   cards:[
+    {icon:'1️⃣',titleZh:'先明确起点',titleEn:'Start with a Clear Starting Point',textZh:'先写一句话目标、Do / Do-Not List 和前置条件，明确项目为什么做、做什么、不做什么。',textEn:'Begin with a one-sentence goal, a Do / Do-Not list, and prerequisites so the team is clear on why the project exists, what it does, and what it does not do.'},
+    {icon:'2️⃣',titleZh:'用 UPX / BSD / VBA 打基础',titleEn:'Use UPX / BSD / VBA as the Base',textZh:'先学习外部知识，再围绕问题做正式讨论，再反向分析竞对，快速建立对业务的理解和判断。',textEn:'First learn from external knowledge, then run formal problem-centered discussions, and then reverse-analyze competitors to quickly build understanding and judgment.'},
+    {icon:'3️⃣',titleZh:'用四件套承接项目',titleEn:'Carry the Project with the Four-piece Set',textZh:'先用 TMM 理清结构，再用 PEA 跟进执行，用 MTX 做关系表达，用 KMM 表达流程。',textEn:'Use TMM to clarify the structure first, PEA to follow execution, MTX to express relationships, and KMM to express the process.'},
+    {icon:'4️⃣',titleZh:'用 AIX 方法形成闭环',titleEn:'Use AIX Methods to Form the Loop',textZh:'通过 LCM、ELD、AIM / BIM、TDA 和 GPS，把项目做成"能理解、能决策、能推进、能沉淀"的闭环。',textEn:'Use LCM, ELD, AIM / BIM, TDA, and GPS to turn the project into a loop that can be understood, decided, executed, and accumulated.'},
+    {icon:'5️⃣',titleZh:'最后用 KPI 进行衡量',titleEn:'Measure in the End with KPI',textZh:'通过 KPI 判断项目进展、结果质量和投入产出，不让方法停留在"看起来不错"。',textEn:'Use KPI to judge project progress, output quality, and input-output ratio so the method does not stop at "it looks good."'}
+   ]
+  }
+];
+
+let tmxLang='zh';
+let tmxSearch='';
+let tmxActiveId=tmxData[0].id;
+
+const tmxEsc=str=>String(str||'').replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+const tmxSearchText=m=>[m.code,m.tag,m.titleZh,m.titleEn,m.fullEn,m.defZh,m.defEn,m.impZh,m.impEn,(m.pointsZh||[]).join(' '),(m.pointsEn||[]).join(' ')].join(' ').toLowerCase();
+const tmxCardText=c=>[c.titleZh,c.titleEn,c.textZh,c.textEn].join(' ').toLowerCase();
+const tmxFlowText=s=>[s.code,s.zh,s.en].join(' ').toLowerCase();
+
+function tmxRenderMeta(){
+  const lang=tmxUI[tmxLang];
+  document.getElementById('tmx-hero-title').textContent=lang.heroTitle;
+  document.getElementById('tmx-hero-subtitle').textContent=lang.heroSub;
+  document.getElementById('tmx-btn-clear').textContent=lang.clear;
+  document.getElementById('tmx-search-input').placeholder=lang.searchPlaceholder;
+  document.getElementById('tmx-search-meta').textContent=lang.searchMeta(tmxSearch);
+  document.getElementById('tmx-footer-note').textContent=lang.footer;
+  document.getElementById('tmx-stat-row').innerHTML=lang.stats.map(s=>`<div class="tmx-stat"><strong>${s.num}</strong><span>${tmxEsc(s.text)}</span></div>`).join('');
+}
+
+function tmxRenderNav(){
+  const nav=document.getElementById('tmx-nav-list');
+  nav.innerHTML=tmxData.map(sec=>`
+    <a class="tmx-nav-item${!tmxSearch&&sec.id===tmxActiveId?' tmx-active':''}" data-target="${sec.id}" href="#tmx-${sec.id}">
+      <span class="tmx-nav-num">${sec.number}</span>
+      <span>${tmxEsc(tmxLang==='zh'?sec.navZh:sec.navEn)}</span>
+    </a>`).join('');
+  nav.querySelectorAll('.tmx-nav-item').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault();
+    tmxActiveId=a.dataset.target;
+    tmxSearch='';
+    document.getElementById('tmx-search-input').value='';
+    document.getElementById('tmx-page').scrollIntoView({behavior:'smooth',block:'start'});
+    tmxRenderAll();
+  }));
+}
+
+function tmxRenderCards(cards){
+  return`<div class="tmx-card-grid">${cards.map(c=>`
+    <div class="tmx-info-card">
+      <div class="tmx-card-icon">${c.icon}</div>
+      <h4>${tmxEsc(tmxLang==='zh'?c.titleZh:c.titleEn)}</h4>
+      <p>${tmxEsc(tmxLang==='zh'?c.textZh:c.textEn)}</p>
+    </div>`).join('')}</div>`;
+}
+
+function tmxRenderFlow(sec,items){
+  const flowItems=items!==undefined?items:sec.flow;
+  if(!flowItems||!flowItems.length)return'';
+  const title=tmxLang==='zh'?(sec.flowTitleZh||''):(sec.flowTitleEn||'');
+  return`
+    <div class="tmx-flow-header"><h3>${tmxEsc(title)}</h3></div>
+    <div class="tmx-flow">${flowItems.map(step=>`
+      <div class="tmx-flow-item"><span class="tmx-flow-code">${tmxEsc(step.code)}</span><p>${tmxEsc(tmxLang==='zh'?step.zh:step.en)}</p></div>`).join('')}</div>`;
+}
+
+function tmxRenderMethod(m){
+  const pts=(tmxLang==='zh'?m.pointsZh:m.pointsEn).map(p=>`<li>${tmxEsc(p)}</li>`).join('');
+  return`
+    <article class="tmx-method-row">
+      <div class="tmx-method-meta">
+        <span class="tmx-label">Code</span>
+        <div class="tmx-method-code">${tmxEsc(m.code)}</div>
+        <div class="tmx-method-type">${tmxEsc(m.tag)}</div>
+      </div>
+      <div class="tmx-method-body">
+        <div class="tmx-method-title-row">
+          <div class="tmx-method-title-group">
+            <div class="tmx-method-icon">${m.icon}</div>
+            <div>
+              <h4>${tmxEsc(tmxLang==='zh'?m.titleZh:m.titleEn)}</h4>
+              <div class="tmx-method-subtitle">${tmxEsc(m.fullEn)}<br><span style="color:#8a96a9;">${tmxEsc(m.titleZh)}</span></div>
+            </div>
+          </div>
+          <div class="tmx-method-badge">${tmxEsc(m.tag)}</div>
+        </div>
+        <p><span class="k">${tmxLang==='zh'?'定义：':'Definition:'}</span> ${tmxEsc(tmxLang==='zh'?m.defZh:m.defEn)}</p>
+        <p><span class="k">${tmxLang==='zh'?'重要性：':'Importance:'}</span> ${tmxEsc(tmxLang==='zh'?m.impZh:m.impEn)}</p>
+        <p><span class="k">${tmxLang==='zh'?'关键要点：':'Key points:'}</span></p>
+        <ul>${pts}</ul>
+      </div>
+    </article>`;
+}
+
+function tmxRenderContent(){
+  const q=tmxSearch.toLowerCase();
+  const content=document.getElementById('tmx-content');
+  const empty=document.getElementById('tmx-empty-state');
+  if(q){
+    let found=false;
+    const html=tmxData.map(sec=>{
+      const fc=sec.cards?sec.cards.filter(c=>tmxCardText(c).includes(q)):[];
+      const ff=sec.flow?sec.flow.filter(s=>tmxFlowText(s).includes(q)):[];
+      const fm=sec.methods?sec.methods.filter(m=>tmxSearchText(m).includes(q)):[];
+      if(!fc.length&&!ff.length&&!fm.length)return'';
+      found=true;
+      return`<div class="tmx-sec-block" id="tmx-${sec.id}">
+        <div class="tmx-sec-header"><div>
+          <h3>${tmxEsc(tmxLang==='zh'?(sec.sectionTitleZh||sec.titleZh):(sec.sectionTitleEn||sec.titleEn))}</h3>
+        </div></div>
+        ${fc.length?tmxRenderCards(fc):''}
+        ${tmxRenderFlow(sec,ff)}
+        ${fm.length?`<div class="tmx-method-list">${fm.map(tmxRenderMethod).join('')}</div>`:''}
+      </div>`;
+    }).join('');
+    content.innerHTML=html;
+    empty.style.display=found?'none':'block';
+    empty.textContent=tmxUI[tmxLang].noResult;
+  } else {
+    const sec=tmxData.find(s=>s.id===tmxActiveId)||tmxData[0];
+    content.innerHTML=`<div class="tmx-sec-block" id="tmx-${sec.id}">
+      <div class="tmx-sec-header"><div>
+        <h3>${tmxEsc(tmxLang==='zh'?(sec.sectionTitleZh||sec.titleZh):(sec.sectionTitleEn||sec.titleEn))}</h3>
+        <p>${tmxEsc(tmxLang==='zh'?(sec.sectionIntroZh||sec.introZh||''):(sec.sectionIntroEn||sec.introEn||''))}</p>
+      </div></div>
+      ${sec.cards?tmxRenderCards(sec.cards):''}
+      ${tmxRenderFlow(sec)}
+      ${sec.methods?`<div class="tmx-method-list">${sec.methods.map(tmxRenderMethod).join('')}</div>`:''}
+    </div>`;
+    empty.style.display='none';
+  }
+}
+
+function tmxRenderAll(){
+  tmxRenderMeta();
+  tmxRenderNav();
+  tmxRenderContent();
+}
+
+
+document.getElementById('lang-toggle').addEventListener('click',()=>{
+  tmxLang=document.documentElement.lang==='zh-CN'?'zh':'en';
+  tmxRenderAll();
+});
+document.getElementById('tmx-btn-clear').addEventListener('click',()=>{tmxSearch='';document.getElementById('tmx-search-input').value='';tmxRenderAll();});
+document.getElementById('tmx-search-input').addEventListener('input',e=>{tmxSearch=e.target.value.trim();tmxRenderAll();});
+
+tmxRenderAll();
+})();
+  </script>
+</body>
+</html>
+

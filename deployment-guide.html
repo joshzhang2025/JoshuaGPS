@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joshua GPS 部署与功能说明</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="guide-shell">
+    <div class="guide-actions">
+      <a class="btn primary" href="index.html">返回主站</a>
+      <a class="btn" href="http://127.0.0.1:10001/index.html" target="_blank" rel="noreferrer">打开本地地址</a>
+      <a class="btn" href="http://192.168.0.224:10001/index.html" target="_blank" rel="noreferrer">打开正式地址</a>
+    </div>
+
+    <section class="hero guide-intro">
+      <h3>Joshua GPS 正式上线交付模板</h3>
+      <p>本页作为 Joshua GPS 项目的上线交付参考模板，面向部署人员、运维人员和业务使用方，覆盖部署目标、服务器信息、环境要求、启停方式、验证方法、平台介绍与功能说明。</p>
+    </section>
+
+    <section class="guide-grid">
+      <article class="card kpi">
+        <span class="number">224</span>
+        <span class="label">目标服务器：192.168.0.224</span>
+      </article>
+      <article class="card kpi">
+        <span class="number">E:</span>
+        <span class="label">目标部署目录：E:\site\Joshua GPS</span>
+      </article>
+      <article class="card kpi">
+        <span class="number">3.10+</span>
+        <span class="label">建议 Python 版本：3.10 / 3.11 / 3.12</span>
+      </article>
+    </section>
+
+    <section class="guide-stack">
+      <article class="card">
+        <h4>一、上线目标与交付结论</h4>
+        <ul class="guide-list">
+          <li>本项目为纯静态网站，不依赖后端服务、数据库、Node 构建或 npm install。</li>
+          <li>本次目标是将当前文件夹部署到服务器 192.168.0.224 的 E:\site\Joshua GPS 目录下。</li>
+          <li>部署完成后，站点应能通过浏览器直接访问 index.html，并正常读取 data/gps.json。</li>
+          <li>推荐在服务器上使用 IIS 作为正式托管方式；Python http.server 仅建议用于临时预览、联调或快速验收。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h4>二、最上方必须先看的部署条件</h4>
+        <ul class="guide-list">
+          <li>服务器：192.168.0.224。</li>
+          <li>部署目录：E:\site\Joshua GPS。</li>
+          <li>建议系统：Windows Server，已安装 IIS 或可安装 Python。</li>
+          <li>建议 Python 版本：3.10 及以上，优先 3.11；命令需可直接使用 python 或 py -3。</li>
+          <li>如使用 IIS，必须允许 .json、.js、.css 的静态文件 MIME 类型正常返回。</li>
+          <li>如使用 Python 临时服务，默认端口建议 10001，启动后访问 http://192.168.0.224:10001/index.html。</li>
+          <li>浏览器建议使用 Chrome 或 Edge，页面朗读功能依赖浏览器 Web Speech API。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h4>三、建议部署文件清单</h4>
+        <pre>index.html
+deployment-guide.html
+style.css
+script.js
+README.md
+IT_DEPLOYMENT_HANDOFF.md
+data/
+  gps.json
+  today.json
+  daily-logs.json
+  project-notes.json
+server-config/
+  nginx-joshua-gps.conf
+  web.config</pre>
+      </article>
+
+      <article class="card">
+        <h4>四、目标目录示意</h4>
+        <pre>E:\site\Joshua GPS\
+  index.html
+  deployment-guide.html
+  style.css
+  script.js
+  data\
+  server-config\</pre>
+      </article>
+
+      <article class="card">
+        <h4>五、访问入口</h4>
+        <ul class="guide-list">
+          <li>主站入口：index.html</li>
+          <li>说明页入口：deployment-guide.html</li>
+          <li>服务器临时访问地址：http://192.168.0.224:10001/index.html</li>
+          <li>服务器说明页地址：http://192.168.0.224:10001/deployment-guide.html</li>
+          <li>本地联调地址：http://127.0.0.1:10001/index.html</li>
+        </ul>
+      </article>
+    </section>
+
+    <h3 class="section-title">平台介绍</h3>
+    <section class="grid cols-2">
+      <article class="card">
+        <h4>项目定位</h4>
+        <p>Joshua GPS 是一个动态双语工作台，用于承载 Joshua 在实习或项目推进中的每日任务、周计划、优先级、项目记录和最终展示。页面通过读取 JSON 数据实现静态站点上的“轻动态”效果。</p>
+      </article>
+      <article class="card">
+        <h4>适用场景</h4>
+        <ul class="guide-list">
+          <li>实习培养计划展示。</li>
+          <li>双语任务面板与学习跟踪。</li>
+          <li>项目周报、日记与作品集沉淀。</li>
+          <li>无需开发后端的快速内部交付页面。</li>
+        </ul>
+      </article>
+    </section>
+
+    <h3 class="section-title">功能简介</h3>
+    <section class="accordion">
+      <details class="accordion-item" open>
+        <summary>平台模块总览（可折叠）</summary>
+        <div class="accordion-body">
+          <ul class="guide-list">
+            <li>Dashboard：首页总览，展示当前阶段、今日重点、月目标和快捷入口。</li>
+            <li>Today：当天任务卡，包含 focus、tasks、deliverables、resources 和 end-of-day check。</li>
+            <li>Weekly Plan：按周查看主题、目标、主要任务和周产出。</li>
+            <li>Priorities：按 P0 / P1 / P2 组织优先级和对应产出。</li>
+            <li>Monthly Schedule：24 天拆解时间线，展示每天主题、任务和状态。</li>
+            <li>Daily Log：页面内填写当天日志，自动生成明日 Today 卡并写入浏览器本地存储。</li>
+            <li>Project Note：记录每个 Site Demo 的输入、过程、输出和收获。</li>
+            <li>Portfolio / Final View：集中展示学习成果、项目、进度和最终复盘。</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="accordion-item">
+        <summary>页面辅助能力</summary>
+        <div class="accordion-body">
+          <ul class="guide-list">
+            <li>中英文切换：页面所有主内容都支持 en / zh 双语展示。</li>
+            <li>Read current page：使用浏览器朗读当前页面内容。</li>
+            <li>Export local records：导出本机浏览器中的 Daily Log 和备份数据。</li>
+            <li>Reset local updates：清理本地浏览器缓存，恢复到服务器原始 JSON 内容。</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="accordion-item">
+        <summary>数据更新机制与边界</summary>
+        <div class="accordion-body">
+          <ul class="guide-list">
+            <li>页面主数据来自 data/gps.json。</li>
+            <li>Daily Log 表单不会写回服务器，只会先保存到当前浏览器的 localStorage。</li>
+            <li>如果服务器端要长期归档，需要定期导出本地记录，或后续补一个轻量保存接口。</li>
+            <li>换浏览器、换电脑、清空浏览器缓存后，本地 Daily Log 记录不会自动保留到其他环境。</li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <h3 class="section-title">部署方法</h3>
+    <section class="grid cols-2">
+      <article class="card">
+        <h4>方式 A：IIS 正式部署</h4>
+        <ol class="step-list">
+          <li>在服务器 192.168.0.224 上创建目录 E:\site\Joshua GPS。</li>
+          <li>将当前项目全部文件复制到 E:\site\Joshua GPS。</li>
+          <li>将 server-config\web.config 复制或合并到站点目录根下，确保静态文件 MIME 类型正确。</li>
+          <li>在 IIS 中新增站点，物理路径指向 E:\site\Joshua GPS。</li>
+          <li>确认默认文档包含 index.html，站点绑定到目标 IP，并使用 10001 端口或对应站点绑定端口。</li>
+          <li>启动站点后，访问首页并检查 data/gps.json 是否能直接返回 JSON。</li>
+        </ol>
+      </article>
+
+      <article class="card">
+        <h4>方式 B：Python 临时服务部署</h4>
+        <ol class="step-list">
+          <li>登录服务器 192.168.0.224，进入 E:\site\Joshua GPS。</li>
+          <li>在 PowerShell 中执行 python --version，确认版本为 3.10 及以上。</li>
+          <li>启动命令：python -m http.server 10001。</li>
+          <li>如果系统使用 py 启动器，也可执行 py -3 -m http.server 10001。</li>
+          <li>启动后在浏览器访问 http://192.168.0.224:10001/index.html。</li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="grid cols-2" style="margin-top: 16px;">
+      <article class="card">
+        <h4>启动、关闭与重启服务</h4>
+        <pre>cd /d E:\site\Joshua GPS
+python --version
+python -m http.server 10001</pre>
+        <p>关闭 Python 临时服务的方法：在启动该命令的窗口中按 Ctrl + C。若窗口已丢失，可在服务器上查找占用 10001 端口的进程后结束。</p>
+        <pre>netstat -ano | findstr :10001
+taskkill /PID 进程号 /F</pre>
+      </article>
+
+      <article class="card">
+        <h4>打开网页验证</h4>
+        <ul class="guide-list">
+          <li>打开首页：http://192.168.0.224:10001/index.html。</li>
+          <li>打开说明页：http://192.168.0.224:10001/deployment-guide.html。</li>
+          <li>直接打开数据文件：http://192.168.0.224:10001/data/gps.json。</li>
+          <li>若首页无内容，优先检查 JSON 是否可访问、路径是否在 E:\site\Joshua GPS 下、服务是否从该目录启动。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid cols-2" style="margin-top: 16px;">
+      <article class="card">
+        <h4>CMD 查看当前所有端口占用</h4>
+        <p>如果你要在 Windows CMD 中查看当前所有端口、对应的 PID 和进程信息，先执行下面这条基础命令：</p>
+        <pre>netstat -ano</pre>
+        <p>如果你要重点查看监听端口并结合进程名称，执行下面这条 CMD 单行命令：</p>
+        <pre>for /f "tokens=1,2,3,4,5" %a in ('netstat -ano ^| findstr LISTENING') do @echo Proto=%a Local=%b State=%d PID=%e &amp; @tasklist /FI "PID eq %e" /FO TABLE /NH</pre>
+        <p>如果你只想查看 10001 端口的占用情况，执行：</p>
+        <pre>netstat -ano | findstr :10001</pre>
+      </article>
+
+      <article class="card">
+        <h4>端口信息动态展示说明</h4>
+        <ul class="guide-list">
+          <li>当前这个页面是纯静态 HTML，浏览器出于安全限制，不能直接读取服务器操作系统的端口、PID 和进程列表。</li>
+          <li>因此页面里可以放命令、流程和说明，但不能仅靠前端自动动态识别 192.168.0.224 上的实时端口占用。</li>
+          <li>如果你后续要把“端口占用实时展示到页面上”，需要增加一个本地脚本或后端接口，把 netstat 或 PowerShell 结果输出成 JSON，再由页面读取展示。</li>
+          <li>当前版本已经把命令和核查方法补充到交付页中，适合作为部署与运维说明模板。</li>
+        </ul>
+      </article>
+      <article class="card">
+        <h4>Windows 防火墙放行端口</h4>
+        <p>如果服务器上 Python http.server 已启动但其他电脑无法访问，通常是防火墙阻止了入站连接。按以下步骤操作：</p>
+        <p><strong>步骤 1：检查端口是否已被防火墙放行</strong></p>
+        <pre>$port = 10001
+$rule = Get-NetFirewallRule -Direction Inbound -Action Allow -Enabled True |
+  Get-NetFirewallPortFilter |
+  Where-Object { $_.Protocol -eq "TCP" -and $_.LocalPort -eq "$port" }
+if ($rule) { "端口 $port 已放行" } else { "端口 $port 未放行" }</pre>
+        <p><strong>步骤 2：以管理员身份打开 PowerShell</strong></p>
+        <p>按 Win 键 — 输入 <code>PowerShell</code> — 右键点击"Windows PowerShell" — 选择"以管理员身份运行"。</p>
+        <p>或在已打开的终端中执行以下命令，弹出 UAC 确认窗口：</p>
+        <pre>Start-Process powershell -Verb RunAs</pre>
+        <p><strong>步骤 3：添加防火墙放行规则</strong></p>
+        <p>在管理员 PowerShell 中执行：</p>
+        <pre>New-NetFirewallRule -DisplayName "Joshua GPS 10001" -Direction Inbound -Protocol TCP -LocalPort 10001 -Action Allow -Profile Any</pre>
+        <p><strong>步骤 4：再次验证</strong></p>
+        <pre>$port = 10001
+$rule = Get-NetFirewallRule -Direction Inbound -Action Allow -Enabled True |
+  Get-NetFirewallPortFilter |
+  Where-Object { $_.Protocol -eq "TCP" -and $_.LocalPort -eq "$port" }
+if ($rule) { "端口 $port 已放行" } else { "端口 $port 未放行" }</pre>
+        <p>显示"已放行"后，重启 Python 服务，其他设备即可访问 <code>http://服务器IP:10001/</code>。</p>
+      </article>    </section>
+
+    <section class="grid cols-2" style="margin-top: 16px;">
+      <article class="card">
+        <h4>部署注意事项</h4>
+        <ul class="guide-list">
+          <li>不要直接双击 index.html 用 file 协议打开，否则 fetch 读取 JSON 可能失败。</li>
+          <li>部署目录必须包含 data 子目录，缺少 data/gps.json 时首页不会正常显示。</li>
+          <li>若目录名保留空格 Joshua GPS，启动命令和脚本中要注意路径引用。</li>
+          <li>Python http.server 适合临时使用，不适合作为长期正式服务托管。</li>
+          <li>页面 Daily Log 提交是浏览器本地存储，不会回写服务器文件，这是当前设计行为，不是部署故障。</li>
+          <li>如需外网访问或长期稳定运行，应切换到 IIS 并配置正式域名、端口和访问策略。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h4>正式上线验收清单</h4>
+        <ul class="guide-list">
+          <li>首页样式加载正常，不是纯文字页面。</li>
+          <li>左侧导航可切换各模块。</li>
+          <li>中英文切换按钮可用。</li>
+          <li>Read current page 可以触发浏览器朗读或出现浏览器支持提示。</li>
+          <li>Daily Log 表单可以提交并在当前浏览器保留。</li>
+          <li>Export local records 可以导出 JSON 文件。</li>
+          <li>手机端访问无横向滚动，卡片按单列显示。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card" style="margin-top: 16px;">
+      <h4>推荐交付说明</h4>
+      <p>如果这次只是先把项目放到 192.168.0.224 上给内部同事预览，最快路径是在 E:\site\Joshua GPS 下直接用 Python 3.10+ 启动 10001 端口服务并做浏览器验收。如果要作为长期正式入口，建议改用 IIS 托管当前目录，并保留本页作为后续运维和交接模板。</p>
+    </section>
+  </main>
+</body>
+</html>

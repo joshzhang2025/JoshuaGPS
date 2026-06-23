@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.apolloemb.com)",
+      "PowerShell(Get-ChildItem \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_copy\\\\A047264C-172B-47EA-BF5E-DA8739C2839B\\\\SlideShows\\\\Large\" | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_copy\\\\A047264C-172B-47EA-BF5E-DA8739C2839B\\\\StaticImages\\\\\" | Where-Object { $_.Name -match \"ASI|PPAI|SAGE|PRO|supplier|Supplier\" } | Select-Object Name)",
+      "PowerShell(Select-String -Path \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_copy\\\\index.html\" -Pattern \"SlideShow\" | Select-Object -First 30 | ForEach-Object { $_.Line.Trim\\(\\) })",
+      "PowerShell(Get-ChildItem \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_copy\\\\A047264C-172B-47EA-BF5E-DA8739C2839B\\\\StaticImages\\\\\" | Where-Object { $_.Name -match -join\\(\"spring\",\"hello\",\"deep\",\"stylish\",\"quality\",\"banner\",\"promo\"\\) } | Select-Object Name)",
+      "PowerShell(Select-String -Path \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_copy\\\\index.html\" -Pattern \"hello|spring|stylish|deep.?stock\" -CaseSensitive:$false | Select-Object -First 10 | ForEach-Object { $_.Line.Trim\\(\\) })"
+    ]
+  }
+}

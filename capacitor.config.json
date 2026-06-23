@@ -1,0 +1,19 @@
+{
+  "appId": "app.netlify.joshuagps",
+  "appName": "Joshua GPS",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "backgroundColor": "#102954",
+      "launchAutoHide": false,
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#102954"
+    },
+    "Keyboard": {
+      "resize": "native"
+    }
+  }
+}

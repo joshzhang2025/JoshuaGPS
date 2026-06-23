@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "build:www": "powershell -ExecutionPolicy Bypass -File build-www.ps1",
+    "sync": "npm run build:www && npx cap sync"
+  },
+  "dependencies": {
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/keyboard": "^8.0.5",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.2"
+  }
+}

@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+
+# Capacitor build output (generated from root by build-www.ps1)
+www/
+
+# Native platform projects (generated on Mac)
+ios/
+android/
+
+# Build artifacts / archives
+*.zip
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

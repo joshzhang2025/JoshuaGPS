@@ -1,0 +1,33 @@
+{
+  "note": "Optional daily override file for future upgrade. Current MVP reads data/gps.json first.",
+  "day": "Day 1",
+  "status": "Ready",
+  "en": {
+    "focus": "Open and use the Joshua GPS Site, then understand how it supports daily internship work.",
+    "tasks": [
+      "Open Joshua GPS Site on desktop.",
+      "Open Joshua GPS Site on mobile.",
+      "Test Chinese / English switching.",
+      "Test read-aloud for the Today page."
+    ],
+    "deliverables": [
+      "Day 1 Daily Log",
+      "Mobile screenshot",
+      "First feedback about the GPS Site"
+    ]
+  },
+  "zh": {
+    "focus": "打开并使用 Joshua GPS Site，理解它如何支持每日实习任务。",
+    "tasks": [
+      "在电脑端打开 Joshua GPS Site。",
+      "在手机端打开 Joshua GPS Site。",
+      "测试中英文切换。",
+      "测试 Today 页面朗读。"
+    ],
+    "deliverables": [
+      "Day 1 Daily Log",
+      "手机端截图",
+      "对 GPS Site 的第一反馈"
+    ]
+  }
+}

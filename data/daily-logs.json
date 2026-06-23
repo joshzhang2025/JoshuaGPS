@@ -1,0 +1,25 @@
+[
+  {
+    "date": "To be updated",
+    "day": "Day 1",
+    "status": "Template",
+    "en": {
+      "focus": "Use Joshua GPS Site for the first time.",
+      "learned": "Pending Joshua's Day 1 update.",
+      "built": "Pending.",
+      "aiHelpedWith": "English summary and GPS explanation.",
+      "difficulty": "Pending.",
+      "questions": "Which page is most useful for daily work?",
+      "nextStep": "Compare the original GPS document with the site version."
+    },
+    "zh": {
+      "focus": "第一次使用 Joshua GPS Site。",
+      "learned": "等待 Joshua Day 1 更新。",
+      "built": "待补充。",
+      "aiHelpedWith": "英文总结和 GPS 说明。",
+      "difficulty": "待补充。",
+      "questions": "哪个页面对每日工作最有用？",
+      "nextStep": "对比原始 GPS 文档和网页版本。"
+    }
+  }
+]

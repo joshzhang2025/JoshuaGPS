@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($content = Get-Content \"d:\\\\Codex\\\\Joshua GPS new\\\\style.css\" -Raw; $content.Length)",
+      "PowerShell(\\(Get-Content \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_redesign.html\" -Raw\\).Length; \\(Get-Content \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_redesign.html\"\\).Count)",
+      "PowerShell(\\(Get-Content \"d:\\\\Codex\\\\Joshua GPS new\\\\apollo_decorations.html\"\\).Count)"
+    ]
+  }
+}
