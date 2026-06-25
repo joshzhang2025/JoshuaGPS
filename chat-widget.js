@@ -70,6 +70,7 @@
   var dismissBtn = document.getElementById("vc-bubble-dismiss");
   var history = [];
   var bubbleTimer = null;
+  var greeted = false;
 
   function hideBubble() {
     bubble.classList.remove("show");
@@ -101,9 +102,7 @@
     if (open) {
       hideBubble();
       input.focus();
-      if (msgs.children.length === 0) {
-        addMsg("Hi! I'm the Apollo assistant. How can I help you today?", "bot");
-      }
+      if (!greeted) greet();
     }
   }
 
@@ -119,23 +118,18 @@
     sendMessage(text);
   });
 
-  function sendMessage(text) {
-    var typing = addMsg("Thinking…", "bot typing");
-    history.push({ role: "user", content: text });
-
-    var body = { assistantId: ASSISTANT_ID, input: history.slice() };
-
-    fetch("https://api.vapi.ai/chat", {
+  /* Ask the Vapi assistant for a reply given the current input messages. */
+  function postChat(inputMessages) {
+    return fetch("https://api.vapi.ai/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + PRIVATE_KEY
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify({ assistantId: ASSISTANT_ID, input: inputMessages })
     })
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      console.log("[Vapi messages]", data.messages);
       var reply = "Sorry, I didn't get a response.";
       if (data.output && data.output.length) {
         var assistantMsg = null;
@@ -145,22 +139,53 @@
         var msg = assistantMsg || data.output[data.output.length - 1];
         var raw = msg && msg.content;
         if (Array.isArray(raw)) {
-          reply = raw.map(function(c) { return c.text || c.content || ""; }).join("");
+          reply = raw.map(function (c) { return c.text || c.content || ""; }).join("");
         } else if (typeof raw === "string" && raw) {
           reply = raw;
         }
       } else if (data.message || data.reply || data.text) {
         reply = data.message || data.reply || data.text;
       }
-      history.push({ role: "assistant", content: reply });
-      typing.className = "vc-msg bot";
-      typing.textContent = reply;
-      msgs.scrollTop = msgs.scrollHeight;
-    })
-    .catch(function () {
-      history.pop();
-      typing.className = "vc-msg bot";
-      typing.textContent = "Connection error — please try again.";
+      return reply;
     });
+  }
+
+  /* On open, have the assistant speak first instead of a hardcoded line. */
+  function greet() {
+    if (greeted) return;
+    greeted = true;
+    var typing = addMsg("…", "bot typing");
+    // Hidden trigger so the assistant produces its own opening message;
+    // this turn is kept in history for context but not shown as a user bubble.
+    history.push({ role: "user", content: "Hi" });
+    postChat(history.slice())
+      .then(function (reply) {
+        history.push({ role: "assistant", content: reply });
+        typing.className = "vc-msg bot";
+        typing.textContent = reply;
+        msgs.scrollTop = msgs.scrollHeight;
+      })
+      .catch(function () {
+        history.pop();
+        typing.className = "vc-msg bot";
+        typing.textContent = "Thanks for reaching out to Apollo! How can I help you today?";
+      });
+  }
+
+  function sendMessage(text) {
+    var typing = addMsg("Thinking…", "bot typing");
+    history.push({ role: "user", content: text });
+    postChat(history.slice())
+      .then(function (reply) {
+        history.push({ role: "assistant", content: reply });
+        typing.className = "vc-msg bot";
+        typing.textContent = reply;
+        msgs.scrollTop = msgs.scrollHeight;
+      })
+      .catch(function () {
+        history.pop();
+        typing.className = "vc-msg bot";
+        typing.textContent = "Connection error — please try again.";
+      });
   }
 })();
