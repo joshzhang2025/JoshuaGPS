@@ -103,22 +103,38 @@
   var client = window.supabase.createClient(CFG.url, CFG.anonKey);
   window.gpsCloud = { client: client };
 
-  // Keep an un-wrapped setter so cloud -> local writes don't echo back up.
-  var rawSetItem = window.localStorage.setItem.bind(window.localStorage);
-
   var currentUserId = null;
   var pendingKeys = {};
   var flushTimer = null;
 
   // --- Push: intercept saves to synced keys and upload them (debounced) ---
-  window.localStorage.setItem = function (key, value) {
-    rawSetItem(key, value);
-    if (currentUserId && SYNCED_KEYS.indexOf(key) !== -1) {
+  // NOTE: you cannot override localStorage.setItem by assigning to the instance
+  // (localStorage is an exotic object — `localStorage.setItem = fn` just stores
+  // an item literally named "setItem"). We must patch Storage.prototype.
+  var storageProto = Object.getPrototypeOf(window.localStorage);
+  var nativeSetItem = storageProto.setItem;
+  // Un-wrapped setter so cloud -> local writes don't echo back up to the cloud.
+  function rawSetItem(key, value) { nativeSetItem.call(window.localStorage, key, value); }
+
+  storageProto.setItem = function (key, value) {
+    nativeSetItem.call(this, key, value);
+    if (this === window.localStorage && currentUserId && SYNCED_KEYS.indexOf(key) !== -1) {
       pendingKeys[key] = true;
       if (flushTimer) clearTimeout(flushTimer);
-      flushTimer = setTimeout(flush, 700);
+      flushTimer = setTimeout(flush, 400);
     }
   };
+
+  // Make sure pending uploads are sent before the app is backgrounded or closed
+  // (important on mobile, where timers/network are frozen on suspend).
+  function flushNow() {
+    if (flushTimer) { clearTimeout(flushTimer); flushTimer = null; }
+    flush();
+  }
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") flushNow();
+  });
+  window.addEventListener("pagehide", flushNow);
 
   function flush() {
     flushTimer = null;
