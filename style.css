@@ -143,6 +143,40 @@
   margin-top: 4px;
 }
 #login-btn:hover { opacity: 0.9; }
+#login-btn:disabled { opacity: 0.6; cursor: default; }
+
+#login-message {
+  display: none;
+  color: #1f66d1;
+  font-size: 13px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+#login-toggle {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f66d1;
+  text-decoration: none;
+  cursor: pointer;
+}
+#login-toggle:hover { text-decoration: underline; }
+
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.sidebar-footer .account-email {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  word-break: break-all;
+}
+.sidebar-footer .btn { width: 100%; }
 
 :root {
       --bg: #f5f7fb;

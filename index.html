@@ -42,15 +42,17 @@
       <p id="login-subtitle">Please sign in to continue</p>
       <form id="login-form" autocomplete="off">
         <div class="login-field">
-          <label for="login-username">Username</label>
-          <input id="login-username" type="text" placeholder="Enter username" />
+          <label for="login-email">Email</label>
+          <input id="login-email" type="email" placeholder="you@example.com" autocomplete="username" />
         </div>
         <div class="login-field">
           <label for="login-password">Password</label>
-          <input id="login-password" type="password" placeholder="Enter password" />
+          <input id="login-password" type="password" placeholder="Enter password" autocomplete="current-password" />
         </div>
-        <div id="login-error">Incorrect username or password.</div>
+        <div id="login-error">Incorrect email or password.</div>
+        <div id="login-message"></div>
         <button id="login-btn" type="submit">Sign In</button>
+        <a href="#" id="login-toggle">Need an account? Sign up</a>
       </form>
     </div>
   </div>
@@ -66,6 +68,10 @@
         </div>
       </div>
       <div class="nav-scroll" id="nav"></div>
+      <div class="sidebar-footer" id="sidebar-footer" style="display:none">
+        <span class="account-email" id="account-email"></span>
+        <button class="btn" id="logout-btn" type="button">Sign out</button>
+      </div>
     </aside>
     <div id="sidebar-overlay"></div>
 
@@ -130,25 +136,6 @@
   <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <script>
-    (function () {
-      var overlay = document.getElementById('login-overlay');
-      var form = document.getElementById('login-form');
-      var errEl = document.getElementById('login-error');
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var user = document.getElementById('login-username').value.trim();
-        var pass = document.getElementById('login-password').value;
-        if ((user === 'admin' && pass === 'bigblaze') || (user === '1' && pass === '1')) {
-          overlay.classList.add('login-fade-out');
-          setTimeout(function () { overlay.style.display = 'none'; }, 400);
-        } else {
-          errEl.style.display = 'block';
-          document.getElementById('login-password').value = '';
-        }
-      });
-    })();
-  </script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
@@ -484,6 +471,11 @@ document.getElementById('tmx-search-input').addEventListener('input',e=>{tmxSear
 tmxRenderAll();
 })();
   </script>
+  <!-- Cloud accounts + data sync (Supabase). Loads after the app so it can
+       refresh the UI once the signed-in account's data is pulled down. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="cloud-sync.js"></script>
 </body>
 </html>
 

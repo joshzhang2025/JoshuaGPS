@@ -1,10 +1,12 @@
-const CACHE = 'joshua-gps-v2';
+const CACHE = 'joshua-gps-v4';
 const OFFLINE_URL = './offline.html';
 const ASSETS = [
   './index.html',
   './offline.html',
   './style.css',
   './script.js',
+  './supabase-config.js',
+  './cloud-sync.js',
   './manifest.json',
   './icon.svg',
   './data/gps.json',
