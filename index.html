@@ -471,6 +471,35 @@ document.getElementById('tmx-search-input').addEventListener('input',e=>{tmxSear
 tmxRenderAll();
 })();
   </script>
+  <script>
+    // Size the Apollo iframes to the real visible height so their bottom edge
+    // (where the floating chat button is pinned) stays on screen on mobile.
+    (function () {
+      function fitApolloFrames() {
+        var sections = document.querySelectorAll('.apollo-section');
+        for (var i = 0; i < sections.length; i++) {
+          var sec = sections[i];
+          if (!sec.classList.contains('active')) continue;
+          var frame = sec.querySelector('iframe');
+          if (!frame) continue;
+          var top = frame.getBoundingClientRect().top;
+          frame.style.height = Math.max(320, Math.round(window.innerHeight - top)) + 'px';
+        }
+      }
+      window.fitApolloFrames = fitApolloFrames;
+      window.addEventListener('resize', fitApolloFrames);
+      window.addEventListener('orientationchange', function () { setTimeout(fitApolloFrames, 300); });
+      window.addEventListener('load', function () { setTimeout(fitApolloFrames, 120); });
+      // Recompute whenever an Apollo section becomes the active page.
+      var apollo = document.querySelectorAll('.apollo-section');
+      for (var j = 0; j < apollo.length; j++) {
+        new MutationObserver(function () {
+          fitApolloFrames();
+          setTimeout(fitApolloFrames, 360); // after the page's smooth scroll-to-top
+        }).observe(apollo[j], { attributes: true, attributeFilter: ['class'] });
+      }
+    })();
+  </script>
   <!-- Cloud accounts + data sync (Supabase). Loads after the app so it can
        refresh the UI once the signed-in account's data is pulled down. -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

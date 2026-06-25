@@ -30,7 +30,14 @@
     "#vc-input{flex:1;border:1px solid var(--line,#dde3ee);border-radius:999px;padding:9px 14px;font-size:14px;outline:none;font-family:inherit;color:var(--text,#1a2535);background:#f7f9fc;}",
     "#vc-input:focus{border-color:var(--accent,#C8922A);background:#fff;}",
     "#vc-send{width:38px;height:38px;border-radius:50%;background:var(--accent,#C8922A);color:#fff;border:none;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;flex-shrink:0;transition:background .15s;}",
-    "#vc-send:hover{background:var(--accent-dark,#a87420);}"
+    "#vc-send:hover{background:var(--accent-dark,#a87420);}",
+
+    /* Mobile: keep the launcher, bubble and panel within the visible screen. */
+    "@media (max-width:768px){",
+    "  #vc-btn{bottom:calc(20px + env(safe-area-inset-bottom));right:16px;}",
+    "  #vc-bubble{bottom:calc(86px + env(safe-area-inset-bottom));right:16px;max-width:min(220px,calc(100vw - 90px));}",
+    "  #vc-panel{bottom:calc(86px + env(safe-area-inset-bottom));right:12px;left:12px;width:auto;max-height:72vh;}",
+    "}"
   ].join("");
   document.head.appendChild(style);
 
