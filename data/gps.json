@@ -15,7 +15,8 @@
         { "id": "xmind", "icon": "13", "zh": "思维导图", "en": "Mind Map" },
         { "id": "apollo", "icon": "🏪", "group": "Apollo", "zh": "Apollo 网站", "en": "Current Apollo Site" },
         { "id": "apollo-redesign", "icon": "✦", "group": "Apollo", "zh": "Apollo 重设计", "en": "Apollo Redesign" },
-        { "id": "tmx", "icon": "📋", "group": "TMX", "zh": "TMX 方法论", "en": "TMX Methodology" }
+        { "id": "tmx", "icon": "📋", "group": "TMX", "zh": "TMX 方法论", "en": "TMX Methodology" },
+        { "id": "tby", "icon": "🛒", "group": "TBY", "zh": "TBY 电商业务", "en": "TBY E-Commerce" }
       ],
       "ui": {
         "en": {
