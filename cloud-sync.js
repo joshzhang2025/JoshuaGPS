@@ -43,6 +43,15 @@
     if (msgEl) msgEl.style.display = "none";
   }
 
+  // Local admin shortcut: typing this username/password in the login form
+  // gets you straight into the app UI, bypassing Supabase. It does NOT create
+  // a cloud session, so admin data stays local-only and is not synced.
+  var ADMIN_USER = "admin";
+  var ADMIN_PASS = "111111";
+  function isAdminLogin(user, pass) {
+    return (user || "").trim().toLowerCase() === ADMIN_USER && pass === ADMIN_PASS;
+  }
+
   function showLogin() {
     if (overlay) {
       overlay.style.display = "flex";
@@ -88,7 +97,7 @@
       clearNotes();
       var user = (emailEl ? emailEl.value : "").trim();
       var pass = passEl ? passEl.value : "";
-      if ((user === "admin" && pass === "bigblaze") || (user === "1" && pass === "1")) {
+      if (isAdminLogin(user, pass) || (user === "admin" && pass === "bigblaze") || (user === "1" && pass === "1")) {
         hideLogin();
       } else {
         showErr("Incorrect username or password.");
@@ -102,6 +111,10 @@
   // ----------------------------------------------------------------------
   var client = window.supabase.createClient(CFG.url, CFG.anonKey);
   window.gpsCloud = { client: client };
+
+  // Use a text input so the "admin" shortcut isn't rejected by the browser's
+  // built-in email validation. Real email sign-in/up still works normally.
+  if (emailEl) emailEl.type = "text";
 
   var currentUserId = null;
   var pendingKeys = {};
@@ -236,6 +249,16 @@
       clearNotes();
       var email = (emailEl ? emailEl.value : "").trim();
       var password = passEl ? passEl.value : "";
+
+      // Admin shortcut: skip Supabase, drop straight into the app (local-only).
+      if (isAdminLogin(email, password)) {
+        if (accountEl) accountEl.textContent = "admin (local)";
+        if (footerEl) footerEl.style.display = "flex";
+        hideLogin();
+        reRender();
+        return;
+      }
+
       if (!email || !password) { showErr("Please enter your email and password."); return; }
       if (mode === "signup" && password.length < 6) {
         showErr("Password must be at least 6 characters.");
