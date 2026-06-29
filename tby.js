@@ -171,8 +171,7 @@ function renderKeyTakeaways(section) {
 function renderNav() {
   var nav = document.getElementById("tby-nav-list");
   if (!nav || !doc) return;
-  nav.innerHTML = '<span class="tmx-nav-caption">' + (state.mode === "en" ? "TBY Sections" : "TBY 章节") + "</span>" +
-    doc.sections.map(function (section, index) {
+  nav.innerHTML = doc.sections.map(function (section, index) {
       var label = state.mode === "en" ? englishText(section.zh) : section.zh;
       return '<button class="tmx-nav-item' + (state.active === index ? " tmx-active" : "") + '" data-index="' + index + '" type="button">' +
         '<span class="tmx-nav-num">' + (icons[index] || String(index + 1).padStart(2, "0")) + "</span><span>" + escapeHtml(label) + "</span></button>";

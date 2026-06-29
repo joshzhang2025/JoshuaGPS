@@ -136,6 +136,18 @@
           <div id="tby-content"></div>
         </div>
       </section>
+      <section id="woot" class="section">
+        <div id="woot-page">
+          <nav class="tmx-subnav" id="woot-nav-list"></nav>
+          <div class="tmx-hero">
+            <h3 id="woot-hero-title"></h3>
+            <p id="woot-hero-subtitle"></p>
+            <div class="tmx-stat-row" id="woot-stat-row"></div>
+          </div>
+          <div id="woot-content"></div>
+          <div class="tmx-footer-note" id="woot-footer-note"></div>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -340,7 +352,7 @@ const tmxData=[
   }
 ];
 
-let tmxLang='zh';
+let tmxLang=document.documentElement.lang==='zh-CN'?'zh':'en';
 let tmxSearch='';
 let tmxActiveId=tmxData[0].id;
 
@@ -478,6 +490,245 @@ document.getElementById('tmx-btn-clear').addEventListener('click',()=>{tmxSearch
 document.getElementById('tmx-search-input').addEventListener('input',e=>{tmxSearch=e.target.value.trim();tmxRenderAll();});
 
 tmxRenderAll();
+})();
+  </script>
+  <script>
+(function(){
+const wootUI={
+  zh:{
+    heroTitle:'Woot 业务全景',
+    heroSub:'Frual 帮助 Amazon 第三方卖家通过 Woot / Amazon Deal 渠道做促销销售。本页整理为章节导航、中英文对照与当前章节朗读。',
+    footer:'说明：本页内容参考 Woot 业务导图整理，用于公司内部同步与培训，支持中英文切换与当前章节朗读。',
+    stats:[{num:'7',text:'业务章节'},{num:'13',text:'主流程步骤'},{num:'3',text:'核心系统'},{num:'2',text:'语言模式'}]
+  },
+  en:{
+    heroTitle:'Woot Business Overview',
+    heroSub:'Frual helps Amazon third-party sellers run promotional sales through Woot / Amazon Deal channels. This page is organized into section navigation, bilingual content, and read-aloud support.',
+    footer:'Note: This page is organized from the Woot business mind map for internal synchronization and training, with bilingual switching and read-aloud support.',
+    stats:[{num:'7',text:'sections'},{num:'13',text:'process steps'},{num:'3',text:'core systems'},{num:'2',text:'languages'}]
+  }
+};
+
+const wootData=[
+  {id:'what',number:'01',navZh:'Woot 是什么',navEn:'What is Woot?',
+   titleZh:'Woot 是什么',titleEn:'What is Woot?',
+   introZh:'先理解 Woot 平台本身，以及 Frual 在 Woot / Amazon Deal 业务链路中的定位。',
+   introEn:'Start with what Woot is and where Frual fits in the Woot / Amazon Deal service chain.',
+   cards:[
+    {icon:'🏢',titleZh:'亚马逊全资子公司',titleEn:'A wholly owned Amazon subsidiary',
+     pointsZh:['2010年6月，亚马逊以1.1亿美元现金完成了对 Woot 的全资收购。'],
+     pointsEn:['In June 2010, Amazon completed its full cash acquisition of Woot for USD 110 million.']},
+    {icon:'🛒',titleZh:'美国知名团购网站',titleEn:'A well-known U.S. deal site',
+     pointsZh:['www.woot.com 是美国著名的团购网站，月活跃用户超过千万。'],
+     pointsEn:['www.woot.com is a well-known U.S. group-buying and deal site with more than 10 million monthly active users.']},
+    {icon:'🏆',titleZh:'Amazon 高级卖家',titleEn:'High-weight Amazon seller account',
+     pointsZh:['Woot 在亚马逊美国站拥有高权重 VC 账号。','可通过亚马逊内部数据联通，为其他卖家提供多元营销推广服务。'],
+     pointsEn:['Woot has a high-weight Vendor Central account on Amazon US.','Through Amazon-side data and process connectivity, it can support diversified marketing services for other sellers.']},
+    {icon:'🧭',titleZh:'Frual 在 Woot 业务中的定位',titleEn:'Frual’s role in the Woot business',
+     pointsZh:['Frual 帮助 Amazon 第三方卖家通过 Woot / Amazon Deal 渠道做促销销售。','Frual 不持货、不发货、不取得产品所有权。','Frual 的核心角色是服务方、流程推进方、资金与规则中枢。'],
+     pointsEn:['Frual helps Amazon third-party sellers run promotional sales through Woot / Amazon Deal channels.','Frual does not hold inventory, ship goods, or take product ownership.','Frual acts as a service provider, process coordinator, and hub for funding and rules.']}
+   ]
+  },
+  {id:'roles',number:'02',navZh:'核心角色',navEn:'Core Roles',
+   sectionTitleZh:'业务中的核心角色',sectionTitleEn:'Core Roles in the Business',
+   sectionIntroZh:'这条链路由卖家、Frual、Woot 和 Amazon 共同组成。',
+   sectionIntroEn:'The business chain is formed by sellers, Frual, Woot, and Amazon.',
+   cards:[
+    {icon:'🧑‍💼',titleZh:'卖家',titleEn:'Seller',
+     pointsZh:['产品所有人，Amazon 店铺实际经营者。','提供产品、库存、价格、资料。','承担产品质量、合规、物流等责任。'],
+     pointsEn:['Owns the products and operates the Amazon store.','Provides product information, inventory, price, and required materials.','Takes responsibility for product quality, compliance, and logistics.']},
+    {icon:'🤝',titleZh:'Frual',titleEn:'Frual',
+     pointsZh:['Woot 官方 Vendor，帮助卖家对接 Woot。','推进报价、提交、活动、广告、退库存、结款等流程。','核心是服务、流程、资源整合和风险控制。'],
+     pointsEn:['An official Woot vendor that helps sellers connect with Woot.','Drives quotation, submission, deal execution, ads, inventory return, and settlement workflows.','Focuses on service delivery, workflow coordination, resource integration, and risk control.']},
+    {icon:'🟢',titleZh:'Woot',titleEn:'Woot',
+     pointsZh:['Amazon 旗下 Deal / 促销平台。','审核产品和价格，执行 Deal 活动。','处理划库存、退库存、结款等流程。'],
+     pointsEn:['A deal and promotion platform under Amazon.','Reviews products and prices and executes deal events.','Handles inventory transfer, returns, and settlement-related processes.']},
+    {icon:'📦',titleZh:'Amazon',titleEn:'Amazon',
+     pointsZh:['底层交易和履约平台。','产品、店铺、库存、活动均需符合 Amazon 规则。'],
+     pointsEn:['The underlying transaction and fulfillment platform.','Products, stores, inventory, and promotions must comply with Amazon rules.']}
+   ]
+  },
+  {id:'flow',number:'03',navZh:'业务主流程',navEn:'Main Process',
+   sectionTitleZh:'Woot 业务主流程',sectionTitleEn:'Main Woot Business Process',
+   sectionIntroZh:'从客户开发到客户回访，是一条完整的业务闭环。',
+   sectionIntroEn:'From customer development to follow-up, the process forms a full business loop.',
+   flowTitleZh:'十三步业务闭环',flowTitleEn:'Thirteen-step Business Loop',
+   flow:[
+    {code:'1',zh:'客户开发：寻找有 Amazon 产品和库存的卖家，判断是否适合做 Woot / Deal。',en:'Customer Development: find sellers with Amazon products and inventory; assess deal fit.'},
+    {code:'2',zh:'产品提报：卖家提交 ASIN、库存、价格、FNSKU、店铺等信息。',en:'Product Submission: seller submits ASIN, inventory, price, FNSKU, store, and related information.'},
+    {code:'3',zh:'报价与价格沟通：核算 Woot 可接受价格，KP 与卖家沟通是否接受。',en:'Quotation & Price Communication: estimate acceptable Woot price; KP confirms seller acceptance.'},
+    {code:'4',zh:'协议与资料确认：完成店铺验证、协议签署、FNSKU / 库存 / 发货方式确认。',en:'Agreement & Materials: verify store, sign agreements, and confirm FNSKU, inventory, and fulfillment mode.'},
+    {code:'5',zh:'提交 Woot：内部确认后由 CT/CS 提交给 Woot 审核。',en:'Submit to Woot: after internal confirmation, CT/CS submits the case to Woot for review.'},
+    {code:'6',zh:'划库存：常规为 FBA 库存划转至 Woot。',en:'Inventory Transfer: usually transfers FBA inventory to Woot.'},
+    {code:'7',zh:'上活动：设置并执行 Woot / Amazon Deal。',en:'Deal Launch: set up and execute Woot / Amazon Deal events.'},
+    {code:'8',zh:'广告协助：配合广告投放，关注预算、花费、销售额、ACOS、CR、CPC。',en:'Ad Support: support ad operations and monitor budget, spend, sales, ACOS, CR, and CPC.'},
+    {code:'9',zh:'活动中监控：检查销量、库存、购物车、价格异常。',en:'In-event Monitoring: monitor sales, inventory, Buy Box, and price issues during the deal.'},
+    {code:'10',zh:'退库存：活动结束或不再继续活动后提交退库存。',en:'Inventory Return: submit inventory return after the activity ends or will not continue.'},
+    {code:'11',zh:'效果分析：分析销量、流量、广告、关键词、库存变化。',en:'Effect Analysis: analyze sales, traffic, ads, keywords, and inventory changes.'},
+    {code:'12',zh:'结款与返款：按库存、退货、预留金、账单多退少补。',en:'Settlement & Refund: settle based on inventory, returns, reserves, and final bills.'},
+    {code:'13',zh:'客户回访：总结活动效果，推动继续提报和复购。',en:'Customer Follow-up: review results and drive future submissions and repeat cooperation.'}
+   ]
+  },
+  {id:'teams',number:'04',navZh:'团队职责',navEn:'Team Roles',
+   sectionTitleZh:'公司内部团队职责',sectionTitleEn:'Internal Team Responsibilities',
+   sectionIntroZh:'Woot 业务是跨部门协作闭环，不是某个部门单独完成。',
+   sectionIntroEn:'Woot business is a cross-team loop, not a task owned by one single team.',
+   cards:[
+    {icon:'🧲',titleZh:'OM：客户开发与客户管理',titleEn:'OM: Customer Development & Management',
+     pointsZh:['开发客户、建立客户编号、维护客户标签。','同步客户信息，活动后配合回访和复购。'],
+     pointsEn:['Develop customers, create customer IDs, and maintain customer tags.','Synchronize customer information and support follow-up and repeat cooperation after deals.']},
+    {icon:'📞',titleZh:'KP：客户 / 卖家一线接口',titleEn:'KP: Frontline Seller Interface',
+     pointsZh:['收集产品资料，沟通价格和合作条件。','跟进验证、协议、反馈、退库、发票、收款等事项。'],
+     pointsEn:['Collect product information and communicate price and cooperation terms.','Follow up on verification, agreements, feedback, returns, invoices, and payment information.']},
+    {icon:'🔧',titleZh:'CT / CS：流程推进中枢',titleEn:'CT / CS: Process Coordination Hub',
+     pointsZh:['整理并提交资料给 Woot，推进订单提交、取消、执行。','跟进报价、PORF、PO、划库存、Deal、广告、退库存。'],
+     pointsEn:['Prepare and submit materials to Woot; drive order submission, cancellation, and execution.','Follow up on quotation, PORF, PO, inventory transfer, deals, ads, and returns.']},
+    {icon:'📝',titleZh:'MC：订单创建',titleEn:'MC: Order Creation',
+     pointsZh:['产品导入后在 TBN 创建订单并生成订单号。','确保订单进入后续审价和执行流程。'],
+     pointsEn:['Create orders in TBN and generate order numbers after product import.','Ensure orders enter the next review and execution workflow.']},
+    {icon:'📈',titleZh:'TAK：广告与效果分析',titleEn:'TAK: Advertising & Performance Analysis',
+     pointsZh:['提供广告建议，协助活动期广告创建和调整。','分析广告、销售、ACOS、CR、CPC，并判断是否继续提报。'],
+     pointsEn:['Provide ad recommendations and support ad creation or adjustments during deals.','Analyze ad metrics, sales, ACOS, CR, and CPC and assess whether to continue submission.']},
+    {icon:'💰',titleZh:'财务：结款与返款',titleEn:'Finance: Settlement & Refunds',
+     pointsZh:['处理返款账单、Seller PI、Seller Word、Invoice。','安排返款，处理预留金、多退少补和垫资风险。'],
+     pointsEn:['Handle refund bills, Seller PI, Seller Word, and invoices.','Arrange payments and manage reserves, final adjustments, and advance-funding risk.']},
+    {icon:'🔗',titleZh:'Woot 对接人 / Woot AM',titleEn:'Woot Contacts / Woot AM',
+     pointsZh:['通过 Jerry / Sarah / Brad 等中间人对接。','Woot AM 处理审核、报价、划库存、活动执行、退库存等事项。'],
+     pointsEn:['Coordinate through Jerry, Sarah, Brad, and other intermediaries.','Woot AM handles review, pricing, inventory transfer, deal execution, and returns.']},
+    {icon:'🤖',titleZh:'优化技术团队：AI / IT / BMO',titleEn:'Optimization Technology Team: AI / IT / BMO',
+     pointsZh:['支持系统优化、报表优化、流程优化、工具 / 产品改进。','提升业务效率、数据沉淀和用户体验。'],
+     pointsEn:['Supports system optimization, reporting optimization, process optimization, and tool/product improvements.','Improves efficiency, data accumulation, and user experience.']}
+   ]
+  },
+  {id:'systems',number:'05',navZh:'主要系统',navEn:'Main Systems',
+   sectionTitleZh:'公司主要系统',sectionTitleEn:'Main Company Systems',
+   sectionIntroZh:'三大系统支撑业务流转：DOM、TBN、QTC。',
+   sectionIntroEn:'Three systems support the business workflow: DOM, TBN, and QTC.',
+   cards:[
+    {icon:'🗂️',titleZh:'DOM（OM 使用）',titleEn:'DOM (used by OM)',
+     pointsZh:['客户建档与管理。','客户标签与分层。','客户跟进与维护，回访记录管理。'],
+     pointsEn:['Customer setup and management.','Customer tagging and segmentation.','Customer follow-up, maintenance, and visit records.']},
+    {icon:'🖥️',titleZh:'TBN（CT、MC、KP、TAK / AT 使用）',titleEn:'TBN (used by CT, MC, KP, TAK / AT)',
+     pointsZh:['订单创建与管理。','流程推进与追踪。','客户信息与沟通记录、广告创建与录入、状态跟踪与数据管理。'],
+     pointsEn:['Order creation and management.','Workflow execution and tracking.','Customer information, communication records, ad creation/input, status tracking, and data management.']},
+    {icon:'📦',titleZh:'QTC（卖家使用）',titleEn:'QTC (used by sellers)',
+     pointsZh:['产品导入与管理。','Deal 创建与管理。','广告创建与运营，查看活动状态与反馈。'],
+     pointsEn:['Product import and management.','Deal creation and management.','Ad creation/operation and viewing deal status and feedback.']}
+   ]
+  },
+  {id:'risk',number:'06',navZh:'风险与责任',navEn:'Risks & Boundaries',
+   sectionTitleZh:'核心风险与责任边界',sectionTitleEn:'Key Risks & Responsibility Boundaries',
+   sectionIntroZh:'Woot 业务既要推动销售增长，也要控制价格、库存、结算与合规风险。',
+   sectionIntroEn:'Woot business must grow sales while controlling price, inventory, settlement, and compliance risks.',
+   cards:[
+    {icon:'🧑‍💼',titleZh:'卖家承担',titleEn:'Seller Responsibilities',
+     pointsZh:['产品质量、知识产权、Amazon 合规责任。','物流与发货责任，产品缺陷、召回、索赔、税务等责任。'],
+     pointsEn:['Product quality, intellectual property, and Amazon compliance.','Logistics, fulfillment, defects, recalls, claims, taxes, and related liabilities.']},
+    {icon:'🤝',titleZh:'Frual 承担',titleEn:'Frual Responsibilities',
+     pointsZh:['Woot 项目服务、系统流程推进、规则与资金流程管理。','不承担产品质量、销售额、Amazon 合规等责任。'],
+     pointsEn:['Woot project service, process coordination, rules, and funding workflow management.','Does not assume responsibility for product quality, sales amount, or Amazon compliance.']},
+    {icon:'🛡️',titleZh:'重点风险',titleEn:'Key Risks',
+     pointsZh:['FBM 自发货风险。','退货结算风险与垫资风险。','价格库存异常与活动执行异常。'],
+     pointsEn:['FBM seller-fulfilled risk.','Return/settlement risk and advance-funding risk.','Price/inventory anomalies and deal execution issues.']}
+   ]
+  },
+  {id:'points',number:'07',navZh:'业务关键点',navEn:'Key Takeaways',
+   sectionTitleZh:'业务关键点',sectionTitleEn:'Key Takeaways',
+   sectionIntroZh:'用于快速记忆的核心结论。',
+   sectionIntroEn:'Core conclusions for quick memorization.',
+   cards:[
+    {icon:'✅',titleZh:'关键点 1',titleEn:'Takeaway 1',textZh:'Frual 是服务方，不是货主。',textEn:'Frual is a service provider, not the product owner.'},
+    {icon:'✅',titleZh:'关键点 2',titleEn:'Takeaway 2',textZh:'系统里建了，不代表 Woot 已经执行。',textEn:'Being created in the system does not mean Woot has executed it.'},
+    {icon:'✅',titleZh:'关键点 3',titleEn:'Takeaway 3',textZh:'Deal 或广告创建后，需 CT/CS 提交 Woot。',textEn:'After a deal or ad is created, CT/CS must submit it to Woot.'},
+    {icon:'✅',titleZh:'关键点 4',titleEn:'Takeaway 4',textZh:'结款不能只看销量，还要看库存、退货、账期和预留金。',textEn:'Settlement depends on inventory, returns, billing cycle, and reserves—not only sales.'},
+    {icon:'✅',titleZh:'关键点 5',titleEn:'Takeaway 5',textZh:'Woot 业务底层逻辑是销售增长与风险控制并重。',textEn:'Woot business balances sales growth with risk control.'},
+    {icon:'✅',titleZh:'关键点 6',titleEn:'Takeaway 6',textZh:'这是跨部门协作闭环，不是单个部门可以独立完成。',textEn:'It is a cross-team workflow loop, not a task one team can complete alone.'}
+   ]
+  }
+];
+
+let wootLang=document.documentElement.lang==='zh-CN'?'zh':'en';
+let wootActiveId=wootData[0].id;
+
+const wootEsc=str=>String(str==null?'':str).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+
+function wootRenderMeta(){
+  const lang=wootUI[wootLang];
+  document.getElementById('woot-hero-title').textContent=lang.heroTitle;
+  document.getElementById('woot-hero-subtitle').textContent=lang.heroSub;
+  document.getElementById('woot-footer-note').textContent=lang.footer;
+  document.getElementById('woot-stat-row').innerHTML=lang.stats.map(s=>`<div class="tmx-stat"><strong>${s.num}</strong><span>${wootEsc(s.text)}</span></div>`).join('');
+}
+
+const wootIcons={what:'🟢',roles:'👥',flow:'🔁',teams:'🏢',systems:'🖥️',risk:'🛡️',points:'✅'};
+const wootT=(zh,en)=>wootLang==='zh'?zh:en;
+
+function wootRenderNav(){
+  const nav=document.getElementById('woot-nav-list');
+  nav.innerHTML=wootData.map(sec=>`<button class="tmx-nav-item${sec.id===wootActiveId?' tmx-active':''}" data-target="${sec.id}" type="button"><span class="tmx-nav-num">${sec.number}</span><span>${wootEsc(wootT(sec.navZh,sec.navEn))}</span></button>`).join('');
+  nav.querySelectorAll('.tmx-nav-item').forEach(btn=>btn.addEventListener('click',()=>{
+    wootActiveId=btn.dataset.target;
+    if('speechSynthesis' in window) window.speechSynthesis.cancel();
+    wootRenderAll();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+}
+
+function wootRenderCards(cards){
+  return`<div class="module-grid">${cards.map((c,i)=>{
+    const bullets=c.pointsZh
+      ? wootT(c.pointsZh,c.pointsEn).map(p=>`<li>${wootEsc(p)}</li>`).join('')
+      : `<li>${wootEsc(wootT(c.textZh,c.textEn))}</li>`;
+    return`<article class="module-card">
+      <div class="module-head"><span class="module-index">${i+1}</span><h4>${wootEsc(wootT(c.titleZh,c.titleEn))}</h4></div>
+      <ul class="clean-list">${bullets}</ul>
+    </article>`;
+  }).join('')}</div>`;
+}
+
+function wootRenderFlow(flow){
+  return`<div class="flow-grid">${flow.map(step=>{
+    const txt=wootT(step.zh,step.en);
+    const sep=wootLang==='zh'?'：':':';
+    const idx=txt.indexOf(sep);
+    const title=idx>-1?txt.slice(0,idx):'';
+    const desc=idx>-1?txt.slice(idx+1).trim():txt;
+    return`<div class="flow-step"><div class="step-no">${wootEsc(step.code)}</div><div>${title?`<h4>${wootEsc(title)}</h4>`:''}<p>${wootEsc(desc)}</p></div></div>`;
+  }).join('')}</div>`;
+}
+
+function wootRenderTakeaways(cards){
+  return`<div class="takeaways">${cards.map((c,i)=>`<div class="takeaway"><span class="point-badge">${i+1}</span><p>${wootEsc(wootT(c.textZh,c.textEn))}</p></div>`).join('')}</div>`;
+}
+
+function wootRenderContent(){
+  const sec=wootData.find(s=>s.id===wootActiveId)||wootData[0];
+  let body='';
+  if(sec.id==='points') body=wootRenderTakeaways(sec.cards);
+  else if(sec.flow) body=wootRenderFlow(sec.flow);
+  else if(sec.cards) body=wootRenderCards(sec.cards);
+  document.getElementById('woot-content').innerHTML=`
+    <div class="woot-section-head">
+      <div class="section-icon">${wootIcons[sec.id]||'🟢'}</div>
+      <div>
+        <h3>${wootEsc(wootT(sec.sectionTitleZh||sec.titleZh,sec.sectionTitleEn||sec.titleEn))}</h3>
+        <p>${wootEsc(wootT(sec.sectionIntroZh||sec.introZh||'',sec.sectionIntroEn||sec.introEn||''))}</p>
+      </div>
+    </div>
+    ${body}`;
+}
+
+function wootRenderAll(){
+  wootRenderMeta();
+  wootRenderNav();
+  wootRenderContent();
+}
+
+document.getElementById('lang-toggle').addEventListener('click',()=>{
+  setTimeout(()=>{ wootLang=document.documentElement.lang==='zh-CN'?'zh':'en'; wootRenderAll(); },0);
+});
+
+wootRenderAll();
 })();
   </script>
   <script>

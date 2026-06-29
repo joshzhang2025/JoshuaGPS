@@ -16,7 +16,8 @@
         { "id": "apollo", "icon": "🏪", "group": "Apollo", "zh": "Apollo 网站", "en": "Current Apollo Site" },
         { "id": "apollo-redesign", "icon": "✦", "group": "Apollo", "zh": "Apollo 重设计", "en": "Apollo Redesign" },
         { "id": "tmx", "icon": "📋", "group": "TMX", "zh": "TMX 方法论", "en": "TMX Methodology" },
-        { "id": "tby", "icon": "🛒", "group": "TBY", "zh": "TBY 电商业务", "en": "TBY E-Commerce" }
+        { "id": "tby", "icon": "🛒", "group": "TBY", "zh": "TBY 电商业务", "en": "TBY E-Commerce" },
+        { "id": "woot", "icon": "🟢", "group": "Woot", "zh": "Woot 业务全景", "en": "Woot Business" }
       ],
       "ui": {
         "en": {

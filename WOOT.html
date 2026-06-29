@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Woot 业务全景 | 离线双语朗读版</title>
+  <style>
+:root { --bg:#f5f7fb; --panel:#fff; --text:#172033; --muted:#657085; --line:#dce3ef; --primary:#1f66d1; --primary-dark:#164d9c; --soft:#eaf2ff; --green:#1f8a5f; --yellow:#a76713; --orange:#f27b12; --purple:#6f45c9; --red:#d93b3b; --shadow:0 16px 40px rgba(23,32,51,.08); --radius:16px; }
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;min-width:0;overflow-x:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.58} button{font:inherit} .app{min-height:100vh;display:grid;grid-template-columns:292px minmax(0,1fr)}
+.sidebar{background:linear-gradient(180deg,#102954 0%,#193f7f 100%);color:#fff;padding:24px 18px;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;gap:12px;align-items:center;margin-bottom:22px}.brand-mark{width:44px;height:44px;border-radius:12px;background:#fff;color:var(--primary);display:grid;place-items:center;font-weight:850}.brand h1{margin:0;font-size:18px;line-height:1.25}.brand p{margin:4px 0 0;color:rgba(255,255,255,.72);font-size:12px}.nav-group-label{text-transform:uppercase;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.55);margin:18px 10px 10px}.nav-btn{width:100%;min-height:44px;border:0;background:transparent;color:rgba(255,255,255,.84);text-align:left;padding:11px 12px;border-radius:12px;display:flex;gap:10px;cursor:pointer;font-size:14px;margin-bottom:4px;align-items:center}.nav-btn:hover{background:rgba(255,255,255,.12);color:#fff}.nav-btn.active{background:#fff;color:#17376d;font-weight:750}.nav-icon{width:26px;flex:0 0 26px;text-align:center;font-weight:850}
+main{min-width:0;padding:26px 30px 50px}.topbar{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:22px}.eyebrow{margin:0 0 4px;color:var(--primary-dark);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.08em}.topbar h2{margin:0;font-size:25px}.topbar p:last-child{margin:5px 0 0;color:var(--muted)}.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;border:1px solid var(--line);background:#fff;color:var(--text);border-radius:999px;padding:10px 15px;cursor:pointer;font-weight:700;box-shadow:0 4px 14px rgba(23,32,51,.04)}.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}.btn.active{background:var(--soft);color:var(--primary-dark);border-color:#b9cff5}.btn:hover{transform:translateY(-1px)}
+.hero{background:linear-gradient(135deg,#1f66d1 0%,#267c88 100%);border-radius:20px;padding:28px;color:#fff;box-shadow:var(--shadow);margin-bottom:18px}.hero h3{margin:0 0 10px;font-size:28px;line-height:1.2}.hero p{margin:0;color:rgba(255,255,255,.88);max-width:920px}.doc-meta{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;background:var(--soft);color:var(--primary-dark);font-size:12px;font-weight:800;margin:3px 5px 3px 0}.pill.green{background:#e8f7f0;color:var(--green)}.pill.yellow{background:#fff5df;color:var(--yellow)}.pill.purple{background:#f0ebff;color:var(--purple)}
+.content-section{display:none}.content-section.active{display:block}.section-title{display:flex;align-items:flex-start;gap:14px;margin:18px 0}.section-icon{width:48px;height:48px;border-radius:14px;background:#fff;box-shadow:var(--shadow);display:grid;place-items:center;font-size:24px;flex:0 0 auto}.section-title h3{margin:0;font-size:26px}.section-title p{margin:5px 0 0;color:var(--muted)}.module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.module-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}.module-head{display:flex;align-items:center;gap:12px;margin-bottom:12px}.module-index{flex:0 0 auto;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--soft);color:var(--primary-dark);font-weight:850}.module-head h4{margin:0;font-size:20px}.clean-list,.mini-list{margin:0;padding-left:20px}.clean-list li,.mini-list li{margin:8px 0;color:var(--muted)}
+.flow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.flow-step{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}.step-no{width:34px;height:34px;border-radius:50%;background:#e8f7f0;color:var(--green);display:grid;place-items:center;font-weight:850;flex:0 0 auto}.flow-step h4{margin:2px 0 6px;font-size:17px}.flow-step p{margin:0;color:var(--muted);font-size:14px}.takeaways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.takeaway{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow)}.takeaway p{margin:10px 0 0;color:var(--muted)}.point-badge{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;font-weight:850}
+.mode-zh .lang-en{display:none!important}.mode-zh .lang-zh{display:inline}.mode-en .lang-zh{display:none!important}.mode-en .lang-en{display:inline}.mode-bi .lang-zh{display:block}.mode-bi .lang-en{display:block;margin-top:4px;color:#4f5d73;font-weight:500}.mode-bi .pill .lang-zh,.mode-bi .pill .lang-en{display:inline;margin:0;color:inherit}.mode-bi .pill .lang-zh::after{content:" / "}.mode-en .clean-list li,.mode-en .mini-list li{color:var(--text)}.mode-en .lang-en{color:var(--text)}.mode-bi .clean-list .lang-en,.mode-bi .mini-list .lang-en,.mode-bi .takeaway .lang-en,.mode-bi .flow-step .lang-en{color:#4f5d73}.hero,.hero h3,.hero p,.hero .lang-zh,.hero .lang-en{color:#fff!important}.hero p,.hero p .lang-zh,.hero p .lang-en{color:rgba(255,255,255,.9)!important}.mode-en .hero .lang-en,.mode-zh .hero .lang-zh,.mode-bi .hero .lang-zh,.mode-bi .hero .lang-en{display:block}.status{margin-top:10px;color:rgba(255,255,255,.8);font-size:13px}@media(max-width:1100px){.module-grid,.flow-grid,.takeaways{grid-template-columns:1fr 1fr}}@media(max-width:980px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:18px}.nav-scroll{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.nav-group-label{grid-column:1/-1}main{padding:18px 14px 36px}.topbar{flex-direction:column;align-items:stretch}.actions{justify-content:flex-start}.hero{padding:22px}.hero h3{font-size:22px}}@media(max-width:560px){.nav-scroll,.module-grid,.flow-grid,.takeaways{grid-template-columns:1fr}.btn{width:100%}.actions{width:100%}}
+/* Sidebar readability improvements */
+.sidebar .nav-btn .lang-zh{color:rgba(255,255,255,.96);font-weight:600}
+.sidebar .nav-btn .lang-en{color:rgba(255,255,255,.92);font-weight:560}
+.mode-en .sidebar .nav-btn .lang-en{display:inline;color:#ffffff !important;font-weight:620}
+.mode-bi .sidebar .nav-btn .lang-en{display:block;color:rgba(255,255,255,.92) !important;font-weight:560}
+.mode-bi .sidebar .nav-btn .lang-zh{display:block;color:#ffffff !important;font-weight:650}
+.sidebar .nav-btn.active .lang-zh,.sidebar .nav-btn.active .lang-en,.mode-en .sidebar .nav-btn.active .lang-en,.mode-bi .sidebar .nav-btn.active .lang-en,.mode-bi .sidebar .nav-btn.active .lang-zh{color:#17376d !important}
+  </style>
+</head>
+<body class="mode-bi">
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">W</div><div><h1>Woot 业务导读</h1><p>Bilingual Read-Aloud Site</p></div></div>
+      <div class="nav-group-label">Sections</div>
+      <div class="nav-scroll" id="nav"><button class="nav-btn" data-target="what"><span class="nav-icon">🟢</span><span><span><span class="lang-zh">Woot 是什么</span><span class="lang-en">What is Woot?</span></span></span></button>
+<button class="nav-btn" data-target="roles"><span class="nav-icon">👥</span><span><span><span class="lang-zh">业务中的核心角色</span><span class="lang-en">Core Roles in the Business</span></span></span></button>
+<button class="nav-btn" data-target="flow"><span class="nav-icon">🔁</span><span><span><span class="lang-zh">Woot 业务主流程</span><span class="lang-en">Main Woot Business Process</span></span></span></button>
+<button class="nav-btn" data-target="teams"><span class="nav-icon">🏢</span><span><span><span class="lang-zh">公司内部团队职责</span><span class="lang-en">Internal Team Responsibilities</span></span></span></button>
+<button class="nav-btn" data-target="systems"><span class="nav-icon">🖥️</span><span><span><span class="lang-zh">公司主要系统</span><span class="lang-en">Main Company Systems</span></span></span></button>
+<button class="nav-btn" data-target="risk"><span class="nav-icon">🛡️</span><span><span><span class="lang-zh">核心风险与责任边界</span><span class="lang-en">Key Risks &amp; Responsibility Boundaries</span></span></span></button>
+<button class="nav-btn" data-target="points"><span class="nav-icon">✅</span><span><span><span class="lang-zh">业务关键点</span><span class="lang-en">Key Takeaways</span></span></span></button></div>
+    </aside>
+    <main>
+      <div class="topbar">
+        <div><p class="eyebrow">Offline Business Briefing</p><h2 id="page-title">Woot 业务全景</h2><p id="page-subtitle">中英文对照、章节导航、当前章节朗读。</p></div>
+        <div class="actions"><button class="btn" id="mode-zh" type="button">中文</button><button class="btn" id="mode-en" type="button">English</button><button class="btn active" id="mode-bi" type="button">双语</button><button class="btn primary" id="read-btn" type="button">朗读当前章节</button><button class="btn" id="stop-btn" type="button">停止</button></div>
+      </div>
+      <section class="hero">
+        <h3><span><span class="lang-zh">Woot 业务全景</span><span class="lang-en">Woot Business Overview</span></span></h3>
+        <p><span><span class="lang-zh">Frual 帮助 Amazon 第三方卖家通过 Woot / Amazon Deal 渠道做促销销售。本页面参考导图内容整理为离线单文件网站，支持中文、英文、双语切换和当前章节朗读。</span><span class="lang-en">Frual helps Amazon third-party sellers run promotional sales through Woot / Amazon Deal channels. This offline single-file site organizes the mind map into a bilingual briefing with read-aloud support.</span></span></p>
+        <div class="status" id="read-status">Ready</div>
+      </section>
+      <div class="doc-meta"><span class="pill green">DOM / TBN / QTC</span><span class="pill yellow">流程闭环</span><span class="pill purple">双语朗读</span></div>
+      <div id="reader"><section class="content-section" id="what" data-zh="Woot 是什么" data-en="What is Woot?">
+      <div class="section-title"><div class="section-icon">🟢</div><div><h3><span><span class="lang-zh">Woot 是什么</span><span class="lang-en">What is Woot?</span></span></h3><p><span><span class="lang-zh">先理解 Woot 平台本身，以及 Frual 在 Woot / Amazon Deal 业务链路中的定位。</span><span class="lang-en">Start with what Woot is and where Frual fits in the Woot / Amazon Deal service chain.</span></span></p></div></div>
+<div class="module-grid">
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">1</div><h4><span><span class="lang-zh">亚马逊全资子公司</span><span class="lang-en">A wholly owned Amazon subsidiary</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">2010年6月，亚马逊以1.1亿美元现金完成了对 Woot 的全资收购。</span><span class="lang-en">In June 2010, Amazon completed its full cash acquisition of Woot for USD 110 million.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">2</div><h4><span><span class="lang-zh">美国知名团购网站</span><span class="lang-en">A well-known U.S. deal site</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">www.woot.com 是美国著名的团购网站，月活跃用户超过千万。</span><span class="lang-en">www.woot.com is a well-known U.S. group-buying and deal site with more than 10 million monthly active users.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">3</div><h4><span><span class="lang-zh">Amazon 高级卖家</span><span class="lang-en">High-weight Amazon seller account</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">Woot 在亚马逊美国站拥有高权重 VC 账号。</span><span class="lang-en">Woot has a high-weight Vendor Central account on Amazon US.</span></span></li><li><span><span class="lang-zh">可通过亚马逊内部数据联通，为其他卖家提供多元营销推广服务。</span><span class="lang-en">Through Amazon-side data and process connectivity, it can support diversified marketing services for other sellers.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">4</div><h4><span><span class="lang-zh">Frual 在 Woot 业务中的定位</span><span class="lang-en">Frual’s role in the Woot business</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">Frual 帮助 Amazon 第三方卖家通过 Woot / Amazon Deal 渠道做促销销售。</span><span class="lang-en">Frual helps Amazon third-party sellers run promotional sales through Woot / Amazon Deal channels.</span></span></li><li><span><span class="lang-zh">Frual 不持货、不发货、不取得产品所有权。</span><span class="lang-en">Frual does not hold inventory, ship goods, or take product ownership.</span></span></li><li><span><span class="lang-zh">Frual 的核心角色是服务方、流程推进方、资金与规则中枢。</span><span class="lang-en">Frual acts as a service provider, process coordinator, and hub for funding and rules.</span></span></li></ul>
+    </article>
+</div>
+</section>
+<section class="content-section" id="roles" data-zh="业务中的核心角色" data-en="Core Roles in the Business">
+      <div class="section-title"><div class="section-icon">👥</div><div><h3><span><span class="lang-zh">业务中的核心角色</span><span class="lang-en">Core Roles in the Business</span></span></h3><p><span><span class="lang-zh">这条链路由卖家、Frual、Woot 和 Amazon 共同组成。</span><span class="lang-en">The business chain is formed by sellers, Frual, Woot, and Amazon.</span></span></p></div></div>
+<div class="module-grid">
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">1</div><h4><span><span class="lang-zh">卖家</span><span class="lang-en">Seller</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">产品所有人，Amazon 店铺实际经营者。</span><span class="lang-en">Owns the products and operates the Amazon store.</span></span></li><li><span><span class="lang-zh">提供产品、库存、价格、资料。</span><span class="lang-en">Provides product information, inventory, price, and required materials.</span></span></li><li><span><span class="lang-zh">承担产品质量、合规、物流等责任。</span><span class="lang-en">Takes responsibility for product quality, compliance, and logistics.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">2</div><h4><span><span class="lang-zh">Frual</span><span class="lang-en">Frual</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">Woot 官方 Vendor，帮助卖家对接 Woot。</span><span class="lang-en">An official Woot vendor that helps sellers connect with Woot.</span></span></li><li><span><span class="lang-zh">推进报价、提交、活动、广告、退库存、结款等流程。</span><span class="lang-en">Drives quotation, submission, deal execution, ads, inventory return, and settlement workflows.</span></span></li><li><span><span class="lang-zh">核心是服务、流程、资源整合和风险控制。</span><span class="lang-en">Focuses on service delivery, workflow coordination, resource integration, and risk control.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">3</div><h4><span><span class="lang-zh">Woot</span><span class="lang-en">Woot</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">Amazon 旗下 Deal / 促销平台。</span><span class="lang-en">A deal and promotion platform under Amazon.</span></span></li><li><span><span class="lang-zh">审核产品和价格，执行 Deal 活动。</span><span class="lang-en">Reviews products and prices and executes deal events.</span></span></li><li><span><span class="lang-zh">处理划库存、退库存、结款等流程。</span><span class="lang-en">Handles inventory transfer, returns, and settlement-related processes.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">4</div><h4><span><span class="lang-zh">Amazon</span><span class="lang-en">Amazon</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">底层交易和履约平台。</span><span class="lang-en">The underlying transaction and fulfillment platform.</span></span></li><li><span><span class="lang-zh">产品、店铺、库存、活动均需符合 Amazon 规则。</span><span class="lang-en">Products, stores, inventory, and promotions must comply with Amazon rules.</span></span></li></ul>
+    </article>
+</div>
+</section>
+<section class="content-section" id="flow" data-zh="Woot 业务主流程" data-en="Main Woot Business Process">
+      <div class="section-title"><div class="section-icon">🔁</div><div><h3><span><span class="lang-zh">Woot 业务主流程</span><span class="lang-en">Main Woot Business Process</span></span></h3><p><span><span class="lang-zh">从客户开发到客户回访，是一条完整的业务闭环。</span><span class="lang-en">From customer development to follow-up, the process forms a full business loop.</span></span></p></div></div>
+<div class="flow-grid">
+<div class="flow-step"><div class="step-no">1</div><div><h4><span><span class="lang-zh">客户开发</span><span class="lang-en">Customer Development</span></span></h4><p><span><span class="lang-zh">寻找有 Amazon 产品和库存的卖家，判断是否适合做 Woot / Deal。</span><span class="lang-en">Find sellers with Amazon products and inventory; assess deal fit.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">2</div><div><h4><span><span class="lang-zh">产品提报</span><span class="lang-en">Product Submission</span></span></h4><p><span><span class="lang-zh">卖家提交 ASIN、库存、价格、FNSKU、店铺等信息。</span><span class="lang-en">Seller submits ASIN, inventory, price, FNSKU, store, and related information.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">3</div><div><h4><span><span class="lang-zh">报价与价格沟通</span><span class="lang-en">Quotation &amp; Price Communication</span></span></h4><p><span><span class="lang-zh">核算 Woot 可接受价格，KP 与卖家沟通是否接受。</span><span class="lang-en">Estimate acceptable Woot price; KP confirms seller acceptance.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">4</div><div><h4><span><span class="lang-zh">协议与资料确认</span><span class="lang-en">Agreement &amp; Materials</span></span></h4><p><span><span class="lang-zh">完成店铺验证、协议签署、FNSKU / 库存 / 发货方式确认。</span><span class="lang-en">Verify store, sign agreements, and confirm FNSKU, inventory, and fulfillment mode.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">5</div><div><h4><span><span class="lang-zh">提交 Woot</span><span class="lang-en">Submit to Woot</span></span></h4><p><span><span class="lang-zh">内部确认后由 CT/CS 提交给 Woot 审核。</span><span class="lang-en">After internal confirmation, CT/CS submits the case to Woot for review.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">6</div><div><h4><span><span class="lang-zh">划库存</span><span class="lang-en">Inventory Transfer</span></span></h4><p><span><span class="lang-zh">常规为 FBA 库存划转至 Woot。</span><span class="lang-en">Usually transfers FBA inventory to Woot.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">7</div><div><h4><span><span class="lang-zh">上活动</span><span class="lang-en">Deal Launch</span></span></h4><p><span><span class="lang-zh">设置并执行 Woot / Amazon Deal。</span><span class="lang-en">Set up and execute Woot / Amazon Deal events.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">8</div><div><h4><span><span class="lang-zh">广告协助</span><span class="lang-en">Ad Support</span></span></h4><p><span><span class="lang-zh">配合广告投放，关注预算、花费、销售额、ACOS、CR、CPC。</span><span class="lang-en">Support ad operations and monitor budget, spend, sales, ACOS, CR, and CPC.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">9</div><div><h4><span><span class="lang-zh">活动中监控</span><span class="lang-en">In-event Monitoring</span></span></h4><p><span><span class="lang-zh">检查销量、库存、购物车、价格异常。</span><span class="lang-en">Monitor sales, inventory, Buy Box, and price issues during the deal.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">10</div><div><h4><span><span class="lang-zh">退库存</span><span class="lang-en">Inventory Return</span></span></h4><p><span><span class="lang-zh">活动结束或不再继续活动后提交退库存。</span><span class="lang-en">Submit inventory return after the activity ends or will not continue.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">11</div><div><h4><span><span class="lang-zh">效果分析</span><span class="lang-en">Effect Analysis</span></span></h4><p><span><span class="lang-zh">分析销量、流量、广告、关键词、库存变化。</span><span class="lang-en">Analyze sales, traffic, ads, keywords, and inventory changes.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">12</div><div><h4><span><span class="lang-zh">结款与返款</span><span class="lang-en">Settlement &amp; Refund</span></span></h4><p><span><span class="lang-zh">按库存、退货、预留金、账单多退少补。</span><span class="lang-en">Settle based on inventory, returns, reserves, and final bills.</span></span></p></div></div>
+<div class="flow-step"><div class="step-no">13</div><div><h4><span><span class="lang-zh">客户回访</span><span class="lang-en">Customer Follow-up</span></span></h4><p><span><span class="lang-zh">总结活动效果，推动继续提报和复购。</span><span class="lang-en">Review results and drive future submissions and repeat cooperation.</span></span></p></div></div>
+</div>
+</section>
+<section class="content-section" id="teams" data-zh="公司内部团队职责" data-en="Internal Team Responsibilities">
+      <div class="section-title"><div class="section-icon">🏢</div><div><h3><span><span class="lang-zh">公司内部团队职责</span><span class="lang-en">Internal Team Responsibilities</span></span></h3><p><span><span class="lang-zh">Woot 业务是跨部门协作闭环，不是某个部门单独完成。</span><span class="lang-en">Woot business is a cross-team loop, not a task owned by one single team.</span></span></p></div></div>
+<div class="module-grid">
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">1</div><h4><span><span class="lang-zh">OM：客户开发与客户管理</span><span class="lang-en">OM: Customer Development &amp; Management</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">开发客户、建立客户编号、维护客户标签。</span><span class="lang-en">Develop customers, create customer IDs, and maintain customer tags.</span></span></li><li><span><span class="lang-zh">同步客户信息，活动后配合回访和复购。</span><span class="lang-en">Synchronize customer information and support follow-up and repeat cooperation after deals.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">2</div><h4><span><span class="lang-zh">KP：客户 / 卖家一线接口</span><span class="lang-en">KP: Frontline Seller Interface</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">收集产品资料，沟通价格和合作条件。</span><span class="lang-en">Collect product information and communicate price and cooperation terms.</span></span></li><li><span><span class="lang-zh">跟进验证、协议、反馈、退库、发票、收款等事项。</span><span class="lang-en">Follow up on verification, agreements, feedback, returns, invoices, and payment information.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">3</div><h4><span><span class="lang-zh">CT / CS：流程推进中枢</span><span class="lang-en">CT / CS: Process Coordination Hub</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">整理并提交资料给 Woot，推进订单提交、取消、执行。</span><span class="lang-en">Prepare and submit materials to Woot; drive order submission, cancellation, and execution.</span></span></li><li><span><span class="lang-zh">跟进报价、PORF、PO、划库存、Deal、广告、退库存。</span><span class="lang-en">Follow up on quotation, PORF, PO, inventory transfer, deals, ads, and returns.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">4</div><h4><span><span class="lang-zh">MC：订单创建</span><span class="lang-en">MC: Order Creation</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">产品导入后在 TBN 创建订单并生成订单号。</span><span class="lang-en">Create orders in TBN and generate order numbers after product import.</span></span></li><li><span><span class="lang-zh">确保订单进入后续审价和执行流程。</span><span class="lang-en">Ensure orders enter the next review and execution workflow.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">5</div><h4><span><span class="lang-zh">TAK：广告与效果分析</span><span class="lang-en">TAK: Advertising &amp; Performance Analysis</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">提供广告建议，协助活动期广告创建和调整。</span><span class="lang-en">Provide ad recommendations and support ad creation or adjustments during deals.</span></span></li><li><span><span class="lang-zh">分析广告、销售、ACOS、CR、CPC，并判断是否继续提报。</span><span class="lang-en">Analyze ad metrics, sales, ACOS, CR, and CPC and assess whether to continue submission.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">6</div><h4><span><span class="lang-zh">财务：结款与返款</span><span class="lang-en">Finance: Settlement &amp; Refunds</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">处理返款账单、Seller PI、Seller Word、Invoice。</span><span class="lang-en">Handle refund bills, Seller PI, Seller Word, and invoices.</span></span></li><li><span><span class="lang-zh">安排返款，处理预留金、多退少补和垫资风险。</span><span class="lang-en">Arrange payments and manage reserves, final adjustments, and advance-funding risk.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">7</div><h4><span><span class="lang-zh">Woot 对接人 / Woot AM</span><span class="lang-en">Woot Contacts / Woot AM</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">通过 Jerry / Sarah / Brad 等中间人对接。</span><span class="lang-en">Coordinate through Jerry, Sarah, Brad, and other intermediaries.</span></span></li><li><span><span class="lang-zh">Woot AM 处理审核、报价、划库存、活动执行、退库存等事项。</span><span class="lang-en">Woot AM handles review, pricing, inventory transfer, deal execution, and returns.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">8</div><h4><span><span class="lang-zh">优化技术团队：AI / IT / BMO</span><span class="lang-en">Optimization Technology Team: AI / IT / BMO</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">支持系统优化、报表优化、流程优化、工具 / 产品改进。</span><span class="lang-en">Supports system optimization, reporting optimization, process optimization, and tool/product improvements.</span></span></li><li><span><span class="lang-zh">提升业务效率、数据沉淀和用户体验。</span><span class="lang-en">Improves efficiency, data accumulation, and user experience.</span></span></li></ul>
+    </article>
+</div>
+</section>
+<section class="content-section" id="systems" data-zh="公司主要系统" data-en="Main Company Systems">
+      <div class="section-title"><div class="section-icon">🖥️</div><div><h3><span><span class="lang-zh">公司主要系统</span><span class="lang-en">Main Company Systems</span></span></h3><p><span><span class="lang-zh">三大系统支撑业务流转：DOM、TBN、QTC。</span><span class="lang-en">Three systems support the business workflow: DOM, TBN, and QTC.</span></span></p></div></div>
+<div class="module-grid">
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">1</div><h4><span><span class="lang-zh">DOM（OM 使用）</span><span class="lang-en">DOM (used by OM)</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">客户建档与管理。</span><span class="lang-en">Customer setup and management.</span></span></li><li><span><span class="lang-zh">客户标签与分层。</span><span class="lang-en">Customer tagging and segmentation.</span></span></li><li><span><span class="lang-zh">客户跟进与维护，回访记录管理。</span><span class="lang-en">Customer follow-up, maintenance, and visit records.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">2</div><h4><span><span class="lang-zh">TBN（CT、MC、KP、TAK / AT 使用）</span><span class="lang-en">TBN (used by CT, MC, KP, TAK / AT)</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">订单创建与管理。</span><span class="lang-en">Order creation and management.</span></span></li><li><span><span class="lang-zh">流程推进与追踪。</span><span class="lang-en">Workflow execution and tracking.</span></span></li><li><span><span class="lang-zh">客户信息与沟通记录、广告创建与录入、状态跟踪与数据管理。</span><span class="lang-en">Customer information, communication records, ad creation/input, status tracking, and data management.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">3</div><h4><span><span class="lang-zh">QTC（卖家使用）</span><span class="lang-en">QTC (used by sellers)</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">产品导入与管理。</span><span class="lang-en">Product import and management.</span></span></li><li><span><span class="lang-zh">Deal 创建与管理。</span><span class="lang-en">Deal creation and management.</span></span></li><li><span><span class="lang-zh">广告创建与运营，查看活动状态与反馈。</span><span class="lang-en">Ad creation/operation and viewing deal status and feedback.</span></span></li></ul>
+    </article>
+</div>
+</section>
+<section class="content-section" id="risk" data-zh="核心风险与责任边界" data-en="Key Risks &amp; Responsibility Boundaries">
+      <div class="section-title"><div class="section-icon">🛡️</div><div><h3><span><span class="lang-zh">核心风险与责任边界</span><span class="lang-en">Key Risks &amp; Responsibility Boundaries</span></span></h3><p><span><span class="lang-zh">Woot 业务既要推动销售增长，也要控制价格、库存、结算与合规风险。</span><span class="lang-en">Woot business must grow sales while controlling price, inventory, settlement, and compliance risks.</span></span></p></div></div>
+<div class="module-grid">
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">1</div><h4><span><span class="lang-zh">卖家承担</span><span class="lang-en">Seller Responsibilities</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">产品质量、知识产权、Amazon 合规责任。</span><span class="lang-en">Product quality, intellectual property, and Amazon compliance.</span></span></li><li><span><span class="lang-zh">物流与发货责任，产品缺陷、召回、索赔、税务等责任。</span><span class="lang-en">Logistics, fulfillment, defects, recalls, claims, taxes, and related liabilities.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">2</div><h4><span><span class="lang-zh">Frual 承担</span><span class="lang-en">Frual Responsibilities</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">Woot 项目服务、系统流程推进、规则与资金流程管理。</span><span class="lang-en">Woot project service, process coordination, rules, and funding workflow management.</span></span></li><li><span><span class="lang-zh">不承担产品质量、销售额、Amazon 合规等责任。</span><span class="lang-en">Does not assume responsibility for product quality, sales amount, or Amazon compliance.</span></span></li></ul>
+    </article>
+<article class="module-card compact-card">
+      <div class="module-head"><div class="module-index">3</div><h4><span><span class="lang-zh">重点风险</span><span class="lang-en">Key Risks</span></span></h4></div>
+      <ul class="clean-list"><li><span><span class="lang-zh">FBM 自发货风险。</span><span class="lang-en">FBM seller-fulfilled risk.</span></span></li><li><span><span class="lang-zh">退货结算风险与垫资风险。</span><span class="lang-en">Return/settlement risk and advance-funding risk.</span></span></li><li><span><span class="lang-zh">价格库存异常与活动执行异常。</span><span class="lang-en">Price/inventory anomalies and deal execution issues.</span></span></li></ul>
+    </article>
+</div>
+</section>
+<section class="content-section" id="points" data-zh="业务关键点" data-en="Key Takeaways">
+      <div class="section-title"><div class="section-icon">✅</div><div><h3><span><span class="lang-zh">业务关键点</span><span class="lang-en">Key Takeaways</span></span></h3><p><span><span class="lang-zh">用于快速记忆的核心结论。</span><span class="lang-en">Core conclusions for quick memorization.</span></span></p></div></div>
+<div class="takeaways compact-takeaways">
+<div class="takeaway"><span class="point-badge">1</span><p><span><span class="lang-zh">Frual 是服务方，不是货主。</span><span class="lang-en">Frual is a service provider, not the product owner.</span></span></p></div>
+<div class="takeaway"><span class="point-badge">2</span><p><span><span class="lang-zh">系统里建了，不代表 Woot 已经执行。</span><span class="lang-en">Being created in the system does not mean Woot has executed it.</span></span></p></div>
+<div class="takeaway"><span class="point-badge">3</span><p><span><span class="lang-zh">Deal 或广告创建后，需 CT/CS 提交 Woot。</span><span class="lang-en">After a deal or ad is created, CT/CS must submit it to Woot.</span></span></p></div>
+<div class="takeaway"><span class="point-badge">4</span><p><span><span class="lang-zh">结款不能只看销量，还要看库存、退货、账期和预留金。</span><span class="lang-en">Settlement depends on inventory, returns, billing cycle, and reserves—not only sales.</span></span></p></div>
+<div class="takeaway"><span class="point-badge">5</span><p><span><span class="lang-zh">Woot 业务底层逻辑是销售增长与风险控制并重。</span><span class="lang-en">Woot business balances sales growth with risk control.</span></span></p></div>
+<div class="takeaway"><span class="point-badge">6</span><p><span><span class="lang-zh">这是跨部门协作闭环，不是单个部门可以独立完成。</span><span class="lang-en">It is a cross-team workflow loop, not a task one team can complete alone.</span></span></p></div>
+</div>
+</section></div>
+    </main>
+  </div>
+<script>
+const SPEECH_DATA = [{"id": "what", "zh": "Woot 是什么。先理解 Woot 平台本身，以及 Frual 在 Woot / Amazon Deal 业务链路中的定位。。亚马逊全资子公司。2010年6月，亚马逊以1.1亿美元现金完成了对 Woot 的全资收购。。美国知名团购网站。www.woot.com 是美国著名的团购网站，月活跃用户超过千万。。Amazon 高级卖家。Woot 在亚马逊美国站拥有高权重 VC 账号。。可通过亚马逊内部数据联通，为其他卖家提供多元营销推广服务。。Frual 在 Woot 业务中的定位。Frual 帮助 Amazon 第三方卖家通过 Woot / Amazon Deal 渠道做促销销售。。Frual 不持货、不发货、不取得产品所有权。。Frual 的核心角色是服务方、流程推进方、资金与规则中枢。", "en": "What is Woot?. Start with what Woot is and where Frual fits in the Woot / Amazon Deal service chain.. A wholly owned Amazon subsidiary. In June 2010, Amazon completed its full cash acquisition of Woot for USD 110 million.. A well-known U.S. deal site. www.woot.com is a well-known U.S. group-buying and deal site with more than 10 million monthly active users.. High-weight Amazon seller account. Woot has a high-weight Vendor Central account on Amazon US.. Through Amazon-side data and process connectivity, it can support diversified marketing services for other sellers.. Frual’s role in the Woot business. Frual helps Amazon third-party sellers run promotional sales through Woot / Amazon Deal channels.. Frual does not hold inventory, ship goods, or take product ownership.. Frual acts as a service provider, process coordinator, and hub for funding and rules."}, {"id": "roles", "zh": "业务中的核心角色。这条链路由卖家、Frual、Woot 和 Amazon 共同组成。。卖家。产品所有人，Amazon 店铺实际经营者。。提供产品、库存、价格、资料。。承担产品质量、合规、物流等责任。。Frual。Woot 官方 Vendor，帮助卖家对接 Woot。。推进报价、提交、活动、广告、退库存、结款等流程。。核心是服务、流程、资源整合和风险控制。。Woot。Amazon 旗下 Deal / 促销平台。。审核产品和价格，执行 Deal 活动。。处理划库存、退库存、结款等流程。。Amazon。底层交易和履约平台。。产品、店铺、库存、活动均需符合 Amazon 规则。", "en": "Core Roles in the Business. The business chain is formed by sellers, Frual, Woot, and Amazon.. Seller. Owns the products and operates the Amazon store.. Provides product information, inventory, price, and required materials.. Takes responsibility for product quality, compliance, and logistics.. Frual. An official Woot vendor that helps sellers connect with Woot.. Drives quotation, submission, deal execution, ads, inventory return, and settlement workflows.. Focuses on service delivery, workflow coordination, resource integration, and risk control.. Woot. A deal and promotion platform under Amazon.. Reviews products and prices and executes deal events.. Handles inventory transfer, returns, and settlement-related processes.. Amazon. The underlying transaction and fulfillment platform.. Products, stores, inventory, and promotions must comply with Amazon rules."}, {"id": "flow", "zh": "Woot 业务主流程。从客户开发到客户回访，是一条完整的业务闭环。。客户开发。寻找有 Amazon 产品和库存的卖家，判断是否适合做 Woot / Deal。。产品提报。卖家提交 ASIN、库存、价格、FNSKU、店铺等信息。。报价与价格沟通。核算 Woot 可接受价格，KP 与卖家沟通是否接受。。协议与资料确认。完成店铺验证、协议签署、FNSKU / 库存 / 发货方式确认。。提交 Woot。内部确认后由 CT/CS 提交给 Woot 审核。。划库存。常规为 FBA 库存划转至 Woot。。上活动。设置并执行 Woot / Amazon Deal。。广告协助。配合广告投放，关注预算、花费、销售额、ACOS、CR、CPC。。活动中监控。检查销量、库存、购物车、价格异常。。退库存。活动结束或不再继续活动后提交退库存。。效果分析。分析销量、流量、广告、关键词、库存变化。。结款与返款。按库存、退货、预留金、账单多退少补。。客户回访。总结活动效果，推动继续提报和复购。", "en": "Main Woot Business Process. From customer development to follow-up, the process forms a full business loop.. Customer Development. Find sellers with Amazon products and inventory; assess deal fit.. Product Submission. Seller submits ASIN, inventory, price, FNSKU, store, and related information.. Quotation & Price Communication. Estimate acceptable Woot price; KP confirms seller acceptance.. Agreement & Materials. Verify store, sign agreements, and confirm FNSKU, inventory, and fulfillment mode.. Submit to Woot. After internal confirmation, CT/CS submits the case to Woot for review.. Inventory Transfer. Usually transfers FBA inventory to Woot.. Deal Launch. Set up and execute Woot / Amazon Deal events.. Ad Support. Support ad operations and monitor budget, spend, sales, ACOS, CR, and CPC.. In-event Monitoring. Monitor sales, inventory, Buy Box, and price issues during the deal.. Inventory Return. Submit inventory return after the activity ends or will not continue.. Effect Analysis. Analyze sales, traffic, ads, keywords, and inventory changes.. Settlement & Refund. Settle based on inventory, returns, reserves, and final bills.. Customer Follow-up. Review results and drive future submissions and repeat cooperation."}, {"id": "teams", "zh": "公司内部团队职责。Woot 业务是跨部门协作闭环，不是某个部门单独完成。。OM：客户开发与客户管理。开发客户、建立客户编号、维护客户标签。。同步客户信息，活动后配合回访和复购。。KP：客户 / 卖家一线接口。收集产品资料，沟通价格和合作条件。。跟进验证、协议、反馈、退库、发票、收款等事项。。CT / CS：流程推进中枢。整理并提交资料给 Woot，推进订单提交、取消、执行。。跟进报价、PORF、PO、划库存、Deal、广告、退库存。。MC：订单创建。产品导入后在 TBN 创建订单并生成订单号。。确保订单进入后续审价和执行流程。。TAK：广告与效果分析。提供广告建议，协助活动期广告创建和调整。。分析广告、销售、ACOS、CR、CPC，并判断是否继续提报。。财务：结款与返款。处理返款账单、Seller PI、Seller Word、Invoice。。安排返款，处理预留金、多退少补和垫资风险。。Woot 对接人 / Woot AM。通过 Jerry / Sarah / Brad 等中间人对接。。Woot AM 处理审核、报价、划库存、活动执行、退库存等事项。。优化技术团队：AI / IT / BMO。支持系统优化、报表优化、流程优化、工具 / 产品改进。。提升业务效率、数据沉淀和用户体验。", "en": "Internal Team Responsibilities. Woot business is a cross-team loop, not a task owned by one single team.. OM: Customer Development & Management. Develop customers, create customer IDs, and maintain customer tags.. Synchronize customer information and support follow-up and repeat cooperation after deals.. KP: Frontline Seller Interface. Collect product information and communicate price and cooperation terms.. Follow up on verification, agreements, feedback, returns, invoices, and payment information.. CT / CS: Process Coordination Hub. Prepare and submit materials to Woot; drive order submission, cancellation, and execution.. Follow up on quotation, PORF, PO, inventory transfer, deals, ads, and returns.. MC: Order Creation. Create orders in TBN and generate order numbers after product import.. Ensure orders enter the next review and execution workflow.. TAK: Advertising & Performance Analysis. Provide ad recommendations and support ad creation or adjustments during deals.. Analyze ad metrics, sales, ACOS, CR, and CPC and assess whether to continue submission.. Finance: Settlement & Refunds. Handle refund bills, Seller PI, Seller Word, and invoices.. Arrange payments and manage reserves, final adjustments, and advance-funding risk.. Woot Contacts / Woot AM. Coordinate through Jerry, Sarah, Brad, and other intermediaries.. Woot AM handles review, pricing, inventory transfer, deal execution, and returns.. Optimization Technology Team: AI / IT / BMO. Supports system optimization, reporting optimization, process optimization, and tool/product improvements.. Improves efficiency, data accumulation, and user experience."}, {"id": "systems", "zh": "公司主要系统。三大系统支撑业务流转：DOM、TBN、QTC。。DOM（OM 使用）。客户建档与管理。。客户标签与分层。。客户跟进与维护，回访记录管理。。TBN（CT、MC、KP、TAK / AT 使用）。订单创建与管理。。流程推进与追踪。。客户信息与沟通记录、广告创建与录入、状态跟踪与数据管理。。QTC（卖家使用）。产品导入与管理。。Deal 创建与管理。。广告创建与运营，查看活动状态与反馈。", "en": "Main Company Systems. Three systems support the business workflow: DOM, TBN, and QTC.. DOM (used by OM). Customer setup and management.. Customer tagging and segmentation.. Customer follow-up, maintenance, and visit records.. TBN (used by CT, MC, KP, TAK / AT). Order creation and management.. Workflow execution and tracking.. Customer information, communication records, ad creation/input, status tracking, and data management.. QTC (used by sellers). Product import and management.. Deal creation and management.. Ad creation/operation and viewing deal status and feedback."}, {"id": "risk", "zh": "核心风险与责任边界。Woot 业务既要推动销售增长，也要控制价格、库存、结算与合规风险。。卖家承担。产品质量、知识产权、Amazon 合规责任。。物流与发货责任，产品缺陷、召回、索赔、税务等责任。。Frual 承担。Woot 项目服务、系统流程推进、规则与资金流程管理。。不承担产品质量、销售额、Amazon 合规等责任。。重点风险。FBM 自发货风险。。退货结算风险与垫资风险。。价格库存异常与活动执行异常。", "en": "Key Risks & Responsibility Boundaries. Woot business must grow sales while controlling price, inventory, settlement, and compliance risks.. Seller Responsibilities. Product quality, intellectual property, and Amazon compliance.. Logistics, fulfillment, defects, recalls, claims, taxes, and related liabilities.. Frual Responsibilities. Woot project service, process coordination, rules, and funding workflow management.. Does not assume responsibility for product quality, sales amount, or Amazon compliance.. Key Risks. FBM seller-fulfilled risk.. Return/settlement risk and advance-funding risk.. Price/inventory anomalies and deal execution issues."}, {"id": "points", "zh": "业务关键点。用于快速记忆的核心结论。。Frual 是服务方，不是货主。。系统里建了，不代表 Woot 已经执行。。Deal 或广告创建后，需 CT/CS 提交 Woot。。结款不能只看销量，还要看库存、退货、账期和预留金。。Woot 业务底层逻辑是销售增长与风险控制并重。。这是跨部门协作闭环，不是单个部门可以独立完成。", "en": "Key Takeaways. Core conclusions for quick memorization.. Frual is a service provider, not the product owner.. Being created in the system does not mean Woot has executed it.. After a deal or ad is created, CT/CS must submit it to Woot.. Settlement depends on inventory, returns, billing cycle, and reserves—not only sales.. Woot business balances sales growth with risk control.. It is a cross-team workflow loop, not a task one team can complete alone."}];
+const body = document.body;
+let current = 'what';
+const navBtns = [...document.querySelectorAll('.nav-btn')];
+const sections = [...document.querySelectorAll('.content-section')];
+function setSection(id) {
+  current = id;
+  navBtns.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+  sections.forEach(s => s.classList.toggle('active', s.id === id));
+  const sec = sections.find(s => s.id === id);
+  if (sec) {
+    document.getElementById('page-title').textContent = body.classList.contains('mode-en') ? sec.dataset.en : sec.dataset.zh;
+  }
+  stopReading();
+}
+navBtns.forEach(b => b.addEventListener('click', () => setSection(b.dataset.target)));
+function setMode(mode) {
+  body.classList.remove('mode-zh','mode-en','mode-bi');
+  body.classList.add('mode-' + mode);
+  ['zh','en','bi'].forEach(m => document.getElementById('mode-' + m).classList.toggle('active', m === mode));
+  const sec = sections.find(s => s.id === current);
+  if (sec) document.getElementById('page-title').textContent = mode === 'en' ? sec.dataset.en : sec.dataset.zh;
+  document.getElementById('page-subtitle').textContent = mode === 'en' ? 'Bilingual content, section navigation, and read-aloud support.' : '中英文对照、章节导航、当前章节朗读。';
+}
+['zh','en','bi'].forEach(m => document.getElementById('mode-' + m).addEventListener('click', () => setMode(m)));
+function speakText(text, lang) {
+  return new Promise(resolve => {
+    if (!('speechSynthesis' in window)) { alert('当前浏览器不支持朗读功能。'); resolve(); return; }
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang; u.rate = 0.95; u.pitch = 1;
+    u.onend = resolve; u.onerror = resolve;
+    window.speechSynthesis.speak(u);
+  });
+}
+function stopReading() {
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  document.getElementById('read-status').textContent = 'Ready';
+}
+async function readCurrent() {
+  stopReading();
+  const data = SPEECH_DATA.find(x => x.id === current);
+  if (!data) return;
+  const mode = body.classList.contains('mode-en') ? 'en' : body.classList.contains('mode-zh') ? 'zh' : 'bi';
+  document.getElementById('read-status').textContent = mode === 'en' ? 'Reading current section...' : '正在朗读当前章节...';
+  if (mode === 'zh') await speakText(data.zh, 'zh-CN');
+  else if (mode === 'en') await speakText(data.en, 'en-US');
+  else { await speakText(data.zh, 'zh-CN'); await speakText(data.en, 'en-US'); }
+  document.getElementById('read-status').textContent = 'Ready';
+}
+document.getElementById('read-btn').addEventListener('click', readCurrent);
+document.getElementById('stop-btn').addEventListener('click', stopReading);
+setSection(current);
+</script>
+</body>
+</html>
