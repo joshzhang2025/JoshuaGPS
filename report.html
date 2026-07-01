@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apollo AI Mockup — Overview & Competitor Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F3EE; --paper-2:#FBFBF8; --ink:#17181B; --ink-soft:#3B3E44; --muted:#6C7077;
+    --line:#D9DAD2; --line-strong:#C3C4BB;
+    --blue:#21379A; --blue-deep:#172a7a; --blue-tint:#E7EAF6;
+    --green:#1E6B45; --amber:#9a7b1f; --stamp:#C13B2A;
+    --display:'Space Grotesk',sans-serif; --body:'Newsreader',Georgia,serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+    --zh:'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+    --maxw:1040px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  ::selection{background:var(--blue);color:#fff;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .mono{font-family:var(--mono);}
+
+  /* language */
+  .zh{display:none;font-family:var(--zh);}
+  body.lang-zh .en{display:none;}
+  body.lang-zh .zh{display:inline;}
+  body.lang-zh{font-family:var(--zh);}
+  body.lang-zh .mono,body.lang-zh .k,body.lang-zh .eyebrow,body.lang-zh .tn,body.lang-zh .q{font-family:var(--mono);}
+  body.lang-zh h1,body.lang-zh h2,body.lang-zh .name,body.lang-zh .tier-h h2,body.lang-zh .sec-head h2{font-family:var(--display),var(--zh);}
+
+  /* pages */
+  .page{display:none;}
+  .page.active{display:block;}
+  .page[hidden]{display:none !important;}
+
+  /* topbar */
+  .topbar{border-bottom:1.5px solid var(--ink);position:sticky;top:0;background:var(--paper);z-index:50;}
+  .topbar .wrap{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;padding:11px 28px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+  .topbar b{color:var(--ink);}
+  .topbar .tag{color:var(--blue);border:1px solid var(--blue);padding:3px 9px;border-radius:2px;font-weight:700;}
+  .langbtn{margin-left:auto;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.05em;
+    color:var(--ink);background:var(--paper-2);border:1.5px solid var(--ink);padding:5px 14px;border-radius:2px;cursor:pointer;
+    display:flex;align-items:center;gap:6px;transition:background .15s,color .15s;}
+  .langbtn:hover{background:var(--ink);color:var(--paper);}
+
+  /* page nav */
+  .pnav{border-bottom:1.5px solid var(--ink);background:var(--paper);position:sticky;top:43px;z-index:49;}
+  .pnav .wrap{display:flex;gap:0;padding:0 28px;}
+  .ptab{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);
+    background:none;border:0;border-bottom:2.5px solid transparent;padding:13px 0;margin-right:30px;cursor:pointer;
+    display:flex;align-items:baseline;gap:8px;transition:color .15s;}
+  body.lang-zh .ptab{font-family:var(--zh);}
+  .ptab .pn{color:var(--blue);font-weight:700;}
+  .ptab:hover{color:var(--ink);}
+  .ptab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--blue);font-weight:700;}
+
+  header.hero{padding:62px 0 42px;}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);
+    margin:0 0 20px;display:flex;align-items:center;gap:12px;}
+  .eyebrow::before{content:"";width:34px;height:1.5px;background:var(--blue);display:inline-block;flex:none;}
+  h1{font-family:var(--display);font-weight:700;line-height:1.02;letter-spacing:-.02em;font-size:clamp(32px,6vw,56px);margin:0;}
+  .sub{max-width:700px;margin:22px 0 0;font-size:clamp(17px,2.2vw,21px);color:var(--ink-soft);line-height:1.5;}
+
+  /* flow steps */
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1.5px solid var(--ink);margin:8px 0 6px;}
+  @media(max-width:760px){.flow{grid-template-columns:1fr 1fr;}}
+  @media(max-width:440px){.flow{grid-template-columns:1fr;}}
+  .fstep{padding:20px 18px;border-right:1px solid var(--line);position:relative;}
+  .fstep:last-child{border-right:0;}
+  @media(max-width:760px){.fstep:nth-child(2){border-right:0;}.fstep:nth-child(-n+2){border-bottom:1px solid var(--line);}}
+  @media(max-width:440px){.fstep{border-right:0;border-bottom:1px solid var(--line);}.fstep:last-child{border-bottom:0;}}
+  .fstep .fn{font-family:var(--mono);font-size:11px;color:var(--blue);font-weight:700;margin-bottom:10px;}
+  .fstep .ft{font-family:var(--display);font-weight:600;font-size:16px;margin-bottom:6px;line-height:1.2;}
+  body.lang-zh .fstep .ft{font-family:var(--display),var(--zh);}
+  .fstep .fd{font-size:14px;color:var(--muted);line-height:1.45;}
+
+  section.block{padding:52px 0;border-top:1.5px solid var(--ink);scroll-margin-top:96px;}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:24px;}
+  .sec-head .num{font-family:var(--mono);font-weight:700;color:var(--blue);font-size:14px;}
+  .sec-head h2{font-family:var(--display);font-weight:600;letter-spacing:-.01em;font-size:clamp(23px,3.4vw,30px);margin:0;line-height:1.1;}
+  .sec-head .q{font-family:var(--mono);font-size:13px;color:var(--muted);margin:6px 0 0;}
+  p{margin:0 0 18px;}
+  strong{color:var(--ink);font-weight:600;}
+  .lead-p{font-size:19px;}
+
+  .chain{display:grid;grid-template-columns:1fr;border:1px solid var(--line-strong);background:var(--paper-2);margin:6px 0 22px;}
+  .chain .row{display:grid;grid-template-columns:150px 1fr;border-top:1px solid var(--line);}
+  .chain .row:first-child{border-top:0;}
+  .chain .row .who{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--blue);padding:18px 16px;border-right:1px solid var(--line);}
+  body.lang-zh .chain .row .who{font-family:var(--zh);}
+  .chain .row .pain{padding:18px;font-size:16px;color:var(--ink-soft);line-height:1.5;}
+  .chain .row .pain b{color:var(--ink);}
+  @media(max-width:600px){.chain .row{grid-template-columns:1fr;}.chain .row .who{border-right:0;border-bottom:1px solid var(--line);}}
+
+  .value{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin:6px 0 4px;}
+  @media(max-width:720px){.value{grid-template-columns:1fr;}}
+  .vc{border:1px solid var(--line-strong);background:var(--paper-2);padding:20px 22px;}
+  .vc .vh{font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:8px;color:var(--blue-deep);}
+  body.lang-zh .vc .vh{font-family:var(--display),var(--zh);}
+  .vc p{margin:0;font-size:15.5px;color:var(--ink-soft);line-height:1.5;}
+
+  .verdict-row{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;margin-top:8px;}
+  @media(max-width:760px){.verdict-row{grid-template-columns:1fr;gap:24px;}}
+  .vcard{border:1px solid var(--line-strong);background:var(--paper-2);padding:22px 24px;margin-bottom:14px;}
+  .vcard:last-child{margin-bottom:0;}
+  .vcard .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+  body.lang-zh .vcard .k{font-family:var(--zh);}
+  .vcard .k b{color:var(--ink);}
+  .vcard p{margin:0;font-size:16.5px;color:var(--ink-soft);line-height:1.5;}
+  .stamp{border:3px double var(--green);color:var(--green);padding:18px 22px;transform:rotate(-4deg);text-align:center;font-family:var(--mono);background:rgba(30,107,69,.04);max-width:230px;}
+  .stamp .s1{font-size:10px;letter-spacing:.2em;border-bottom:1px solid var(--green);padding-bottom:7px;margin-bottom:9px;}
+  .stamp .s2{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.1;}
+  body.lang-zh .stamp .s2{font-family:var(--display),var(--zh);}
+  .stamp .s3{font-size:10px;letter-spacing:.1em;margin-top:9px;border-top:1px solid var(--green);padding-top:7px;}
+
+  .steps{list-style:none;margin:0;padding:0;counter-reset:step;}
+  .steps li{counter-increment:step;padding:14px 0 14px 44px;position:relative;border-top:1px solid var(--line);font-size:16px;color:var(--ink-soft);}
+  .steps li:first-child{border-top:0;}
+  .steps li::before{content:counter(step);position:absolute;left:0;top:13px;width:26px;height:26px;border:1px solid var(--blue);color:var(--blue);font-family:var(--mono);font-weight:700;font-size:13px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .steps li b{color:var(--ink);}
+
+  .gotobtn{margin-top:34px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--paper);background:var(--blue);border:0;padding:14px 22px;border-radius:2px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:background .15s;}
+  body.lang-zh .gotobtn{font-family:var(--zh);}
+  .gotobtn:hover{background:var(--blue-deep);}
+
+  /* competitor styles */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:30px;font-family:var(--mono);font-size:11.5px;color:var(--muted);}
+  body.lang-zh .legend{font-family:var(--zh);}
+  .legend span.li{display:flex;align-items:center;gap:6px;}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none;}
+  .dot.y{background:var(--green);} .dot.p{background:var(--amber);} .dot.n{background:var(--line-strong);}
+  .tier{border-top:1.5px solid var(--ink);padding:46px 0 0;margin-top:14px;}
+  .tier-h{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+  .tier-h .tn{font-family:var(--mono);font-weight:700;color:var(--blue);font-size:13px;}
+  .tier-h h2{font-family:var(--display);font-weight:600;font-size:clamp(22px,3.2vw,28px);margin:0;letter-spacing:-.01em;}
+  .tier-sub{font-size:16px;color:var(--muted);margin:0 0 26px;max-width:680px;}
+  .tool{border:1px solid var(--line-strong);background:var(--paper-2);margin-bottom:20px;}
+  .tool-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;padding:18px 22px;border-bottom:1px solid var(--line);}
+  .tool-head .name{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.01em;}
+  .tool-head .url{font-family:var(--mono);font-size:12px;color:var(--blue);}
+  .tool-head .kind{margin-left:auto;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border:1px solid var(--line-strong);padding:3px 8px;border-radius:2px;}
+  body.lang-zh .tool-head .kind{font-family:var(--zh);}
+  .tool-body{padding:20px 22px;}
+  .tool-body .lead{font-size:16.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.55;}
+  .tool-body .lead b{color:var(--ink);}
+  .spec{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);margin-bottom:16px;}
+  @media(max-width:640px){.spec{grid-template-columns:1fr;}}
+  .spec .cell{padding:11px 14px;border-top:1px solid var(--line);border-right:1px solid var(--line);}
+  .spec .cell:nth-child(-n+2){border-top:0;}
+  @media(max-width:640px){.spec .cell{border-right:0;}.spec .cell:nth-child(2){border-top:1px solid var(--line);}}
+  .spec .k{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:3px;}
+  body.lang-zh .spec .k{font-family:var(--zh);}
+  .spec .v{font-size:15px;color:var(--ink);line-height:1.4;}
+  .spec .v .dot{margin-right:6px;vertical-align:middle;}
+  .gap-line{border-left:3px solid var(--stamp);background:rgba(193,59,42,.05);padding:13px 16px;font-size:15.5px;color:var(--ink-soft);line-height:1.5;}
+  .gap-line .lbl{color:var(--stamp);font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:4px;}
+  body.lang-zh .gap-line .lbl{font-family:var(--zh);}
+  .matrix-sec{border-top:1.5px solid var(--ink);padding:48px 0 0;margin-top:30px;}
+  .tbl-scroll{overflow-x:auto;border:1.5px solid var(--ink);margin-top:8px;}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:880px;background:var(--paper-2);}
+  thead th{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;text-align:center;padding:10px;background:var(--ink);color:var(--paper);font-weight:500;vertical-align:bottom;}
+  body.lang-zh thead th{font-family:var(--zh);}
+  thead th:first-child{text-align:left;}
+  tbody td{padding:9px 10px;border-top:1px solid var(--line);text-align:center;color:var(--ink-soft);}
+  tbody td:first-child{font-family:var(--display);font-weight:600;color:var(--ink);text-align:left;white-space:nowrap;}
+  tbody tr:nth-child(even) td{background:rgba(33,55,154,.035);}
+  .y{color:var(--green);font-weight:700;} .p{color:var(--amber);font-weight:600;} .n{color:var(--muted);}
+  .mtag{font-family:var(--mono);font-size:11px;}
+  body.lang-zh .mtag{font-family:var(--zh);}
+
+  /* synthesis readout */
+  .synth-sec{border-top:1.5px solid var(--ink);padding:46px 0 0;margin-top:14px;}
+  .synth-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:8px;}
+  @media(max-width:820px){.synth-grid{grid-template-columns:1fr;}}
+  .spanel{border:1px solid var(--line-strong);background:var(--paper-2);padding:22px;}
+  .spanel.closest{border-top:3px solid var(--blue);}
+  .spanel.covered{border-top:3px solid var(--green);}
+  .spanel.gaps{border-top:3px solid var(--stamp);}
+  .spanel h3{font-family:var(--display);font-weight:600;font-size:17px;margin:0 0 4px;line-height:1.2;}
+  body.lang-zh .spanel h3{font-family:var(--display),var(--zh);}
+  .spanel .sk{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;margin:0 0 14px;}
+  body.lang-zh .spanel .sk{font-family:var(--zh);}
+  .spanel.closest .sk{color:var(--blue);} .spanel.covered .sk{color:var(--green);} .spanel.gaps .sk{color:var(--stamp);}
+  .spanel ul{list-style:none;margin:0;padding:0;}
+  .spanel li{font-size:15px;color:var(--ink-soft);line-height:1.45;padding:9px 0 9px 18px;position:relative;border-top:1px solid var(--line);}
+  .spanel li:first-child{border-top:0;}
+  .spanel li::before{content:"";position:absolute;left:0;top:15px;width:7px;height:7px;border-radius:50%;}
+  .spanel.closest li::before{background:var(--blue);}
+  .spanel.covered li::before{background:var(--green);}
+  .spanel.gaps li::before{background:var(--stamp);}
+  .spanel li b{color:var(--ink);font-weight:600;}
+  .synth-take{border-left:3px solid var(--ink);background:var(--paper-2);padding:18px 22px;margin-top:18px;font-size:16.5px;color:var(--ink-soft);line-height:1.55;}
+  .synth-take b{color:var(--ink);}
+
+  footer{border-top:1.5px solid var(--ink);padding:26px 0 60px;margin-top:40px;}
+  footer .wrap{font-family:var(--mono);font-size:11.5px;color:var(--muted);line-height:1.7;}
+  body.lang-zh footer .wrap{font-family:var(--zh);}
+  footer b{color:var(--ink);}
+  :focus-visible{outline:2.5px solid var(--blue);outline-offset:3px;}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Apollo USA</span>
+    <span><span class="en">Doc · <b>AI Mockup Tool</b></span><span class="zh">文档 · <b>AI Mockup 工具</b></span></span>
+    <span class="tag"><span class="en">Research / Internal</span><span class="zh">调研 / 内部</span></span>
+    <button class="langbtn" id="langToggle" aria-label="Switch language"><span>中文</span></button>
+  </div>
+</div>
+
+<nav class="pnav" role="tablist">
+  <div class="wrap">
+    <button class="ptab" role="tab" aria-selected="true" data-page="overview"><span class="pn">01</span><span><span class="en">Overview</span><span class="zh">概览</span></span></button>
+    <button class="ptab" role="tab" aria-selected="false" data-page="competitors"><span class="pn">02</span><span><span class="en">Competitor Research</span><span class="zh">竞品调研</span></span></button>
+  </div>
+</nav>
+
+<!-- ================= PAGE 1 : OVERVIEW ================= -->
+<div class="page page-overview active" role="tabpanel">
+
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span class="en">Project Overview · PromoProofAI Mockup</span><span class="zh">项目概览 · PromoProofAI Mockup</span></p>
+      <h1><span class="en">See the logo on the product — before it's ever made.</span><span class="zh">在生产之前，先看到 Logo 在产品上的样子。</span></h1>
+      <p class="sub"><span class="en">An AI tool where a customer uploads their logo and instantly gets a realistic preview — embroidered, screen-printed, or DTF on the actual Apollo product, plus a model wearing it. Here's what it does, the problem it solves, and why it matters.</span><span class="zh">一个 AI 工具：客户上传 Logo，立刻得到逼真的预览 —— 在真实的 Apollo 产品上呈现刺绣、丝印或 DTF 效果，还能配上模特穿着图。下面讲清楚它做什么、解决什么问题、为什么重要。</span></p>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">01</span><div><h2><span class="en">What it does</span><span class="zh">它做什么</span></h2><p class="q"><span class="en">From a logo to a customer-ready proof, in minutes</span><span class="zh">从一个 Logo 到客户可看的打样，只需几分钟</span></p></div></div>
+      <p class="lead-p"><span class="en">The whole tool is one short flow. The customer or sales rep brings a product and a logo; the tool does the rest and hands back something a customer can actually understand and approve.</span><span class="zh">整个工具就是一条短流程。客户或销售带来产品和 Logo，工具完成其余步骤，交回一份客户真正看得懂、能确认的东西。</span></p>
+      <div class="flow">
+        <div class="fstep"><div class="fn">01</div><div class="ft"><span class="en">Upload product + logo</span><span class="zh">上传产品 + Logo</span></div><div class="fd"><span class="en">Pick an Apollo product, drop in the customer's logo.</span><span class="zh">选一个 Apollo 产品，放入客户的 Logo。</span></div></div>
+        <div class="fstep"><div class="fn">02</div><div class="ft"><span class="en">Generate the mockup</span><span class="zh">生成 Mockup</span></div><div class="fd"><span class="en">AI renders it as it'll really look — embroidery, DTF, or screen print.</span><span class="zh">AI 还原真实呈现 —— 刺绣、DTF 或丝印。</span></div></div>
+        <div class="fstep"><div class="fn">03</div><div class="ft"><span class="en">Add a model shot</span><span class="zh">加上模特图</span></div><div class="fd"><span class="en">Show the product worn, in a lifestyle scene.</span><span class="zh">展示产品穿着效果与场景图。</span></div></div>
+        <div class="fstep"><div class="fn">04</div><div class="ft"><span class="en">Send the proof</span><span class="zh">发送打样</span></div><div class="fd"><span class="en">Generate a proof sheet to send for sign-off.</span><span class="zh">生成打样表，发出去确认。</span></div></div>
+      </div>
+      <p class="mono" style="font-size:13px;color:var(--muted);margin-top:14px;"><span class="en">The point is the <b style="color:var(--ink)">decoration accuracy</b> — not a flat logo pasted on a photo, but how the thread or ink will actually sit on the garment.</span><span class="zh">重点是<b style="color:var(--ink)">工艺真实度</b> —— 不是把平面 Logo 贴到照片上，而是还原针线或油墨在衣物上的真实呈现。</span></p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">02</span><div><h2><span class="en">The problem it solves</span><span class="zh">它解决的问题</span></h2><p class="q"><span class="en">Why the current way is too slow</span><span class="zh">为什么现在的方式太慢</span></p></div></div>
+      <p><span class="en">Today, when someone wants to see a logo on an Apollo product, the options are slow: wait days for a physical sample, or get a rough Photoshop comp from the team. Time is what kills deals in this industry — a slow quote loses to a faster competitor even when Apollo's pricing and quality are better.</span><span class="zh">如今，当有人想看到 Logo 在 Apollo 产品上的样子时，选择都很慢：等几天做实体样品，或让团队做个粗糙的 Photoshop 拼图。在这个行业，时间决定成败 —— 报价慢就会输给更快的对手，哪怕 Apollo 的价格和质量更好。</span></p>
+      <div class="chain">
+        <div class="row"><div class="who">Apollo</div><div class="pain"><span class="en">Sales spends hours per quote manually mocking up logos, or waits days for a physical sample — capacity that could close more deals.</span><span class="zh">销售每单要花数小时手动做 Logo 效果图，或等几天做实体样品 —— 这些精力本可用来成更多单。</span></div></div>
+        <div class="row"><div class="who"><span class="en">Distributor</span><span class="zh">分销商</span></div><div class="pain"><span class="en">Needs to show <b>their</b> client something convincing, fast — often before the client has committed. Slow turnaround pushes them to a faster supplier.</span><span class="zh">需要快速给<b>他们的</b>客户拿出有说服力的东西 —— 往往在客户还没下决心之前。周转慢就会把他们推向更快的供应商。</span></div></div>
+        <div class="row"><div class="who"><span class="en">End customer</span><span class="zh">最终客户</span></div><div class="pain"><span class="en">Can't picture an embroidered logo from a flat vector file. Without a visual, it's hard to approve — so the order stalls.</span><span class="zh">仅凭一个平面矢量文件，想象不出刺绣后的样子。没有可视化就难以确认 —— 订单就此卡住。</span></div></div>
+      </div>
+      <p><span class="en"><strong>The real problem isn't "we need nicer pictures."</strong> It's that the gap between "customer has a logo" and "customer approves an order" is too slow, and today it's filled by manual labor instead of software.</span><span class="zh"><strong>真正的问题不是"我们需要更好看的图"。</strong>而是从"客户有了 Logo"到"客户确认下单"之间这段太慢，而如今填补它的是人工，不是软件。</span></p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">03</span><div><h2><span class="en">Why it matters</span><span class="zh">为什么重要</span></h2><p class="q"><span class="en">What Apollo actually gains</span><span class="zh">Apollo 真正得到什么</span></p></div></div>
+      <div class="value">
+        <div class="vc"><div class="vh"><span class="en">Faster deal velocity</span><span class="zh">更快的成交速度</span></div><p><span class="en">A proof that used to take days comes back in minutes, so the customer decides while they're still interested.</span><span class="zh">原本要几天的打样几分钟就能返回，客户还在兴头上就能拍板。</span></p></div>
+        <div class="vc"><div class="vh"><span class="en">Higher conversion</span><span class="zh">更高的转化率</span></div><p><span class="en">People approve what they can see. A clear, accurate mockup turns more quotes into orders.</span><span class="zh">人们会确认看得见的东西。清晰、准确的 Mockup 能把更多报价变成订单。</span></p></div>
+        <div class="vc"><div class="vh"><span class="en">Freed-up sales time</span><span class="zh">解放销售时间</span></div><p><span class="en">Sales stops doing manual Photoshop work and spends that time selling instead.</span><span class="zh">销售不再做手动 Photoshop，把时间花在真正的销售上。</span></p></div>
+      </div>
+      <p style="margin-top:22px;"><span class="en">In one line: this isn't about generating pretty images — it's about helping Apollo's sales and distributors get customers to <strong>understand and approve faster</strong>, shortening the path from quote to order.</span><span class="zh">一句话：这不是为了生成漂亮的图 —— 而是帮 Apollo 的销售和分销商让客户<strong>更快看懂并确认</strong>，缩短从报价到下单的路径。</span></p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-head"><span class="num">04</span><div><h2><span class="en">The bottom line</span><span class="zh">结论</span></h2><p class="q"><span class="en">Worth solving — the how comes next</span><span class="zh">值得解决 —— 怎么做是下一步</span></p></div></div>
+      <div class="verdict-row">
+        <div>
+          <div class="vcard"><div class="k"><span class="en">Is the problem real?</span><span class="zh">问题真实吗？</span> <b><span class="en">Yes.</span><span class="zh">真实。</span></b></div><p><span class="en">Slow proofing genuinely costs deals for Apollo, its distributors, and end customers alike. Anything that shortens "logo → approved order" has clear value.</span><span class="zh">打样慢确实让 Apollo、分销商和最终客户都丢单。任何能缩短"Logo → 确认下单"的东西都有明确价值。</span></p></div>
+          <div class="vcard"><div class="k"><span class="en">Is it worth doing?</span><span class="zh">值得做吗？</span> <b><span class="en">Yes — if built smart.</span><span class="zh">值得 —— 但要聪明地做。</span></b></div><p><span class="en">The value is in faster, decoration-accurate proofs tied to Apollo's own workflow — not in pretty images for their own sake.</span><span class="zh">价值在于更快、工艺准确、并与 Apollo 自身流程绑定的打样 —— 而不是为了好看而生成图。</span></p></div>
+          <div class="vcard"><div class="k"><span class="en">Build or buy?</span><span class="zh">自建还是采购？</span> <b><span class="en">Depends on the market.</span><span class="zh">取决于市场。</span></b></div><p><span class="en">That call rests on what already exists. We mapped the full landscape — which tools fit, what's already solved, and what's still missing — in the competitor research.</span><span class="zh">这取决于市场上已有什么。我们在竞品调研里完整梳理了全局 —— 哪些工具契合、哪些已解决、还缺什么。</span></p></div>
+        </div>
+        <div class="stamp"><div class="s1"><span class="en">REVIEW</span><span class="zh">评审</span></div><div class="s2"><span class="en">PROBLEM<br>WORTH<br>SOLVING</span><span class="zh">问题<br>值得<br>解决</span></div><div class="s3"><span class="en">FILED · JUN 2026</span><span class="zh">归档 · 2026年6月</span></div></div>
+      </div>
+      <button class="gotobtn" data-goto="competitors"><span class="en">See the competitor research &amp; verdict</span><span class="zh">查看竞品调研与结论</span> →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ================= PAGE 2 : COMPETITORS ================= -->
+<div class="page page-competitors" role="tabpanel" hidden>
+
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span class="en">Competitor Deep-Dive · The Evidence Behind the Decision</span><span class="zh">竞品深度分析 · 决策背后的依据</span></p>
+      <h1><span class="en">AI mockup &amp; virtual-sample tools, tool by tool</span><span class="zh">AI Mockup 与虚拟样品工具，逐个解析</span></h1>
+      <p class="sub"><span class="en">Every tool on the same ten data points: who it's for, what it does, product &amp; logo upload, model/lifestyle imagery, decoration realism, API/customization, pricing, and the gap it leaves for Apollo. Industry tools first, then the generic ones individually.</span><span class="zh">每个工具都用同样的十个维度评估：目标用户、主要功能、产品与 Logo 上传、模特/场景图、工艺真实度、API/定制、价格，以及它对 Apollo 留下的差距。先看行业工具，再逐个分析通用工具。</span></p>
+      <div class="legend">
+        <span class="li"><span class="dot y"></span><span class="en">Yes / strong</span><span class="zh">支持 / 强</span></span>
+        <span class="li"><span class="dot p"></span><span class="en">Partial / claimed / generic only</span><span class="zh">部分 / 宣称 / 仅通用</span></span>
+        <span class="li"><span class="dot n"></span><span class="en">No / not its purpose</span><span class="zh">不支持 / 非其定位</span></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="synth-sec">
+    <div class="wrap">
+      <div class="tier-h"><span class="tn">READOUT</span><h2><span class="en">How to read the field</span><span class="zh">如何看待这片市场</span></h2></div>
+      <p class="tier-sub"><span class="en">The list below matters less than the pattern across it. Here's what it actually means for Apollo — which tools sit closest, what's already a solved commodity, and where the real opening is.</span><span class="zh">下面这份清单本身不是重点，重点是它们呈现出的共同规律。这才是对 Apollo 真正的意义 —— 哪些工具最贴近、哪些功能已是成熟商品、真正的机会在哪里。</span></p>
+      <div class="synth-grid">
+        <div class="spanel closest">
+          <p class="sk"><span class="en">Closest to Apollo</span><span class="zh">最贴近 Apollo</span></p>
+          <h3><span class="en">Two tools, two angles</span><span class="zh">两个工具，两个角度</span></h3>
+          <ul>
+            <li><span class="en"><b>Merch.ai</b> — closest as a <b>mockup product</b>. Industry-built; does logo-on-product, model/lifestyle shots (Geppetto), and presentations. Apollo would use it as a paying customer.</span><span class="zh"><b>Merch.ai</b> —— 作为 <b>Mockup 产品</b>最贴近。行业出身；能做 Logo 上产品、模特/场景图（Geppetto）和演示文稿。Apollo 会以付费客户身份使用。</span></li>
+            <li><span class="en"><b>SAGE Supplier VDS</b> — closest on the <b>supplier side</b>. Embeds on Apollo's own website so distributors create virtual samples on Apollo products. Cheapest entry ($59–79/mo).</span><span class="zh"><b>SAGE 供应商版 VDS</b> —— 在<b>供应商侧</b>最贴近。可嵌入 Apollo 自有网站，让分销商在 Apollo 产品上生成虚拟样品。入门最便宜（$59–79/月）。</span></li>
+            <li><span class="en">MPower and ASI are platforms, not close on the mockup itself.</span><span class="zh">MPower 和 ASI 是平台，在 Mockup 本身上并不贴近。</span></li>
+          </ul>
+        </div>
+        <div class="spanel covered">
+          <p class="sk"><span class="en">Already covered</span><span class="zh">已被覆盖</span></p>
+          <h3><span class="en">Commodity — don't rebuild</span><span class="zh">成熟商品 —— 不要重建</span></h3>
+          <ul>
+            <li><span class="en">Product &amp; logo upload — universal across every tool.</span><span class="zh">产品和 Logo 上传 —— 所有工具都有。</span></li>
+            <li><span class="en">Warp / scale / skew a logo onto a product photo.</span><span class="zh">把 Logo 变形/缩放/倾斜贴到产品照片上。</span></li>
+            <li><span class="en">AI model &amp; lifestyle scene generation.</span><span class="zh">AI 模特与场景图生成。</span></li>
+            <li><span class="en">Logo vectorization &amp; color matching.</span><span class="zh">Logo 矢量化与配色匹配。</span></li>
+            <li><span class="en">Presentations &amp; basic proof sheets.</span><span class="zh">演示文稿与基础打样表。</span></li>
+            <li><span class="en"><b>Building any of these again adds no value.</b></span><span class="zh"><b>把这些再造一遍毫无价值。</b></span></li>
+          </ul>
+        </div>
+        <div class="spanel gaps">
+          <p class="sk"><span class="en">Not yet covered for Apollo</span><span class="zh">Apollo 尚未被满足</span></p>
+          <h3><span class="en">The real opening</span><span class="zh">真正的机会</span></h3>
+          <ul>
+            <li><span class="en"><b>True decoration realism</b> — embroidery thread, DTF texture, screen-print ink. Everyone applies a flat logo; nobody nails how it actually renders.</span><span class="zh"><b>真正的工艺真实度</b> —— 刺绣针线、DTF 质感、丝印油墨。人人都是平面贴 Logo，没人真正还原实际呈现。</span></li>
+            <li><span class="en"><b>An Apollo-owned, branded experience</b> tied to Apollo's real catalog — not paying into someone else's distributor tool.</span><span class="zh"><b>Apollo 自有、带品牌的体验</b>，与 Apollo 真实目录绑定 —— 而非付费用别人的分销商工具。</span></li>
+            <li><span class="en"><b>Integration into Apollo's own quoting flow</b> — mockup → quote → proof in one path.</span><span class="zh"><b>接入 Apollo 自己的报价流程</b> —— Mockup → 报价 → 打样，一条链路。</span></li>
+            <li><span class="en"><b>Accuracy checked against real Apollo samples</b>, so customers aren't misled.</span><span class="zh"><b>对照真实 Apollo 样品校验准确度</b>，以免误导客户。</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="synth-take"><span class="en"><b>Net read:</b> buy the covered parts instead of rebuilding them. Spend any custom effort only on the uncovered column — decoration realism plus an Apollo-owned workflow. Trial <b>Merch.ai</b> and <b>SAGE Supplier VDS</b> first to see how much of the gap they already close in practice.</span><span class="zh"><b>总体判断：</b>已覆盖的部分直接买，而不是重建。任何自研投入只放在尚未覆盖的那一列 —— 工艺真实度，加上 Apollo 自有的工作流。先试用 <b>Merch.ai</b> 和 <b>SAGE 供应商版 VDS</b>，看它们在实测中已经填补了多少差距。</span></div>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="wrap">
+      <p class="tier-sub"><span class="en">Built for the promotional-products trade. They understand logos-on-products, presentations, and proofs — the closest competition.</span><span class="zh">专为促销品行业打造，懂得"Logo 上产品"、演示文稿与打样流程 —— 最直接的竞争对手。</span></p>
+
+      <!-- Merch.ai -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">Merch.ai</span><span class="url">merch.ai</span><span class="kind"><span class="en">Industry · mockup-first</span><span class="zh">行业 · 以 Mockup 为核心</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">The most direct competitor. Purpose-built for promo distributors and suppliers to create branded mockups and presentations fast. Upload a logo and apply it across hundreds of product images with <b>vectorization, color matching, and decoration effects</b>. Its "Geppetto" engine generates lifestyle/model shots without a photoshoot, feeding a custom PDF lookbook builder.</span><span class="zh">最直接的竞争对手。专为促销品分销商和供应商打造，用来快速生成品牌 Mockup 和演示文稿。上传 Logo 即可批量套用到数百张产品图，自带<b>矢量化、配色匹配和装饰效果</b>。其 "Geppetto" 引擎无需拍摄即可生成场景图/模特图，并接入定制 PDF 图册生成器。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Promo distributors &amp; suppliers</span><span class="zh">促销品分销商与供应商</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — own or 30,000+ SKU library</span><span class="zh">支持 —— 自有或 30,000+ SKU 库</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — warp, scale, skew, bend</span><span class="zh">支持 —— 变形、缩放、倾斜、弯曲</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — Geppetto AI image creator</span><span class="zh">支持 —— Geppetto AI 图像生成</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot p"></span><span class="en">Claimed "hyper-realistic" — unverified for embroidery/DTF</span><span class="zh">宣称"超真实" —— 刺绣/DTF 效果未经验证</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot p"></span><span class="en">Not clearly documented publicly</span><span class="zh">公开文档不明确</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">$225/mo · $2,250/yr (Starter) · $5,000/yr (Growth), + custom presentation licenses</span><span class="zh">$225/月 · $2,250/年（Starter）· $5,000/年（Growth），另加定制演示授权</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Maturity</span><span class="zh">成熟度</span></div><div class="v"><span class="dot y"></span><span class="en">Live, well-reviewed, in active use</span><span class="zh">已上线，口碑好，行业在用</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">Built for distributors to use as customers, not a supplier-side capability Apollo owns and brands. Apollo pays into someone else's tool, and the real-thread accuracy of its effects needs hands-on testing before trusting it on customer proofs.</span><span class="zh">它是给分销商当客户用的，而非 Apollo 自有、自带品牌的供应商能力。Apollo 只是付费用别人的工具，而它的效果能否还原真实针线，需实测后才能用于客户打样。</span></div>
+        </div>
+      </div>
+
+      <!-- MPowerPromo -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">MPowerPromo</span><span class="url">mpowerpromo.com</span><span class="kind"><span class="en">Industry · ERP + AI feature</span><span class="zh">行业 · ERP + AI 功能</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">A full business platform (orders, CRM, stores, accounting) that <b>bundles AI image generation and virtual art proofing as features</b> rather than being a mockup tool at its core. Strong on workflow; weak on decoration-specific imagery.</span><span class="zh">一个完整的业务平台（订单、CRM、商城、财务），把 <b>AI 图像生成和虚拟打样当作附带功能</b>，本质并非 Mockup 工具。流程强，但装饰专用图像弱。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Distributors, suppliers, decorators</span><span class="zh">分销商、供应商、装饰加工商</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes + vectorization</span><span class="zh">支持 + 矢量化</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot p"></span><span class="en">Generic AI imagery only</span><span class="zh">仅通用 AI 图像</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No evidence of method-accurate output</span><span class="zh">无工艺级还原的证据</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot y"></span><span class="en">REST API on top tier; custom dev billed hourly</span><span class="zh">顶配含 REST API；定制开发按小时计费</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">~$99 / ~$479 / ~$959 per mo (annual); AI ≈ $0.35/image</span><span class="zh">约 $99 / $479 / $959 每月（年付）；AI ≈ $0.35/张</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Maturity</span><span class="zh">成熟度</span></div><div class="v"><span class="dot y"></span><span class="en">Established; SOC 2 Type 1</span><span class="zh">成熟；SOC 2 Type 1 认证</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">Distributor-first and over-scoped — Apollo pays for an entire ERP to use a thin AI-proofing slice that produces generic, not decoration-accurate, imagery.</span><span class="zh">以分销商为先、功能过重 —— Apollo 要为整套 ERP 付费，却只用到很薄的一层 AI 打样，产出的还是通用图像，并非工艺级还原。</span></div>
+        </div>
+      </div>
+
+      <!-- SAGE -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">SAGE Design Studio + Supplier VDS</span><span class="url">sageworld.com</span><span class="kind"><span class="en">Industry · supplier-embeddable</span><span class="zh">行业 · 可嵌入供应商网站</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">SAGE's tools let distributors drop a client logo onto any product to make a virtual sample, with <b>AI smart-erase</b>, AI upscaling, skew/curve for curved items, and an AI lifestyle-scene generator. Crucially, the separate <b>Supplier Virtual Design Studio embeds on a supplier's own website</b> — the one option aimed at Apollo's side of the table.</span><span class="zh">SAGE 的工具让分销商把客户 Logo 放到任意产品上生成虚拟样品，配有 <b>AI 智能擦除</b>、AI 放大、为曲面产品做倾斜/弯曲，以及 AI 场景图生成。关键是，独立的 <b>供应商版 Virtual Design Studio 可嵌入供应商自己的网站</b> —— 这是唯一面向 Apollo 这一侧的选项。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Distributors (Studio); suppliers (VDS)</span><span class="zh">分销商（Studio）；供应商（VDS）</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — product images / supplier site</span><span class="zh">支持 —— 产品图 / 供应商网站</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — place, skew, curve</span><span class="zh">支持 —— 摆放、倾斜、弯曲</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — AI lifestyle scene generator</span><span class="zh">支持 —— AI 场景图生成</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot p"></span><span class="en">Logo-warp + claimed embroidery renderings; not AI-simulated thread</span><span class="zh">Logo 变形 + 宣称的刺绣渲染；并非 AI 模拟针线</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot y"></span><span class="en">VDS embeds on supplier's own website</span><span class="zh">VDS 可嵌入供应商自有网站</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Supplier VDS $59/mo ($595/yr) w/ PromoSearch; $79/mo ($795/yr) standalone</span><span class="zh">供应商 VDS：含 PromoSearch 时 $59/月（$595/年）；单独 $79/月（$795/年）</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Maturity</span><span class="zh">成熟度</span></div><div class="v"><span class="dot y"></span><span class="en">Established; PPAI tech partner</span><span class="zh">成熟；PPAI 技术合作伙伴</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">The most directly relevant supplier-side product — but it warps a flat logo onto a photo rather than simulating thread or DTF, and locks Apollo into the SAGE ecosystem and look.</span><span class="zh">最贴近供应商侧的产品 —— 但它只是把平面 Logo 变形贴到照片上，并不模拟真实针线或 DTF，而且会把 Apollo 锁进 SAGE 的生态与视觉风格里。</span></div>
+        </div>
+      </div>
+
+      <!-- ASI -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">ASI ESP+ / ESP Web</span><span class="url">asicentral.com</span><span class="kind"><span class="en">Industry · data network + platform</span><span class="zh">行业 · 数据网络 + 平台</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">The other big industry network. Distributors get virtual samples (upload a logo once, see it sized/placed on every logo-ready product), presentations, CRM, a client portal for proofs/orders, and AI-generated <b>copy</b> — but the AI is aimed at text and search, not decoration imagery. Suppliers like Apollo feed product data and decorated/blank images into ESP.</span><span class="zh">行业里另一个大网络。分销商可用虚拟样品（上传一次 Logo，就能看到它以正确尺寸/位置出现在所有可加印产品上）、演示文稿、CRM、供客户查看打样/订单的门户，以及 AI 生成的<b>文案</b> —— 但其 AI 主攻文字和搜索，而非装饰图像。像 Apollo 这样的供应商向 ESP 提供产品数据和加印/空白图片。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Distributors (ESP+); suppliers list data</span><span class="zh">分销商（ESP+）；供应商上传数据</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot p"></span><span class="en">Works off ESP catalog; suppliers upload images</span><span class="zh">基于 ESP 目录；供应商上传图片</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — virtual samples</span><span class="zh">支持 —— 虚拟样品</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot n"></span><span class="en">Not a focus</span><span class="zh">非重点</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">Logo placement on photos, not simulation</span><span class="zh">把 Logo 摆到照片上，并非模拟</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot y"></span><span class="en">ASI API / direct-connect data feeds</span><span class="zh">ASI API / 直连数据源</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">ESP+ bundled in ASI distributor membership</span><span class="zh">ESP+ 含在 ASI 分销商会员中</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Maturity</span><span class="zh">成熟度</span></div><div class="v"><span class="dot y"></span><span class="en">Largest network in the industry</span><span class="zh">行业内最大网络</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">A distributor-facing platform and data network, not a mockup engine. Virtual samples are basic logo-on-image; Apollo's role is supplier data provider, not tool owner.</span><span class="zh">这是面向分销商的平台和数据网络，不是 Mockup 引擎。虚拟样品只是基础"Logo 贴图"；Apollo 的角色是供应商数据提供方，而非工具拥有方。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tier">
+    <div class="wrap">
+      <div class="tier-h"><span class="tn">TIER 2</span><h2><span class="en">Generic consumer / e-commerce tools</span><span class="zh">通用消费级 / 电商工具</span></h2></div>
+      <p class="tier-sub"><span class="en">Built for designers, POD sellers, and marketers — not the promo trade. Fast and cheap, but none understand decoration methods or promo workflow. Covered individually below.</span><span class="zh">为设计师、POD 卖家和营销人员打造 —— 并非促销品行业。快且便宜，但没有一个懂装饰工艺或促销品流程。下面逐个分析。</span></p>
+
+      <!-- Recraft -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">Recraft</span><span class="url">recraft.ai</span><span class="kind"><span class="en">Generic · design suite</span><span class="zh">通用 · 设计套件</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">A serious AI design suite: image generator, vector generator, mockup generator, background remover, upscaler. Generate or upload artwork, then drop it onto apparel, packaging, or devices. Strongest of the generic set, with a real developer API.</span><span class="zh">一套实力派 AI 设计工具：图像生成、矢量生成、Mockup 生成、抠图、放大。可生成或上传素材，再放到服装、包装或设备上。通用类里最强，且有真正的开发者 API。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Designers, brands, developers</span><span class="zh">设计师、品牌、开发者</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — upload or generate</span><span class="zh">支持 —— 上传或生成</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — generate scenes</span><span class="zh">支持 —— 生成场景</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No — flat application</span><span class="zh">不支持 —— 平面贴合</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — public API</span><span class="zh">支持 —— 公开 API</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Free 30 gen/day (non-commercial); paid adds commercial rights</span><span class="zh">免费每天 30 次（非商用）；付费含商用授权</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Promo workflow</span><span class="zh">促销品流程</span></div><div class="v"><span class="dot n"></span><span class="en">None</span><span class="zh">无</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">No decoration realism, no proof sheet, no promo data. Useful as a generation engine to build on — not a customer-ready tool.</span><span class="zh">没有工艺真实度、没有打样表、没有促销品数据。适合当底层生成引擎二次开发 —— 但不是面向客户的成品。</span></div>
+        </div>
+      </div>
+
+      <!-- Mockey -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">Mockey</span><span class="url">mockey.ai</span><span class="kind"><span class="en">Generic · POD templates</span><span class="zh">通用 · POD 模板</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">Template-driven generator with 27,000+ templates across 60+ categories, plus custom mockups from your own product photo, recolor, warp, 3D, multi-angle "multi-shot," and animated/video mockups. Built for print-on-demand sellers.</span><span class="zh">以模板为主的生成器，覆盖 60+ 类目、27,000+ 模板，还能用自己的产品图做自定义 Mockup、改色、变形、3D、多角度"多机位"以及动态/视频 Mockup。为 POD 卖家打造。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">POD sellers, e-commerce, designers</span><span class="zh">POD 卖家、电商、设计师</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — custom mockup</span><span class="zh">支持 —— 自定义 Mockup</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot p"></span><span class="en">Via templates / video</span><span class="zh">通过模板 / 视频</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No</span><span class="zh">不支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot n"></span><span class="en">Not prominent</span><span class="zh">不明显</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Free (no watermark) + paid plans</span><span class="zh">免费（无水印）+ 付费套餐</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Promo workflow</span><span class="zh">促销品流程</span></div><div class="v"><span class="dot n"></span><span class="en">None</span><span class="zh">无</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">Template-bound and consumer-focused; logos sit flat on garments with no method awareness or sales workflow.</span><span class="zh">受模板限制、面向消费者；Logo 平贴在服装上，既不懂工艺也没有销售流程。</span></div>
+        </div>
+      </div>
+
+      <!-- Pixa -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">Pixa</span><span class="url">pixa.com</span><span class="kind"><span class="en">Generic · conversational</span><span class="zh">通用 · 对话式</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">A conversational merch mockup generator: upload a blank product and a design, then type "place the logo on the left chest" and the AI handles placement, lighting, and perspective. Watermark-free downloads.</span><span class="zh">对话式周边 Mockup 生成器：上传空白产品和设计，再输入"把 Logo 放到左胸"，AI 自动处理摆位、光影和透视。下载无水印。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Entrepreneurs, designers, small biz</span><span class="zh">创业者、设计师、小企业</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot p"></span><span class="en">Designs on models for portfolios</span><span class="zh">可把设计放到模特上做作品集</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No</span><span class="zh">不支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot n"></span><span class="en">No</span><span class="zh">不支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Free credits, then pay-per-use</span><span class="zh">免费额度，之后按量付费</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Promo workflow</span><span class="zh">促销品流程</span></div><div class="v"><span class="dot n"></span><span class="en">None</span><span class="zh">无</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">Prompt-based placement only; treats the logo as a flat graphic, not stitched or printed. No proof or quoting layer.</span><span class="zh">只做基于指令的摆位；把 Logo 当平面图形，并非缝制或印刷效果。没有打样或报价环节。</span></div>
+        </div>
+      </div>
+
+      <!-- Pixelcut -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">Pixelcut</span><span class="url">pixelcut.ai</span><span class="kind"><span class="en">Generic · merch + product photos</span><span class="zh">通用 · 周边 + 产品图</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">An AI merch generator (text-to-design) plus mockup generator and product-photography tools. Aimed at small businesses populating online stores and social feeds.</span><span class="zh">AI 周边生成器（文字转设计）外加 Mockup 生成和产品摄影工具。面向需要填充网店和社媒的小企业。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Small biz, content creators</span><span class="zh">小企业、内容创作者</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes (mockup tool)</span><span class="zh">支持（Mockup 工具）</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot p"></span><span class="en">Product/lifestyle shots</span><span class="zh">产品/场景图</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No</span><span class="zh">不支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot p"></span><span class="en">API for some features</span><span class="zh">部分功能有 API</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Free tier + subscription</span><span class="zh">免费层 + 订阅</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Promo workflow</span><span class="zh">促销品流程</span></div><div class="v"><span class="dot n"></span><span class="en">None</span><span class="zh">无</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">Geared to generating designs and store imagery, not accurately previewing a customer's existing logo as decorated.</span><span class="zh">偏向生成设计和店铺图，而非准确预览客户现有 Logo 加工后的效果。</span></div>
+        </div>
+      </div>
+
+      <!-- Canva -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">Canva</span><span class="url">canva.com</span><span class="kind"><span class="en">Generic · all-purpose design</span><span class="zh">通用 · 全能设计</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">The mass-market design platform. Its AI mockup generator drops a design into t-shirt, poster, and device scenes, with a huge media library and tight integration into the Canva editor. Ubiquitous and easy, but general-purpose.</span><span class="zh">大众化设计平台。其 AI Mockup 生成器能把设计放进 T 恤、海报、设备场景，素材库庞大，并与 Canva 编辑器深度集成。普及、易用，但是通用型。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Everyone — marketers, students, SMBs</span><span class="zh">所有人 —— 营销、学生、中小企业</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes</span><span class="zh">支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot p"></span><span class="en">Template scenes</span><span class="zh">模板场景</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No</span><span class="zh">不支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot p"></span><span class="en">Apps/SDK, not for this use</span><span class="zh">有 Apps/SDK，但非此用途</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Free + Pro (~$15/mo)</span><span class="zh">免费 + Pro（约 $15/月）</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Promo workflow</span><span class="zh">促销品流程</span></div><div class="v"><span class="dot n"></span><span class="en">None</span><span class="zh">无</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">A generic design tool with no promo data, no decoration accuracy, and no path from mockup to quote. Fine for a one-off, wrong as a system.</span><span class="zh">通用设计工具，没有促销品数据、没有工艺精度，也没有从 Mockup 到报价的链路。临时用一次可以，当系统就不合适。</span></div>
+        </div>
+      </div>
+
+      <!-- Artificial Studio -->
+      <div class="tool">
+        <div class="tool-head"><span class="name">Artificial Studio</span><span class="url">artificialstudio.ai</span><span class="kind"><span class="en">Generic · prompt-to-product</span><span class="zh">通用 · 指令生成产品</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">Differentiates by generating the entire product from a text description and applying the logo automatically — no templates — adapting to texture, lighting, and perspective. Flexible and API-friendly, but the realism is generic, not decoration-specific.</span><span class="zh">差异点：根据文字描述生成整件产品并自动套用 Logo —— 不用模板 —— 自适应材质、光影和透视。灵活、对 API 友好，但真实感是通用层面，并非针对装饰工艺。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">Designers, agencies, e-commerce, POD</span><span class="zh">设计师、代理商、电商、POD</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product upload</span><span class="zh">产品上传</span></div><div class="v"><span class="dot p"></span><span class="en">Optional — can generate product</span><span class="zh">可选 —— 可生成产品</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Logo upload</span><span class="zh">Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — auto-applied</span><span class="zh">支持 —— 自动套用</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — generated scenes</span><span class="zh">支持 —— 生成场景</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No — generic surface application</span><span class="zh">不支持 —— 通用表面贴合</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot y"></span><span class="en">Yes — API available</span><span class="zh">支持 —— 提供 API</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Credit-based; free tier + paid</span><span class="zh">积分制；免费层 + 付费</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Promo workflow</span><span class="zh">促销品流程</span></div><div class="v"><span class="dot n"></span><span class="en">None</span><span class="zh">无</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">Impressive generic engine and API, but no concept of embroidery/DTF/screen-print and no promo sales context.</span><span class="zh">通用引擎和 API 很强，但完全没有刺绣/DTF/丝印的概念，也没有促销品销售场景。</span></div>
+        </div>
+      </div>
+
+      <!-- Others -->
+      <div class="tool">
+        <div class="tool-head"><span class="name"><span class="en">Other consumer tools</span><span class="zh">其他消费级工具</span></span><span class="url">mockuplabs.ai · dynamicmockups.com · fotor · visualgpt</span><span class="kind"><span class="en">Generic · honorable mentions</span><span class="zh">通用 · 附带提及</span></span></div>
+        <div class="tool-body">
+          <p class="lead"><span class="en">A long tail of similar tools — <b>Mockuplabs</b> (reusable photorealistic mockups, SKU recolor), <b>Dynamic Mockups</b> (bulk creation across designs/colors), <b>Fotor</b> and <b>VisualGPT</b> (template-free AI mockups). All share the same profile: fast, cheap, upload product + logo, generate scenes.</span><span class="zh">一长串类似工具 —— <b>Mockuplabs</b>（可复用拟真 Mockup、SKU 改色）、<b>Dynamic Mockups</b>（跨设计/颜色批量生成）、<b>Fotor</b> 和 <b>VisualGPT</b>（免模板 AI Mockup）。画像一致：快、便宜、上传产品 + Logo、生成场景。</span></p>
+          <div class="spec">
+            <div class="cell"><div class="k"><span class="en">Target users</span><span class="zh">目标用户</span></div><div class="v"><span class="en">POD / e-commerce sellers</span><span class="zh">POD / 电商卖家</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Product + logo upload</span><span class="zh">产品 + Logo 上传</span></div><div class="v"><span class="dot y"></span><span class="en">Yes across the board</span><span class="zh">普遍支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Model / lifestyle</span><span class="zh">模特 / 场景图</span></div><div class="v"><span class="dot p"></span><span class="en">Scene generation / templates</span><span class="zh">场景生成 / 模板</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Decoration realism</span><span class="zh">工艺真实度</span></div><div class="v"><span class="dot n"></span><span class="en">No</span><span class="zh">不支持</span></div></div>
+            <div class="cell"><div class="k"><span class="en">API / customization</span><span class="zh">API / 定制</span></div><div class="v"><span class="dot p"></span><span class="en">Varies; some bulk APIs</span><span class="zh">不一；部分有批量 API</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Pricing / trial</span><span class="zh">价格 / 试用</span></div><div class="v"><span class="en">Mostly free + low-cost paid tiers</span><span class="zh">多为免费 + 低价付费层</span></div></div>
+            <div class="cell"><div class="k"><span class="en">Promo workflow</span><span class="zh">促销品流程</span></div><div class="v"><span class="dot n"></span><span class="en">None</span><span class="zh">无</span></div></div>
+          </div>
+          <div class="gap-line"><span class="lbl"><span class="en">Gap for Apollo</span><span class="zh">对 Apollo 的差距</span></span><span class="en">Same gap as the rest of Tier 2 — e-commerce imagery, not decoration-accurate customer proofs tied to Apollo's catalog.</span><span class="zh">与第二梯队其余工具差距相同 —— 做的是电商图，而非与 Apollo 目录绑定、工艺精准的客户打样。</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATRIX -->
+  <div class="matrix-sec">
+    <div class="wrap">
+      <div class="tier-h"><span class="tn">SUMMARY</span><h2><span class="en">Full feature matrix</span><span class="zh">完整功能矩阵</span></h2></div>
+      <p class="tier-sub"><span class="en">Everything above in one view. "Decoration realism" is the column nothing truly owns — that's the wedge for Apollo.</span><span class="zh">上面所有内容浓缩成一张表。"工艺真实度"这一列没有任何工具真正占据 —— 那就是 Apollo 的切入点。</span></p>
+      <div class="tbl-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th><span class="en">Tool</span><span class="zh">工具</span></th>
+              <th><span class="en">Tier</span><span class="zh">类别</span></th>
+              <th><span class="en">Product<br>upload</span><span class="zh">产品<br>上传</span></th>
+              <th><span class="en">Logo<br>upload</span><span class="zh">Logo<br>上传</span></th>
+              <th><span class="en">Model /<br>lifestyle</span><span class="zh">模特 /<br>场景</span></th>
+              <th><span class="en">Decoration<br>realism</span><span class="zh">工艺<br>真实度</span></th>
+              <th><span class="en">API /<br>custom</span><span class="zh">API /<br>定制</span></th>
+              <th><span class="en">Pricing</span><span class="zh">价格</span></th>
+              <th><span class="en">Apollo fit</span><span class="zh">Apollo 契合</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Merch.ai</td><td class="mtag"><span class="en">Industry</span><span class="zh">行业</span></td><td class="y">●</td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="p">◐</td><td class="mtag">$225/mo–$5k/yr</td><td class="p"><span class="en">Customer, not owner</span><span class="zh">只能当客户</span></td></tr>
+            <tr><td>MPowerPromo</td><td class="mtag"><span class="en">Industry</span><span class="zh">行业</span></td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="n">○</td><td class="y">●</td><td class="mtag">$99–959/mo</td><td class="n"><span class="en">Over-scoped</span><span class="zh">功能过重</span></td></tr>
+            <tr><td>SAGE Studio + VDS</td><td class="mtag"><span class="en">Industry</span><span class="zh">行业</span></td><td class="y">●</td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="y">●</td><td class="mtag">$59–79/mo</td><td class="p"><span class="en">Closest supplier fit</span><span class="zh">最贴近供应商</span></td></tr>
+            <tr><td>ASI ESP+</td><td class="mtag"><span class="en">Industry</span><span class="zh">行业</span></td><td class="p">◐</td><td class="y">●</td><td class="n">○</td><td class="n">○</td><td class="y">●</td><td class="mtag"><span class="en">Membership</span><span class="zh">会员制</span></td><td class="n"><span class="en">Data network</span><span class="zh">数据网络</span></td></tr>
+            <tr><td>Recraft</td><td class="mtag"><span class="en">Generic</span><span class="zh">通用</span></td><td class="y">●</td><td class="y">●</td><td class="y">●</td><td class="n">○</td><td class="y">●</td><td class="mtag"><span class="en">Free→paid</span><span class="zh">免费→付费</span></td><td class="p"><span class="en">Engine to build on</span><span class="zh">可作底层引擎</span></td></tr>
+            <tr><td>Mockey</td><td class="mtag"><span class="en">Generic</span><span class="zh">通用</span></td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="n">○</td><td class="n">○</td><td class="mtag"><span class="en">Free→paid</span><span class="zh">免费→付费</span></td><td class="n"><span class="en">Consumer POD</span><span class="zh">消费级 POD</span></td></tr>
+            <tr><td>Pixa</td><td class="mtag"><span class="en">Generic</span><span class="zh">通用</span></td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="n">○</td><td class="n">○</td><td class="mtag"><span class="en">Free→paid</span><span class="zh">免费→付费</span></td><td class="n"><span class="en">Consumer</span><span class="zh">消费级</span></td></tr>
+            <tr><td>Pixelcut</td><td class="mtag"><span class="en">Generic</span><span class="zh">通用</span></td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="n">○</td><td class="p">◐</td><td class="mtag"><span class="en">Free→paid</span><span class="zh">免费→付费</span></td><td class="n"><span class="en">Consumer</span><span class="zh">消费级</span></td></tr>
+            <tr><td>Canva</td><td class="mtag"><span class="en">Generic</span><span class="zh">通用</span></td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="n">○</td><td class="p">◐</td><td class="mtag"><span class="en">Free / ~$15</span><span class="zh">免费 / ~$15</span></td><td class="n"><span class="en">All-purpose</span><span class="zh">通用工具</span></td></tr>
+            <tr><td>Artificial Studio</td><td class="mtag"><span class="en">Generic</span><span class="zh">通用</span></td><td class="p">◐</td><td class="y">●</td><td class="y">●</td><td class="n">○</td><td class="y">●</td><td class="mtag"><span class="en">Free→paid</span><span class="zh">免费→付费</span></td><td class="n"><span class="en">Generic engine</span><span class="zh">通用引擎</span></td></tr>
+            <tr><td><span class="en">Others (Mockuplabs, etc.)</span><span class="zh">其他（Mockuplabs 等）</span></td><td class="mtag"><span class="en">Generic</span><span class="zh">通用</span></td><td class="y">●</td><td class="y">●</td><td class="p">◐</td><td class="n">○</td><td class="p">◐</td><td class="mtag"><span class="en">Free→low</span><span class="zh">免费→低价</span></td><td class="n"><span class="en">Consumer</span><span class="zh">消费级</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mono" style="font-size:12px;color:var(--muted);margin-top:12px;"><span class="en">● strong &nbsp; ◐ partial / generic / claimed &nbsp; ○ no &nbsp; · Two tools to actually trial: <b style="color:var(--ink)">Merch.ai</b> (closest mockup product) and <b style="color:var(--ink)">SAGE Supplier VDS</b> (closest supplier-side fit).</span><span class="zh">● 强 &nbsp; ◐ 部分/通用/宣称 &nbsp; ○ 无 &nbsp; · 真正值得试用的两个：<b style="color:var(--ink)">Merch.ai</b>（最贴近的 Mockup 产品）和 <b style="color:var(--ink)">SAGE 供应商版 VDS</b>（最贴近供应商侧）。</span></p>
+    </div>
+  </div>
+
+  <div class="matrix-sec">
+    <div class="wrap">
+      <div class="tier-h"><span class="tn">VERDICT</span><h2><span class="en">Build, buy, or skip?</span><span class="zh">自建、采购，还是放弃？</span></h2></div>
+      <p class="tier-sub"><span class="en">What the research above adds up to, and what to do next.</span><span class="zh">上面调研的结论，以及下一步该做什么。</span></p>
+      <div class="verdict-row">
+        <div>
+          <div class="vcard"><div class="k"><span class="en">Build from scratch?</span><span class="zh">从零自建？</span> <b><span class="en">No.</span><span class="zh">不。</span></b></div><p><span class="en">The space isn't empty — industry tools like Merch.ai already do much of this, and generic tools cover the basics for free. The one thing nobody fully nails is <strong>decoration-method realism</strong>. That's the wedge.</span><span class="zh">这个领域并不空白 —— Merch.ai 等行业工具已做了大部分，通用工具也免费覆盖基础需求。唯一没人真正做好的是<strong>工艺真实度</strong>。那就是切入点。</span></p></div>
+          <div class="vcard"><div class="k"><span class="en">So what?</span><span class="zh">那怎么办？</span> <b><span class="en">Integrate first.</span><span class="zh">先整合。</span></b></div><p><span class="en">Trial the best existing tool on real Apollo products before writing generation code. Build a thin Apollo-branded layer on top — only build custom if the realism gap proves out in practice.</span><span class="zh">先用真实 Apollo 产品试用最好的现成工具，再写生成代码。在其上做一层薄薄的 Apollo 品牌外壳 —— 只有当工艺差距在实测中确实存在时，才自研。</span></p></div>
+        </div>
+        <div class="stamp"><div class="s1"><span class="en">REVIEW</span><span class="zh">评审</span></div><div class="s2"><span class="en">WORTH DOING<br>AS INTEGRATION<br>NOT INVENTION</span><span class="zh">值得做<br>以整合方式<br>而非从零发明</span></div><div class="s3"><span class="en">FILED · JUN 2026</span><span class="zh">归档 · 2026年6月</span></div></div>
+      </div>
+
+      <h2 style="font-family:var(--display);font-weight:600;font-size:20px;margin:44px 0 18px;"><span class="en">Next steps</span><span class="zh">下一步</span></h2>
+      <ol class="steps">
+        <li><span class="en"><b>Run a real trial.</b> Take 3–5 actual Apollo products and customer logos through Merch.ai and SAGE Supplier VDS. Judge embroidery/DTF realism honestly against real samples.</span><span class="zh"><b>做一次真实试用。</b>拿 3–5 个真实的 Apollo 产品和客户 Logo 跑一遍 Merch.ai 和 SAGE 供应商版 VDS，对照实体样品诚实评估刺绣/DTF 的真实度。</span></li>
+        <li><span class="en"><b>Price it out.</b> Compare subscription cost ($59–225/mo at entry) against the sales time saved per month — that's the real ROI number.</span><span class="zh"><b>算清成本。</b>把订阅费用（入门 $59–225/月）与每月节省的销售时间对比 —— 那才是真正的 ROI 数字。</span></li>
+        <li><span class="en"><b>If it's close enough:</b> wire it into Apollo's quoting flow as a branded layer and stop there for this phase.</span><span class="zh"><b>若已足够接近：</b>把它接入 Apollo 的报价流程，做成带品牌的一层，本阶段到此为止。</span></li>
+        <li><span class="en"><b>If not:</b> scope a narrow MVP focused only on decoration realism for Apollo's top 3 product categories.</span><span class="zh"><b>若不够：</b>规划一个聚焦工艺真实度、仅覆盖 Apollo 前三大品类的精简 MVP。</span></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><span class="en"><b>Apollo USA · PromoProofAI Mockup.</b> Compiled from public product and pricing pages as of June 2026. Decoration-realism ratings are based on public claims and should be confirmed by hands-on trials on real Apollo products before any decision.</span><span class="zh"><b>Apollo USA · PromoProofAI Mockup。</b>整理自各公开产品与价格页面，数据截至 2026 年 6 月。工艺真实度评级基于公开宣称，任何决策前都应在真实 Apollo 产品上实测确认。</span></p>
+  </div>
+</footer>
+
+<script>
+  // language toggle
+  const btn=document.getElementById('langToggle');
+  const label=btn.querySelector('span');
+  btn.addEventListener('click',()=>{
+    const zh=document.body.classList.toggle('lang-zh');
+    document.body.classList.toggle('lang-en',!zh);
+    label.textContent=zh?'EN':'中文';
+    document.documentElement.lang=zh?'zh':'en';
+  });
+
+  // page switching
+  const tabs=[...document.querySelectorAll('.ptab')];
+  const pages={overview:document.querySelector('.page-overview'),competitors:document.querySelector('.page-competitors')};
+  function show(name){
+    tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.page===name)));
+    Object.entries(pages).forEach(([k,el])=>{
+      const on=(k===name);
+      el.classList.toggle('active',on);
+      el.hidden=!on;
+    });
+    window.scrollTo({top:0,behavior:'auto'});
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.page)));
+  document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto)));
+</script>
+</body>
+</html>
