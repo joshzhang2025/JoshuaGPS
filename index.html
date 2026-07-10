@@ -111,7 +111,7 @@
         <iframe src="apollo_redesign.html" title="Apollo Redesign" allowfullscreen></iframe>
       </section>
       <section id="apollo-report" class="section apollo-section">
-        <iframe src="report.html" title="Apollo Report" allowfullscreen></iframe>
+        <iframe src="report.html" title="Apollo Report" id="apollo-report-frame" allowfullscreen onload="syncReportLang()"></iframe>
       </section>
       <section id="tmx" class="section">
         <div id="tmx-page">
@@ -141,6 +141,9 @@
       </section>
       <section id="company-intro" class="section apollo-section">
         <iframe src="company-intro.html" title="Company Intro" allowfullscreen></iframe>
+      </section>
+      <section id="restructure" class="section apollo-section">
+        <iframe src="restructure.html" title="Org Restructuring" allowfullscreen></iframe>
       </section>
       <section id="woot" class="section">
         <div id="woot-page">
@@ -733,6 +736,18 @@ function wootRenderAll(){
 document.getElementById('lang-toggle').addEventListener('click',()=>{
   setTimeout(()=>{ wootLang=document.documentElement.lang==='zh-CN'?'zh':'en'; wootRenderAll(); },0);
 });
+
+// Keep the Apollo Report iframe's language in sync with the GPS site toggle.
+window.syncReportLang=function(){
+  var frame=document.getElementById('apollo-report-frame');
+  if(!frame||!frame.contentDocument||!frame.contentDocument.body)return;
+  var zh=document.documentElement.lang==='zh-CN';
+  var body=frame.contentDocument.body;
+  body.classList.toggle('lang-zh',zh);
+  body.classList.toggle('lang-en',!zh);
+  frame.contentDocument.documentElement.lang=zh?'zh':'en';
+};
+document.getElementById('lang-toggle').addEventListener('click',function(){setTimeout(window.syncReportLang,0);});
 
 wootRenderAll();
 })();

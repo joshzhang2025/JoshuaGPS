@@ -1,9 +1,10 @@
-const CACHE = 'joshua-gps-v13';
+const CACHE = 'joshua-gps-v14';
 const OFFLINE_URL = './offline.html';
 const ASSETS = [
   './index.html',
   './offline.html',
   './company-intro.html',
+  './restructure.html',
   './report.html',
   './style.css',
   './script.js',
