@@ -140,10 +140,10 @@
         </div>
       </section>
       <section id="company-intro" class="section apollo-section">
-        <iframe src="company-intro.html" title="Company Intro" allowfullscreen></iframe>
+        <iframe src="company-intro.html" title="Company Intro" id="company-intro-frame" allowfullscreen onload="syncModeFrames()"></iframe>
       </section>
       <section id="restructure" class="section apollo-section">
-        <iframe src="restructure.html" title="Org Restructuring" allowfullscreen></iframe>
+        <iframe src="restructure.html" title="Org Restructuring" id="restructure-frame" allowfullscreen onload="syncModeFrames()"></iframe>
       </section>
       <section id="woot" class="section">
         <div id="woot-page">
@@ -748,6 +748,21 @@ window.syncReportLang=function(){
   frame.contentDocument.documentElement.lang=zh?'zh':'en';
 };
 document.getElementById('lang-toggle').addEventListener('click',function(){setTimeout(window.syncReportLang,0);});
+
+// Keep the Company Intro / Org Restructuring iframes' language in sync with the GPS site toggle.
+// These pages use mode-en / mode-zh body classes to show their .lang-en / .lang-zh spans.
+window.syncModeFrames=function(){
+  var zh=document.documentElement.lang==='zh-CN';
+  ['company-intro-frame','restructure-frame'].forEach(function(id){
+    var frame=document.getElementById(id);
+    if(!frame||!frame.contentDocument||!frame.contentDocument.body)return;
+    var body=frame.contentDocument.body;
+    body.classList.toggle('mode-zh',zh);
+    body.classList.toggle('mode-en',!zh);
+    frame.contentDocument.documentElement.lang=zh?'zh-CN':'en';
+  });
+};
+document.getElementById('lang-toggle').addEventListener('click',function(){setTimeout(window.syncModeFrames,0);});
 
 wootRenderAll();
 })();
